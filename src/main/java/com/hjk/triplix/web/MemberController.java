@@ -17,6 +17,7 @@ import com.hjk.triplix.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/member")
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
@@ -25,9 +26,11 @@ public class MemberController {
 	private final MemberService memberService;
 	
 	@PostMapping("/register")
-	public String register(String asdf){
-		System.out.println(asdf);
-		return "ok";
+	public ResponseEntity<?> register(@RequestBody Member member){
+		
+		System.out.println(member);
+		memberService.register(member);
+		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
 		/*
 		 * System.out.println(member.getMId()); memberService.register(member); return
 		 * new ResponseEntity<String>("ok",HttpStatus.CREATED);

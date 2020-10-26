@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter implements Filter{
 			ObjectMapper om = new ObjectMapper();
 			try {
 				Member member = om.readValue(req.getInputStream(), Member.class);
-				Member memberEntity = memberRepository.mFindByIdAndPw(member.getMId(), member.getMPw());
+				Member memberEntity = memberRepository.mFindByIdAndPw(member.getMid(), member.getMpw());
 
 				if(memberEntity == null) {
 					out.print("fail");
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter implements Filter{
 					String jwtToken = JWT.create()
 											.withSubject("토큰제목")
 											.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60))
-											.withClaim("id", memberEntity.getMId())
+											.withClaim("id", memberEntity.getMid())
 											.withClaim("id", memberEntity.getId())
 											.sign(Algorithm.HMAC512(JwtProps.secret));
 					

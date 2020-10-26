@@ -16,7 +16,6 @@ public class MemberService {
 	
 	@Transactional
 	public void register(Member member) {
-		System.out.println(member.getMId());
 		memberRepository.save(member);
 	}
 }

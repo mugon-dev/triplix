@@ -24,18 +24,18 @@ public class Member {
 	private int id;
 	
 	@Column(unique = true, length = 50)
-	private String mId;
+	private String mid;
 	
 	@Column(length = 50)
-	private String mPw;
+	private String mpw;
 	
 	@Column(length = 50)
-	private String mName;
+	private String mname;
 	
 	@Column(length = 50)
-	private String mEmail;
+	private String memail;
 	
 	@Column(length = 1000000)
-	private String mProfile;
+	private String mprofile;
 
 }
