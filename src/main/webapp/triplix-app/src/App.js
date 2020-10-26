@@ -15,8 +15,9 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <NavBar/>
+      <NavBar />
       <Route exact path="/" component={Banner} />
+
     </div>
   );
 }
