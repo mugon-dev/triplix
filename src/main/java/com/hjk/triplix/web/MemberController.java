@@ -31,17 +31,9 @@ public class MemberController {
 		System.out.println(member);
 		memberService.register(member);
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
-		/*
-		 * System.out.println(member.getMId()); memberService.register(member); return
-		 * new ResponseEntity<String>("ok",HttpStatus.CREATED);
-		 */
+
 	}
-	
-	@GetMapping("/aaaa")
-	public String aaa() {
-		return "aaaa";
-	}
-	
+
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(){
 		session.invalidate();
