@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
 
@@ -55,11 +56,13 @@ public class JwtAuthenticationFilter implements Filter{
 					out.flush();
 				}else {
 					System.out.println("인증되었습니다.");
-					
+					HttpSession session = req.getSession();
+					session.setAttribute("principal", memberEntity);
+
 					String jwtToken = JWT.create()
 											.withSubject("토큰제목")
 											.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60))
-											.withClaim("id", memberEntity.getMid())
+											.withClaim("mid", memberEntity.getMid())
 											.withClaim("id", memberEntity.getId())
 											.sign(Algorithm.HMAC512(JwtProps.secret));
 					

@@ -7,8 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.hjk.triplix.domain.member.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,4 +39,7 @@ public class Board {
 	@CreationTimestamp
 	private Timestamp bCreatedate;
 	
+	@JoinColumn(name = "memberId")
+	@ManyToOne
+	private Member member;
 }
