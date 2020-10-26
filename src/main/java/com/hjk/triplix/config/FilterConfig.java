@@ -17,14 +17,12 @@ public class FilterConfig {
 	
 	private final MemberRepository memberRepository;
 	
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter(){
-		System.out.println("CORS 필터 등록");
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter());
-		bean.addUrlPatterns("/*");
-		bean.setOrder(0);
-		return bean;
-	}
+	/*
+	 * @Bean public FilterRegistrationBean<CorsFilter> corsFilter(){
+	 * System.out.println("CORS 필터 등록"); FilterRegistrationBean<CorsFilter> bean =
+	 * new FilterRegistrationBean<>(new CorsFilter()); bean.addUrlPatterns("/*");
+	 * bean.setOrder(0); return bean; }
+	 */
 	
 	@Bean
 	public FilterRegistrationBean<JwtAuthenticationFilter> jwtAuthenticationFilter(){
