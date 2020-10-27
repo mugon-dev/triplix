@@ -1,5 +1,7 @@
 package com.hjk.triplix.domain.pick;
 
-public interface PickRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PickRepository extends JpaRepository<Pick, Integer>{
 
 }
