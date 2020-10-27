@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-//import Mypost from '../components/Mypage/Mypost';
+import Mypost from '../components/Mypage/Mypost';
 import { Avatar } from '@material-ui/core';
-//import db from '../firebase';
+import db from '../firebase';
 import { useParams } from 'react-router';
 
-//import Subscribe from '../components/Detail/DetailFunction/Subscribe';
+import Subscribe from '../components/Detail/DetailFunction/Subscribe';
 const Container = styled.div`
     position: relative;
     z-index: 1;
@@ -47,11 +47,10 @@ const IntroductionFont = styled.p`
     letter-spacing: -0.48px;
     color: #ffffff;
 `;
-function UserPage(props) {
+function FriendsPage(props) {
     const { friendid } = useParams();
     const [userinfo, setUserInfo] = useState('');
 
-    /*
     useEffect(() => {
         db.collection('users')
             .doc(friendid)
@@ -60,12 +59,10 @@ function UserPage(props) {
                 setUserInfo(doc.data());
             });
     }, []);
-    */
     return (
         <div>
             <Container>
-                {/* <BackgroundImage bg={userinfo.background} /> */}
-                <BackgroundImage bg={"/images/userbgimg.jpg"} /> 
+                <BackgroundImage bg={userinfo.background} />
             </Container>
             <div
                 style={{
@@ -94,8 +91,8 @@ function UserPage(props) {
                             boxSizing: 'border-box',
                         }}
                     />
-                    <Username>용용이</Username> {/*{userinfo.displayName}*/}
-                    {/* <Subscribe userTo={friendid} Type="FollowPage" /> */}
+                    <Username>{userinfo.displayName}</Username>
+                    <Subscribe userTo={friendid} Type="FollowPage" />
                 </div>
                 <div
                     style={{
@@ -106,7 +103,7 @@ function UserPage(props) {
                     }}
                 >
                     <div>
-                        <IntroductionFont>인트로듀스 마이쉘프</IntroductionFont>
+                        <IntroductionFont>내 소개</IntroductionFont>
                         <IntroductionFont
                             style={{
                                 marginTop: '20px',
@@ -114,14 +111,13 @@ function UserPage(props) {
                                 fontWeight: '300',
                             }}
                         >
-                            여긴 나에 대한 정보가 들어갈거에요
-                            {/*{userinfo.introduction}*/}
+                            {userinfo.introduction}
                         </IntroductionFont>
                     </div>
                 </div>
             </div>
-            {/* <Mypost uid={userinfo.uid} /> */}
+            <Mypost uid={userinfo.uid} />
         </div>
     );
 }
-export default UserPage;
+export default FriendsPage;

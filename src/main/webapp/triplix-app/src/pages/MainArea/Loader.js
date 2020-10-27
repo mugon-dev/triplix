@@ -90,7 +90,6 @@ const Loading = styled.div`
     }
 `;
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
     return (
         <Loading>

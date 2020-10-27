@@ -5,7 +5,6 @@ import Register from './pages/Register/Register';
 import UploadPage from './pages/Upload/UploadPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
-import UserPage from './pages/UserPage';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -25,9 +24,6 @@ function App() {
         <Route exact path="/register" component={Register} />
 
         <Route exact path="/upload" component={UploadPage} />
-
-        {/* 테스트중 */}
-        <Route exact path="/userpage" component={UserPage} />
 
     </div>
   );
