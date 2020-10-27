@@ -12,3 +12,8 @@
 - NavBar 추가(네비게이션)
 - Banner 추가(메인 상단화면)
 - PickBar 추가(기능 박스)
+- npm i react-router-dom
+- npm i yarn
+- yarn add redux react-redux
+- npm install --save styled-components
+- npm install react-bootstrap bootstrap
