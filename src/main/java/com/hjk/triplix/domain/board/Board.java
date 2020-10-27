@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.member.Member;
 
 import lombok.AllArgsConstructor;
@@ -36,9 +38,13 @@ public class Board {
 	@Column(length = 100000)
 	private String bContent;
 	
+	@Column(length = 1000000)
+	private String bImage;
+	
 	@CreationTimestamp
 	private Timestamp bCreatedate;
 	
+	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "memberId")
 	@ManyToOne
 	private Member member;

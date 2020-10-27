@@ -55,8 +55,9 @@
 ### board/save
 - post
 - jwt 필요
-- btitle,bcontent
+- btitle,bcontent,bimage
+
 ### board/update/{id}
 - put
 - jwt 필요
-- btitle,bcontent
+- btitle,bcontent,bimage
