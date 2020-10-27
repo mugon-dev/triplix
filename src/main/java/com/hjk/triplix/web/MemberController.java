@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +39,7 @@ public class MemberController {
 		return new ResponseEntity<String>("ok",HttpStatus.OK);
 	}
 	
-	@PostMapping("/update")
+	@PutMapping("/update")
 	public ResponseEntity<?> update(HttpServletRequest request, @RequestBody Member member){
 		System.out.println("update 호출");
 		HttpSession session = request.getSession();
@@ -51,7 +53,7 @@ public class MemberController {
 		}
 		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
 	}
-	@PostMapping("/delete")
+	@DeleteMapping("/delete")
 	public ResponseEntity<?> delete(HttpServletRequest request){
 		System.out.println("delete 호출");
 		HttpSession session = request.getSession();

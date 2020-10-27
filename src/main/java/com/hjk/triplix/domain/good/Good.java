@@ -1,4 +1,4 @@
-package com.hjk.triplix.domain.like;
+package com.hjk.triplix.domain.good;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

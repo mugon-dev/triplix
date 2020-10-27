@@ -5,6 +5,8 @@ import { createGlobalStyle } from 'styled-components';
 import PickBar from './pages/PickBar/PickBar';
 import Login from './pages/Login';
 import Register from './pages/Register/Register';
+import MainArea from './pages/MainArea/MainArea';
+import UploadPage from './pages/Upload/UploadPage';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -24,6 +26,8 @@ function App() {
       <NavBar />
       <Route exact path="/" component={Banner} />
       <PickBar/>
+      <MainArea/>
+      <Route exact path="/upload" component={UploadPage} />
 
     </div>
   );
