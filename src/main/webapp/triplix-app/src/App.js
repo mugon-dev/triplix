@@ -1,13 +1,12 @@
 import { Route } from 'react-router-dom';
-import NavBar from './pages/NavBar/NavBar';
-import Banner from './pages/Banner/Banner';
 import { createGlobalStyle } from 'styled-components';
-import PickBar from './pages/PickBar/PickBar';
 import Login from './pages/Login';
 import Register from './pages/Register/Register';
-import MainArea from './pages/MainArea/MainArea';
 import UploadPage from './pages/Upload/UploadPage';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './pages/Home';
+import NavBar from './pages/NavBar/NavBar';
+import UserPage from './pages/UserPage';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,15 +18,16 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <GlobalStyle />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-      <NavBar />
-      <Route exact path="/" component={Banner} />
-      <PickBar/>
-      <MainArea/>
-      <Route exact path="/upload" component={UploadPage} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
+
+        <Route exact path="/upload" component={UploadPage} />
+
+        {/* 테스트중 */}
+        <Route exact path="/userpage" component={UserPage} />
 
     </div>
   );

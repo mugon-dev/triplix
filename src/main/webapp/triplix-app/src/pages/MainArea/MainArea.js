@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-//import Picture from './Picture';
+import Picture from './Picture';
 //import db from '../../firebase';
 import FlipMove from 'react-flip-move';
 
@@ -191,6 +191,8 @@ export default () => {
             > 
                 <Container>
                      <FlipMove>
+                        
+
                         {/* {posts.map(({ post, id }) => (
                             <Picture
                                 uid={post.uid}

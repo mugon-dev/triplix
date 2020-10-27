@@ -52,7 +52,7 @@ export default function UploadPage(props) {
     const [imageUrl, setImageUrl] = useState(
         props.imageUrl ? props.imageUrl : null
     ); //이미지
-    const [{ user }] = useStateValue(); //로그인유저
+    //const [{ user }] = useStateValue(); //로그인유저
     const [area, setArea] = useState(props.area ? props.area : null);
     useEffect(() => {
         resetSearchLocation();

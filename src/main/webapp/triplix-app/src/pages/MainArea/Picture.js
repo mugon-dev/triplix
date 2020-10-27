@@ -1,8 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
-import DetailPage from '../Detail/DetailPage';
-import Avartar from '../Detail/DetailFunction/Avartar';
-import LikeInterest from '../Detail/DetailFunction/Like_Interest';
+//import DetailPage from '../Detail/DetailPage';
+//import Avartar from '../Detail/DetailFunction/Avartar';
+//import LikeInterest from '../Detail/DetailFunction/Like_Interest';
 
 const LeftBottomContainer = styled.div`
     position: absolute;
@@ -55,7 +55,7 @@ const Description = styled.p`
 const ImageContainer = styled.div`
     position: relative;
 
-    &: hover {
+     hover {
         ${LeftBottomContainer} {
             visibility: visible;
         }
@@ -107,7 +107,7 @@ const Picture = forwardRef(
 
         return (
             <>
-                <DetailPage
+                {/* <DetailPage
                     open={isModalOpen}
                     close={onClose}
                     id={id}
@@ -127,7 +127,8 @@ const Picture = forwardRef(
                     username={username}
                     address={address}
                     uid={uid}
-                />
+                /> */}
+                
                 <Box>
                     <ImageContainer>
                         <Image
@@ -137,10 +138,10 @@ const Picture = forwardRef(
                             alt=""
                         />
                         <LeftBottomContainer>
-                            <Avartar uid={uid} Type="MainArea" />
+                            {/* <Avartar uid={uid} Type="MainArea" /> */}
                             <TextBox>{username}</TextBox>
                         </LeftBottomContainer>
-                        <LikeInterest postId={id} />
+                        {/* <LikeInterest postId={id} /> */}
                         <RightBottomContainer>
                             <img
                                 style={{ marginRight: '4px' }}
