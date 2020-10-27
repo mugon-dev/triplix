@@ -42,6 +42,8 @@ public class FilterConfig {
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = new FilterRegistrationBean<>(new JwtAuthorizationFilter(memberRepository));
 		bean.addUrlPatterns("/board/~~~~~");
 		bean.addUrlPatterns("/member/update");
+		bean.addUrlPatterns("/member/delete");
+		bean.addUrlPatterns("/member/detail");
 		bean.setOrder(2);
 		return bean;
 	}

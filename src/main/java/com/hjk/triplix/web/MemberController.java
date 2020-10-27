@@ -47,7 +47,32 @@ public class MemberController {
 			System.out.println("id: "+originMember.getId());
 			System.out.println("member: "+member);
 			memberService.update(id,member);
+			return new ResponseEntity<String>("ok",HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
+	}
+	@PostMapping("/delete")
+	public ResponseEntity<?> delete(HttpServletRequest request){
+		System.out.println("delete 호출");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("principal") != null) {
+			Member originMember = (Member) session.getAttribute("principal");
+			int id = originMember.getId();
+			System.out.println("id: "+originMember.getId());
+			memberService.delete(id);
 		}
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
+	}
+	@GetMapping("/detail")
+	public ResponseEntity<?> member(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		if(session.getAttribute("principal") != null) {
+			Member member = (Member) session.getAttribute("principal");
+			int id = member.getId();
+			System.out.println("id: "+member.getId());
+			Member memberEntity = memberService.member(id);
+			return new ResponseEntity<Member>(memberEntity,HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
 	}
 }

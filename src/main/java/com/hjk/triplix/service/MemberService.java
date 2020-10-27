@@ -24,8 +24,8 @@ public class MemberService {
 	@Transactional
 	public void update(int id, Member member) {
 		System.out.println("update service");
+		//예외처리필요
 		Member memberEntity = memberRepository.findById(id).get();
-		System.out.println(memberEntity);
 		if(member.getMemail()!=null) {
 			memberEntity.setMemail(member.getMemail());
 		}
@@ -35,17 +35,17 @@ public class MemberService {
 		if(member.getMpw()!=null) {
 			memberEntity.setMpw(member.getMpw());
 		}
-		System.out.println(memberEntity);
 	}
 	
 	@Transactional
-	public int delete(int id, Member member) {
-		Member memberEntity = memberRepository.findById(id).get();
-		if(memberEntity.getId() == id) {
-			memberRepository.deleteById(id);
-			return 1;
-		}else {
-			return 0; 
-		}
+	public void delete(int id) {
+		memberRepository.deleteById(id);
+	}
+	
+	@Transactional
+	public Member member(int id) {
+		//예외처리 필요
+		Member member = memberRepository.findById(id).get();
+		return member;
 	}
 }
