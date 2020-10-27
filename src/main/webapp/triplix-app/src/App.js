@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register/Register';
 import MainArea from './pages/MainArea/MainArea';
 import UploadPage from './pages/Upload/UploadPage';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const GlobalStyle = createGlobalStyle`
   body {
     color: #ffffff;
