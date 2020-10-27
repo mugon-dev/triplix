@@ -154,31 +154,6 @@ export default () => {
 
                 <RegisterContainer>
 
-                    <>
-                        <RegisterText to={'/login'}>로그인</RegisterText>
-                        <div>|</div>
-                        <RegisterText to={'/register'}>
-                            회원가입
-                            </RegisterText>
-                        <div>|</div>
-
-                        <RegisterText onClick={() => setModalShow(true)}>
-                            글등록
-                        </RegisterText>
-                        <MyVerticallyCenteredModal
-                            show={modalShow}
-                            onHide={() => setModalShow(false)}
-                        />
-                    </>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        {<Avatar
-
                     { isLogin ?
                     (
                         <Link onClick={logoutProc}>로그아웃</Link>
@@ -202,18 +177,16 @@ export default () => {
                                 alignItems: 'center',
                             }}
                         >
-                            {<Avatar
+                            {/*<Avatar
                                 src={user.photoURL}
                                 alt={user.displayName}
                                 onClick={() =>
                                     history.push(`/user/${user.uid}`)
                                 }
                                 style={{ cursor: 'pointer' }}
-                            />}
-                        <Label>로그아웃</Label>
-                    </div>
-                    
-                    </div>
+                            />*/}
+                         
+                        </div>
                 </RegisterContainer>
             </Container>
 
