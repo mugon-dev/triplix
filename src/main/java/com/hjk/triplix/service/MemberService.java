@@ -22,18 +22,20 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public int update(Member member, int id, Member principal) {
+	public void update(int id, Member member) {
+		System.out.println("update service");
 		Member memberEntity = memberRepository.findById(id).get();
-		
-		if(memberEntity.getId() == principal.getId()) {
+		System.out.println(memberEntity);
+		if(member.getMemail()!=null) {
 			memberEntity.setMemail(member.getMemail());
-			memberEntity.setMprofile(member.getMprofile());
-			memberEntity.setMpw(member.getMpw());
-			
-			return 1;
-		}else {
-			return 0;
 		}
+		if(member.getMprofile()!=null) {
+			memberEntity.setMprofile(member.getMprofile());
+		}
+		if(member.getMpw()!=null) {
+			memberEntity.setMpw(member.getMpw());
+		}
+		System.out.println(memberEntity);
 	}
 	
 	@Transactional

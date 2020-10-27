@@ -1,10 +1,10 @@
 package com.hjk.triplix.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hjk.triplix.domain.member.Member;
-import com.hjk.triplix.domain.member.MemberRepository;
 import com.hjk.triplix.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,16 +26,28 @@ public class MemberController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody Member member){
-		
 		System.out.println(member);
 		memberService.register(member);
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
-
 	}
 
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(){
 		session.invalidate();
 		return new ResponseEntity<String>("ok",HttpStatus.OK);
+	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<?> update(HttpServletRequest request, @RequestBody Member member){
+		System.out.println("update 호출");
+		HttpSession session = request.getSession();
+		if(session.getAttribute("principal") != null) {
+			Member originMember = (Member) session.getAttribute("principal");
+			int id = originMember.getId();
+			System.out.println("id: "+originMember.getId());
+			System.out.println("member: "+member);
+			memberService.update(id,member);
+		}
+		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
 	}
 }
