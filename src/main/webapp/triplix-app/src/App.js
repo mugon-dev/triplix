@@ -5,8 +5,8 @@ import Register from './pages/Register/Register';
 import UploadPage from './pages/Upload/UploadPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
+import NavBar from './pages/NavBar/NavBar';
 import UserPage from './pages/UserPage';
-
 
 const GlobalStyle = createGlobalStyle`
   body {

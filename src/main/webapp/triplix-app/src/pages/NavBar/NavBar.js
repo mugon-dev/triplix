@@ -92,9 +92,48 @@ const BackColor = {
     backgroundColor : "rgba(64, 64, 64, 0.7)"
 }
 
+const ColorStyle = {
+    color : "white"
+}
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+export default (props) => {
+
+    const [board, setBoard] = useState({
+		bTitle : "",
+	    bContent : ""
+	});
+
+	const BoardRegister = (e) => {
+		e.preventDefault();
+		fetch("http://localhost:8000/board/save", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json; charset=utf-8",
+				"Authorization": localStorage.getItem("Authorization")
+			},
+			body: JSON.stringify(board)
+		}).then(res => {
+			return res.text();
+		}).then(res => {
+			if (res === "ok") {
+				alert("오케이");
+			} else {
+				alert('글등록 실패');
+			}
+		});
+	}
+
+    const [modalShow, setModalShow] = React.useState(false);
+    const isLogin = useSelector((store) => store.isLogin);
+	const dispatch = useDispatch();
+
+        const changeValue = (e) => {
+		setBoard({
+			...board,
+            [e.target.name]: e.target.value
+        });
+	}
 
     function MyVerticallyCenteredModal(props) {
     return (
@@ -111,9 +150,9 @@ export default () => {
             </Modal.Header>
             <Modal.Body style={BackColor}>
                 <Form.Label>글 제목</Form.Label>
-                <Form.Control type="text" placeholder="글 제목" />
+                <Form.Control name="bTitle" onChange={changeValue} type="text" placeholder="글 제목" />
                 <Form.Label>글 내용</Form.Label>
-                <Form.Control as="textarea" rows={10} />
+                <Form.Control name="bContent" onChange={changeValue} as="textarea" rows={10} />
             </Modal.Body>
             <Modal.Footer style={BackColor}>
                 <Button onClick={BoardRegister}>등록</Button>
@@ -122,14 +161,6 @@ export default () => {
         </Modal>
     );
 }
-
- const BoardRegister = () => {
-        fetch().then().then();
-    }
-
-    const [modalShow, setModalShow] = React.useState(false);
-    const isLogin = useSelector((store) => store.isLogin);
-	const dispatch = useDispatch();
 
 	const logoutProc = () =>{
 		localStorage.removeItem("Authorization");
@@ -156,8 +187,17 @@ export default () => {
 
                     { isLogin ?
                     (
-                        <Link onClick={logoutProc}>로그아웃</Link>
-                        
+                        <>
+                            <Link style={ColorStyle} onClick={logoutProc}>로그아웃</Link>
+                            <div>|</div>
+                            <RegisterText  onClick={() => setModalShow(true)}>
+                                글 등록
+                            </RegisterText>
+                            <MyVerticallyCenteredModal
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                            />
+                        </>
                     )
                     :
                     (
@@ -193,3 +233,4 @@ export default () => {
         </MarginContainer>
     );
 };
+
