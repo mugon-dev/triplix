@@ -36,3 +36,4 @@ build/
 
 
 src/main/resources/application.yml
+src/main/webapp/triplix-app/yarn.lock

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { logout } from '../../store';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -126,6 +128,13 @@ export default () => {
     }
 
     const [modalShow, setModalShow] = React.useState(false);
+    const isLogin = useSelector((store) => store.isLogin);
+	const dispatch = useDispatch();
+
+	const logoutProc = () =>{
+		localStorage.removeItem("Authorization");
+		dispatch(logout());
+	}
     const [area, setArea] = useState('');
 
     return (
@@ -144,6 +153,7 @@ export default () => {
                 </SearhContainer>
 
                 <RegisterContainer>
+
                     <>
                         <RegisterText to={'/login'}>로그인</RegisterText>
                         <div>|</div>
@@ -167,15 +177,42 @@ export default () => {
                             alignItems: 'center',
                         }}
                     >
-                        {/*<Avatar
+                        {<Avatar
+
+                    { isLogin ?
+                    (
+                        <Link onClick={logoutProc}>로그아웃</Link>
+                        
+                    )
+                    :
+                    (
+                       <>
+                            <RegisterText to={'/login'}>로그인</RegisterText>
+                            <div>|</div>
+                            <RegisterText to={'/register'}>
+                                회원가입
+                            </RegisterText>
+                        </>
+                    )
+                    }
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            {<Avatar
                                 src={user.photoURL}
                                 alt={user.displayName}
                                 onClick={() =>
                                     history.push(`/user/${user.uid}`)
                                 }
                                 style={{ cursor: 'pointer' }}
-                            />*/}
+                            />}
                         <Label>로그아웃</Label>
+                    </div>
+                    
                     </div>
                 </RegisterContainer>
             </Container>

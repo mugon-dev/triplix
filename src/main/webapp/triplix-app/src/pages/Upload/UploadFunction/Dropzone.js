@@ -1,6 +1,7 @@
 import React from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import { styled } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     DropZoneArea: {
@@ -27,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 // const UploadTitle = styled.p`
-//     color: #000000;
-//     font-weight: 500;
-//     font-size: 18px;
+ //    color: #000000;
+  //   font-weight: 500;
+    // font-size: 18px;
 //     line-height: 26px;
-//     display: flex;
+     //display: flex;
 // `;
 // const Upload = styled.p`
 //     font-weight: bold;
