@@ -94,7 +94,7 @@ export default () => {
         <MarginContainer>
             <Container>
                 <Title to={'/'}>
-                    <img src="/images/NavbarLogo.jpg" alt="Logo" />
+                    <img src="/images/NavbarLogo.png" alt="Logo" />
                 </Title>
                 <SearhContainer>
                     <Input
