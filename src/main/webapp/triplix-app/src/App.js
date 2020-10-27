@@ -5,8 +5,10 @@ import Register from './pages/Register/Register';
 import UploadPage from './pages/Upload/UploadPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
-
-
+import NavBar from './pages/NavBar/NavBar';
+import button from './pages/NavBar/button';
+import Qwer from './pages/NavBar/Qwer';
+import SignIn from './pages/NavBar/SignIn';
 const GlobalStyle = createGlobalStyle`
   body {
     color: #ffffff;
