@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import Login from './pages/Login';
 import Register from './pages/Register/Register';
 import UploadPage from './pages/Upload/UploadPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import UserPage from './pages/UserPage';
 

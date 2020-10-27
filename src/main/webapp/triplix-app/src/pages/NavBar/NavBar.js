@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { logout } from '../../store';
 
 const MarginContainer = styled.div`
@@ -87,9 +88,46 @@ const Label = styled.span`
     color: #ff534b;
 `;
 
+const BackColor = {
+    backgroundColor : "rgba(64, 64, 64, 0.7)"
+}
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
 
+    function MyVerticallyCenteredModal(props) {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton style={BackColor}>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    글 등록
+        </Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={BackColor}>
+                <Form.Label>글 제목</Form.Label>
+                <Form.Control type="text" placeholder="글 제목" />
+                <Form.Label>글 내용</Form.Label>
+                <Form.Control as="textarea" rows={10} />
+            </Modal.Body>
+            <Modal.Footer style={BackColor}>
+                <Button onClick={BoardRegister}>등록</Button>
+                <Button onClick={props.onHide}>취소</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+ const BoardRegister = () => {
+        fetch().then().then();
+    }
+
+    const [modalShow, setModalShow] = React.useState(false);
     const isLogin = useSelector((store) => store.isLogin);
 	const dispatch = useDispatch();
 
@@ -132,9 +170,6 @@ export default () => {
                         </>
                     )
                     }
-
-
-
                         <div
                             style={{
                                 display: 'flex',
@@ -154,6 +189,7 @@ export default () => {
                         </div>
                 </RegisterContainer>
             </Container>
+
         </MarginContainer>
     );
 };
