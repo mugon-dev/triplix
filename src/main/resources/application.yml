@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cos?serverTimezone=Asia/Seoul
     username: cos
-    password: 1234
+    password: bitc5600
 
   jpa:
     hibernate:

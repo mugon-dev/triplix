@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { logout } from '../../store';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -88,6 +90,13 @@ const Label = styled.span`
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
 
+    const isLogin = useSelector((store) => store.isLogin);
+	const dispatch = useDispatch();
+
+	const logoutProc = () =>{
+		localStorage.removeItem("Authorization");
+		dispatch(logout());
+	}
     const [area, setArea] = useState('');
 
     return (
@@ -106,13 +115,26 @@ export default () => {
                 </SearhContainer>
 
                 <RegisterContainer>
-                        <>
+
+                    { isLogin ?
+                    (
+                        <Link onClick={logoutProc}>로그아웃</Link>
+                        
+                    )
+                    :
+                    (
+                       <>
                             <RegisterText to={'/login'}>로그인</RegisterText>
                             <div>|</div>
                             <RegisterText to={'/register'}>
                                 회원가입
                             </RegisterText>
                         </>
+                    )
+                    }
+
+
+
                         <div
                             style={{
                                 display: 'flex',
@@ -128,7 +150,7 @@ export default () => {
                                 }
                                 style={{ cursor: 'pointer' }}
                             />*/}
-                            <Label>로그아웃</Label>
+                         
                         </div>
                 </RegisterContainer>
             </Container>

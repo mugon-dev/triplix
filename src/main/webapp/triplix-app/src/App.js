@@ -6,6 +6,7 @@ import PickBar from './pages/PickBar/PickBar';
 import Login from './pages/Login';
 import Register from './pages/Register/Register';
 
+
 const GlobalStyle = createGlobalStyle`
   body {
     color: #ffffff;
