@@ -30,8 +30,12 @@ public class BoardService {
 	@Transactional
 	public void boardUpdate(int id, BoardSaveRequestDto dto) {
 		Board boardEntity = boardRepository.findById(id).get();
+		if(dto.getBTitle()!=null)
 		boardEntity.setBTitle(dto.getBTitle());
+		if(dto.getBContent()!=null)
 		boardEntity.setBContent(dto.getBContent());
+		if(dto.getBImage()!=null)
+		boardEntity.setBImage(dto.getBImage());
 	}
 	
 	public Board boardDetail(int id) {

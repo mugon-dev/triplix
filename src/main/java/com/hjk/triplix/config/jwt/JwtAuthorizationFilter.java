@@ -43,14 +43,17 @@ public class JwtAuthorizationFilter implements Filter {
 		} else { 
 			jwtToken = jwtToken.replace(JwtProps.auth, "");
 			try {
-				int mId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id").asInt();
+				int id = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id").asInt();
+				System.out.println("jwt id: "+id);
 				HttpSession session = req.getSession();
-				Member memberEntity = memberRepository.findById(mId).get();
+				Member memberEntity = memberRepository.findById(id).get();
+				System.out.println(memberEntity);
 				session.setAttribute("principal", memberEntity);
 				chain.doFilter(request, response);
 			}catch (Exception e) {
 				// TODO: handle exception
 					PrintWriter out = resp.getWriter();
+					out.print(e.getMessage());
 					out.print("verify fail");
 					out.flush();
 			}
