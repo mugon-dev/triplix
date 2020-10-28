@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import './Banner.css';
+import BestPicture from './BestPicture';
 
 const Container = styled.div`
     position: relative;
@@ -63,7 +64,17 @@ const BestPicContainer = styled.div`
     align-items: center;
 `;
 
-function Banner() {
+    function Banner() {
+        const [posts, setPosts] = useState([]);
+    
+        useEffect(() => {
+            fetch("http://localhost:8000/board/")
+            .then((res)=>res.json())
+            .then((res)=>{
+                setPosts(res);
+                console.log(res);
+            });
+        },[]);
 
     const nextSlide = () => {
         const container = document.querySelector('.row__posters');
@@ -122,6 +133,17 @@ function Banner() {
                         backgroundPosition: 'center center',
                     }}
                 />
+                <div className="row__posters">
+                    {posts.map(({ post, id }) => (
+                        <BestPicture
+                            id={id}
+                            member={posts.member}
+                            title={posts.btitle}
+                            content={posts.bcontent}
+                            createdate={posts.bcreatedate}
+                        />
+                    ))}
+                </div>
                 <button
                     id="slide"
                     type="button"
