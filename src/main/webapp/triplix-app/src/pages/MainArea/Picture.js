@@ -137,7 +137,7 @@ function Picture ({
                         </RightBottomContainer>
                     </ImageContainer>
                     <ImageTitle>{title}</ImageTitle>
-                      {/* <Description>{btitle?.slice(0, 20)}...</Description> {review?.slice(0, 20)}... */}
+                       <Description>{content?.slice(0, 30)}...</Description> {/*{review?.slice(0, 20)}... */}
                 </Box>
             </>
         );
