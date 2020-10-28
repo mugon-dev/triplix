@@ -12,7 +12,7 @@ const LeftBottomContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* visibility: hidden; */
+    visibility: hidden;
 `;
 
 const RightBottomContainer = styled.div`
@@ -21,7 +21,7 @@ const RightBottomContainer = styled.div`
     right: 12px;
     display: flex;
     align-items: center;
-    /* visibility: hidden; */
+    visibility: hidden;
 `;
 const Image = styled.img`
     width: 100%;
@@ -31,7 +31,7 @@ const Image = styled.img`
 const Box = styled.div`
     width: 100%;
     margin: 0 0 45px;
-    /* overflow: hidden; */
+    overflow: hidden; 
     break-inside: avoid;
     cursor: pointer;
 `;
@@ -56,7 +56,7 @@ const Description = styled.p`
 const ImageContainer = styled.div`
     position: relative;
 
-     hover {
+     :hover {
         ${LeftBottomContainer} {
             visibility: visible;
         }
