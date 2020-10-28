@@ -1,0 +1,130 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+//import DetailPage from '../Detail/DetailPage';
+//import Avartar from '../Detail/DetailFunction/Avartar';
+//import LikeInterest from '../Detail/DetailFunction/Like_Interest';
+const LeftBottomContainer = styled.div`
+    position: absolute;
+    left: 6px;
+    bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+`;
+const RightBottomContainer = styled.div`
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+`;
+
+const RightTopContainer = styled.div`
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+`;
+
+const Image = styled.img`
+    width: 224px;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: container;
+    transition: transform 450ms;
+
+    :hover {
+        transform: scale(1.1);
+    }
+`;
+
+const ImageContainer = styled.div`
+    position: relative;
+    margin-right: 24px;
+    cursor: pointer;
+    :hover {
+        ${LeftBottomContainer} {
+            visibility: visible;
+        }
+        ${RightBottomContainer} {
+            visibility: visible;
+        }
+
+        ${Image} {
+            opacity: 0.9;
+            transition: opacity 450ms ease-out;
+        }
+    }
+`;
+
+const TextBox = styled.label`
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: -0.2px;
+`;
+
+function BestPicture({
+    id,
+    member,
+    title,
+    content,
+    createdate
+}) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+
+    return (
+        <>
+            {/* <DetailPage
+                id={id}
+                open={isModalOpen}
+                close={onClose}
+                advertising={advertising}
+                area={area}
+                avatar={avatar}
+                heart={heart}
+                imageUrl={imageUrl}
+                latitude={latitude}
+                longitude={longitude}
+                mood={mood}
+                novelty={novelty}
+                rating={rating}
+                review={review}
+                timestamp={timestamp}
+                title={title}
+                username={username}
+                address={address}
+                uid={uid}
+            /> */}
+            <ImageContainer onClick={() => setIsModalOpen(true)}>
+                 <Image src="./images/homer.jpg" alt="" /> {/*<Image src={imageUrl} alt="" /> */}
+                <LeftBottomContainer>
+                    {/* <Avartar uid={uid} Type="Best" /> */}
+                    <TextBox>유저이름 : {id}</TextBox>
+                </LeftBottomContainer>
+                <RightTopContainer>
+                     좋아요 수 : 
+                    <image src="./images/pinger.png" alt="?" /> 
+                    {/* <LikeInterest postId={id} Type="small" /> */}
+                </RightTopContainer>
+                <RightBottomContainer>
+                    <img
+                        style={{ marginRight: '4px' }}
+                        src="./images/location.png"
+                        alt=""
+                    />
+                    <TextBox>지역 : 부산</TextBox> {/* <TextBox>{area}</TextBox> */}
+                </RightBottomContainer>
+            </ImageContainer>
+        </>
+    );
+}
+
+export default BestPicture;
