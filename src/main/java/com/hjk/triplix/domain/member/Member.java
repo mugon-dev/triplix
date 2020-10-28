@@ -46,7 +46,7 @@ public class Member {
 	private byte[] mprofile;
 	
 	@JsonIgnoreProperties({"member","bcontent"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private List<Board> boards;;
 
 }

@@ -64,8 +64,7 @@ public class BoardController {
 		if(session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
 			System.out.println("member: "+member);
-			board.setMember(member);
-			boardService.boardSave(board);
+			boardService.boardSave(board,member);
 			return new ResponseEntity<String>("ok",HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);

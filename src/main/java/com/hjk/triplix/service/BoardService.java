@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.board.BoardRepository;
 import com.hjk.triplix.domain.board.BoardSaveRequestDto;
+import com.hjk.triplix.domain.member.Member;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +19,8 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 	
 	@Transactional
-	public void boardSave(Board board) {
+	public void boardSave(Board board, Member member) {
+		board.setMember(member);
 		boardRepository.save(board);
 	}
 	
