@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { logout } from '../../store';
+import UploadPage from '../Upload/UploadPage';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -98,11 +99,14 @@ const ColorStyle = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
-
+    const [IsModalOpen, setIsModalOpen] = useState(false);
     const [board, setBoard] = useState({
 		bTitle : "",
 	    bContent : ""
 	});
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
 
 	const BoardRegister = (e) => {
 		e.preventDefault();
@@ -124,7 +128,6 @@ export default (props) => {
 		});
 	}
 
-    const [modalShow, setModalShow] = React.useState(false);
     const isLogin = useSelector((store) => store.isLogin);
 	const dispatch = useDispatch();
 
@@ -134,33 +137,6 @@ export default (props) => {
             [e.target.name]: e.target.value
         });
 	}
-
-    function MyVerticallyCenteredModal(props) {
-    return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton style={BackColor}>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    글 등록
-        </Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={BackColor}>
-                <Form.Label>글 제목</Form.Label>
-                <Form.Control name="bTitle" onChange={changeValue} type="text" placeholder="글 제목" />
-                <Form.Label>글 내용</Form.Label>
-                <Form.Control name="bContent" onChange={changeValue} as="textarea" rows={10} />
-            </Modal.Body>
-            <Modal.Footer style={BackColor}>
-                <Button onClick={BoardRegister}>등록</Button>
-                <Button onClick={props.onHide}>취소</Button>
-            </Modal.Footer>
-        </Modal>
-    );
-}
 
 	const logoutProc = () =>{
 		localStorage.removeItem("Authorization");
@@ -190,13 +166,10 @@ export default (props) => {
                         <>
                             <Link style={ColorStyle} onClick={logoutProc}>로그아웃</Link>
                             <div>|</div>
-                            <RegisterText  onClick={() => setModalShow(true)}>
+                            <RegisterText  onClick={() => setIsModalOpen(true)}>
                                 글 등록
+                                <UploadPage open={IsModalOpen} close={onClose} />
                             </RegisterText>
-                            <MyVerticallyCenteredModal
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                            />
                         </>
                     )
                     :

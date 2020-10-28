@@ -34,21 +34,15 @@ export default function ToggleButtons(props) {
 
     const [alignment, setAlignment] = React.useState(props.mood);
 
-    const handleAlignment = (event, newAlignment) => {
-        setAlignment(newAlignment);
-    };
-    useEffect(() => {
-        props.setHadAtmophere(alignment);
-    }, [alignment]);
+    
 
     return (
         <div>
             <SubtitleFont> 분위기 선택</SubtitleFont>
             <MoodList>
                 <ToggleButtonGroup
-                    value={alignment}
+                   
                     exclusive
-                    onChange={handleAlignment}
                     aria-label="text alignment"
                 >
                     <ToggleButton
