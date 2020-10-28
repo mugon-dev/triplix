@@ -70,8 +70,17 @@ export default () => {
     const [hasMore, setHasMore] = useState(true);
     const moods = ['서울', '대전', '대구', '부산', '찍고', '아하', '~!'];
 
-    /*
+    
     useEffect(() => {
+        fetch("http://localhost:8000/board/")
+        .then((res)=>res.json())
+        .then((res)=>{
+            setPosts(res);
+            console.log(res);
+        });
+    },[]);
+
+    /*
         const unsubscribe = db
             .collection('posts')
             .orderBy('timestamp', 'desc')
@@ -185,36 +194,22 @@ export default () => {
 
              <InfiniteScroll
                 dataLength={posts.length}
-                //next={(mood && moodNext) || next}
+                // next={(mood && moodNext) || next}
                 hasMore={hasMore}
                 loader={<Loader />}
             > 
                 <Container>
                      <FlipMove>
-                        
-
-                        {/* {posts.map(({ post, id }) => (
+                        {posts.map(({ post, id }) => (
                             <Picture
-                                uid={post.uid}
                                 id={id}
-                                key={id}
-                                advertising={post.advertising}
-                                area={post.area}
-                                avatar={post.avatar}
-                                heart={post.heart}
-                                imageUrl={post.imageUrl}
-                                latitude={post.latitude}
-                                longitude={post.longitude}
-                                mood={post.mood}
-                                novelty={post.novelty}
-                                rating={post.rating}
-                                review={post.review}
-                                timestamp={post.timestamp}
-                                title={post.title}
-                                username={post.username}
-                                address={post.address}
+                                title={posts.btitle}
+                                content={posts.bcontent}
+                                member={posts.member}
+                                image={posts.image}
                             />
-                        ))} */}
+                        ))}
+                        
                     </FlipMove> 
                 </Container>
             </InfiniteScroll>
