@@ -12,7 +12,7 @@ const LeftBottomContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    visibility: hidden;
+    /* visibility: hidden; */
 `;
 
 const RightBottomContainer = styled.div`
@@ -21,7 +21,7 @@ const RightBottomContainer = styled.div`
     right: 12px;
     display: flex;
     align-items: center;
-    visibility: hidden;
+    /* visibility: hidden; */
 `;
 const Image = styled.img`
     width: 100%;
@@ -31,7 +31,7 @@ const Image = styled.img`
 const Box = styled.div`
     width: 100%;
     margin: 0 0 45px;
-    overflow: hidden;
+    /* overflow: hidden; */
     break-inside: avoid;
     cursor: pointer;
 `;
@@ -53,22 +53,22 @@ const Description = styled.p`
     letter-spacing: -0.32px;
 `;
 
-// const ImageContainer = styled.div`
-//     position: relative;
+const ImageContainer = styled.div`
+    position: relative;
 
-//      hover {
-//         ${LeftBottomContainer} {
-//             visibility: visible;
-//         }
-//         ${RightBottomContainer} {
-//             visibility: visible;
-//         }
-//         ${Image} {
-//             opacity: 0.6;
-//             transition: opacity 300ms ease-out;
-//         }
-//     }
-// `;
+     hover {
+        ${LeftBottomContainer} {
+            visibility: visible;
+        }
+        ${RightBottomContainer} {
+            visibility: visible;
+        }
+        ${Image} {
+            opacity: 0.6;
+            transition: opacity 300ms ease-out;
+        }
+    }
+`;
 
 const TextBox = styled.label`
     font-size: 16px;
@@ -77,17 +77,14 @@ const TextBox = styled.label`
     letter-spacing: -0.32px;
 `;
 
-const Picture = forwardRef(
-    (
-        {
+//const Picture = forwardRef(
+function Picture ({
             id,
             member,
-            btitle,
-            bcontent,
-            bimage,
-        },
-        ref
-    ) => {
+            title,
+            content,
+            image,
+        }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
 
         const onClose = () => {
@@ -119,16 +116,15 @@ const Picture = forwardRef(
                 /> */}
                 
                 <Box>
-                    {/* <ImageContainer> */}
+                    <ImageContainer>
                         <Image
                             onClick={() => setIsModalOpen(true)}
-                            ref={ref}
-                            src="./postImages/mountincloud.jpg"
+                            src={image}
                             alt="사진"
                         />
                         <LeftBottomContainer>
                             {/* <Avartar uid={uid} Type="MainArea" /> */}
-                            <TextBox>{id}</TextBox>
+                            <TextBox>유저이름 : {id}</TextBox>
                         </LeftBottomContainer>
                         {/* <LikeInterest postId={id} /> */}
                         <RightBottomContainer>
@@ -137,15 +133,15 @@ const Picture = forwardRef(
                                 src="/images/location.png"
                                 alt=""
                             />
-                             <TextBox>{id}</TextBox>{/*{area} */}
+                             <TextBox>부산</TextBox>{/*{area} */}
                         </RightBottomContainer>
-                    {/* </ImageContainer> */}
-                    <ImageTitle>{btitle}</ImageTitle>
-                      <Description>{btitle?.slice(0, 20)}...</Description> {/*{review?.slice(0, 20)}... */}
+                    </ImageContainer>
+                    <ImageTitle>{title}</ImageTitle>
+                      {/* <Description>{btitle?.slice(0, 20)}...</Description> {review?.slice(0, 20)}... */}
                 </Box>
             </>
         );
     }
-);
+
 
 export default Picture;
