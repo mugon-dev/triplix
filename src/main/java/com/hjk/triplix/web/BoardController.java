@@ -59,6 +59,7 @@ public class BoardController {
 	
 	@PostMapping("/save")
 	public ResponseEntity<?> boardSave(HttpServletRequest request, @RequestBody Board board) {
+		System.out.println("board save 호출");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
