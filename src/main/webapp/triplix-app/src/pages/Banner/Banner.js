@@ -72,7 +72,6 @@ const BestPicContainer = styled.div`
             .then((res)=>res.json())
             .then((res)=>{
                 setPosts(res);
-                console.log(res);
             });
         },[]);
 
@@ -137,10 +136,10 @@ const BestPicContainer = styled.div`
                     {posts.map(({ post, id }) => (
                         <BestPicture
                             id={id}
-                            member={posts.member}
                             title={posts.btitle}
                             content={posts.bcontent}
-                            createdate={posts.bcreatedate}
+                            member={posts.member}
+                            image={posts.bimage}
                         />
                     ))}
                 </div>

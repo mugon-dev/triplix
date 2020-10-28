@@ -70,9 +70,9 @@ const TextBox = styled.label`
 function BestPicture({
     id,
     member,
-    title,
-    content,
-    createdate
+    btitle,
+    bcontent,
+    bimage
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 

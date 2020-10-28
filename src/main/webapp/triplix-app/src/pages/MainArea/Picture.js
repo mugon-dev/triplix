@@ -1,3 +1,4 @@
+import { PostAddSharp } from '@material-ui/icons';
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 //import DetailPage from '../Detail/DetailPage';
@@ -52,22 +53,22 @@ const Description = styled.p`
     letter-spacing: -0.32px;
 `;
 
-const ImageContainer = styled.div`
-    position: relative;
+// const ImageContainer = styled.div`
+//     position: relative;
 
-     hover {
-        ${LeftBottomContainer} {
-            visibility: visible;
-        }
-        ${RightBottomContainer} {
-            visibility: visible;
-        }
-        ${Image} {
-            opacity: 0.6;
-            transition: opacity 300ms ease-out;
-        }
-    }
-`;
+//      hover {
+//         ${LeftBottomContainer} {
+//             visibility: visible;
+//         }
+//         ${RightBottomContainer} {
+//             visibility: visible;
+//         }
+//         ${Image} {
+//             opacity: 0.6;
+//             transition: opacity 300ms ease-out;
+//         }
+//     }
+// `;
 
 const TextBox = styled.label`
     font-size: 16px;
@@ -79,23 +80,11 @@ const TextBox = styled.label`
 const Picture = forwardRef(
     (
         {
-            advertising,
-            area,
-            avatar,
-            heart,
-            imageUrl,
-            latitude,
-            longitude,
-            mood,
-            novelty,
-            rating,
-            review,
-            timestamp,
-            title,
-            username,
-            address,
             id,
-            uid,
+            member,
+            btitle,
+            bcontent,
+            bimage,
         },
         ref
     ) => {
@@ -130,16 +119,16 @@ const Picture = forwardRef(
                 /> */}
                 
                 <Box>
-                    <ImageContainer>
+                    {/* <ImageContainer> */}
                         <Image
                             onClick={() => setIsModalOpen(true)}
                             ref={ref}
-                            src={imageUrl}
-                            alt=""
+                            src="./postImages/mountincloud.jpg"
+                            alt="사진"
                         />
                         <LeftBottomContainer>
                             {/* <Avartar uid={uid} Type="MainArea" /> */}
-                            <TextBox>{username}</TextBox>
+                            <TextBox>{id}</TextBox>
                         </LeftBottomContainer>
                         {/* <LikeInterest postId={id} /> */}
                         <RightBottomContainer>
@@ -148,11 +137,11 @@ const Picture = forwardRef(
                                 src="/images/location.png"
                                 alt=""
                             />
-                            <TextBox>{area}</TextBox>
+                             <TextBox>{id}</TextBox>{/*{area} */}
                         </RightBottomContainer>
-                    </ImageContainer>
-                    <ImageTitle>{title}</ImageTitle>
-                    <Description>{review?.slice(0, 20)}...</Description>
+                    {/* </ImageContainer> */}
+                    <ImageTitle>{btitle}</ImageTitle>
+                      <Description>{btitle?.slice(0, 20)}...</Description> {/*{review?.slice(0, 20)}... */}
                 </Box>
             </>
         );
