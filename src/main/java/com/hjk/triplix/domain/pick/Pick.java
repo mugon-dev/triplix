@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.member.Member;
 
@@ -30,10 +32,11 @@ public class Pick {
 	
 	@JoinColumn(name = "boardId")
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Member member;
-	
-	@JoinColumn(name = "memberId")
-	@ManyToOne(fetch = FetchType.LAZY)
 	private Board board;
+	
+	@JsonIgnoreProperties({"boards"})
+	@JoinColumn(name = "memberId")
+	@OneToOne(fetch = FetchType.LAZY)
+	private Member member;
 
 }

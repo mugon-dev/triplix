@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class GoodService {
 	
 	private final GoodRepository goodRepository;
-	private final BoardRepository boardRepository;
 	
 	@Transactional
 	public void goodSave(Member member,Board board) {

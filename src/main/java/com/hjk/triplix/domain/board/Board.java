@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -20,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.comment.Comment;
 import com.hjk.triplix.domain.good.Good;
 import com.hjk.triplix.domain.member.Member;
+import com.hjk.triplix.domain.pick.Pick;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,11 +59,15 @@ public class Board {
 	@ManyToOne
 	private Member member;
 	
-	@JsonIgnoreProperties({"board","member"})
+	@JsonIgnoreProperties({"board"})
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Comment> comment;
 	
 	@JsonIgnoreProperties({"board","member"})
-	@OneToMany(mappedBy = "good", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Good> good;
+	
+	@JsonIgnoreProperties({"board","member"})
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+	private List<Pick> pick;
 }

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
@@ -46,7 +47,7 @@ public class Member {
 	@Column(length = 1000000)
 	private byte[] mprofile;
 	
-	@JsonIgnoreProperties({"member","bcontent"})
+	@JsonIgnoreProperties({"member","boards"})
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private List<Board> boards;
 
