@@ -47,6 +47,9 @@ public class Member {
 	private String memail;
 	
 	@Column(length = 10000)
+	private String mimage;
+	
+	@Column(length = 10000)
 	private String mprofile;
 	
 	@JsonIgnoreProperties({"member","comment","good","pick"})
