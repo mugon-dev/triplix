@@ -44,11 +44,11 @@ public class Member {
 	@Column(length = 50)
 	private String memail;
 	
-	@Column(length = 1000000)
-	private byte[] mprofile;
+	@Column(length = 10000)
+	private String mprofile;
 	
 	@JsonIgnoreProperties({"member","boards"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	private List<Board> boards;
 
 }
