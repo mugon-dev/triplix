@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.comment.Comment;
+import com.hjk.triplix.domain.good.Good;
+import com.hjk.triplix.domain.pick.Pick;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,11 +46,23 @@ public class Member {
 	@Column(length = 50)
 	private String memail;
 	
-	@Column(length = 1000000)
-	private byte[] mprofile;
+	@Column(length = 10000)
+	private String mprofile;
 	
-	@JsonIgnoreProperties({"member","boards"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"member","comment","good","pick"})
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	private List<Board> boards;
+	
+	@JsonIgnoreProperties({"member","comment","board"})
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	private List<Comment> comment;
+	
+	@JsonIgnoreProperties({"member","board"})
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	private List<Good> good;
+	
+	@JsonIgnoreProperties({"member","board"})
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	private List<Pick> pick;
 
 }

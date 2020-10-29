@@ -1,5 +1,7 @@
 package com.hjk.triplix.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,10 @@ import lombok.RequiredArgsConstructor;
 public class MemberService {
 	
 	private final MemberRepository memberRepository;
+	
+	public List<Member> memberList(){
+		return memberRepository.findAll();
+	}
 	
 	@Transactional
 	public void register(Member member) {

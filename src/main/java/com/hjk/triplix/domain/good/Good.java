@@ -35,7 +35,7 @@ public class Good {
 	
 	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "memberId")
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Member member;
 	
 	

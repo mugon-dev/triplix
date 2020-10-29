@@ -54,12 +54,12 @@ public class Board {
 	@CreationTimestamp
 	private Timestamp bCreatedate;
 	
-	@JsonIgnoreProperties({"boards"})
+	@JsonIgnoreProperties({"boards","comment","good","pick"})
 	@JoinColumn(name = "memberId")
 	@ManyToOne
 	private Member member;
 	
-	@JsonIgnoreProperties({"board"})
+	@JsonIgnoreProperties({"board","member"})
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Comment> comment;
 	

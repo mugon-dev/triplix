@@ -1,5 +1,7 @@
 package com.hjk.triplix.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hjk.triplix.domain.member.Member;
@@ -26,6 +29,11 @@ public class MemberController {
 	
 	private final HttpSession session;
 	private final MemberService memberService;
+	
+	@GetMapping({"","/"})
+	public List<Member> memberList(){
+		return memberService.memberList();
+	}
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody Member member){
@@ -66,8 +74,9 @@ public class MemberController {
 		}
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
 	}
-	@GetMapping("/detail")
+	@PostMapping("/detail")
 	public ResponseEntity<?> member(HttpServletRequest request){
+		System.out.println("member/detail");
 		HttpSession session = request.getSession();
 		if(session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");

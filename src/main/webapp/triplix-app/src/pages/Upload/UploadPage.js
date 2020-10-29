@@ -52,72 +52,83 @@ export default function UploadPage(props) {
     //유저 정보
     const [userId, setUserId] = useState();
     //유저 상태
-    const isLogin = useSelector((store)=> store.isLogin);
+    const isLogin = useSelector((store) => store.isLogin);
 
     const classes = useStyles();
 
     const [mood, setMood] = useState(props.mood ? props.mood : ''); //분위기
     const [board, setBoard] = useState({
-		btitle: '',
+        btitle: '',
         bcontent: '',
         bimage: ''
     });
     const [image, setImage] = useState();
     const onDrop = async (file) => {
-        console.log(file[0]);
-        const base64 = await convertBase64(file[0]); 
-        setImage(base64); 
+        setBoard((prevState) => {
+            return {
+                ...prevState,
+                [file[0].name]: file[0],
+            };
+        });
+        console.log(board);
+        setImage(file[0]);
     };
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(file);
-    
-          fileReader.onload = () => {
-            resolve(fileReader.result);
-          };
-    
-          fileReader.onerror = (error) => {
-            reject(error);
-          };
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
         });
-      };
-    
+    };
+
     //이미지
-//     useEffect(() => {
-//         //토큰 가져오기
-//         if(props.match.params.id!=null){
-// 		fetch("http://localhost:8000/board/"+props.match.params.id, {
-// 			method: "GET",
-// 			headers:{
-// 				"Authorization": localStorage.getItem("Authorization")
-// 			}
-// 		}).then(res=>res.json()).then(res=>{
-// 			setBtitle(props.btitle ? props.btitle : null);
-//             setBcontent(props.bcontnet ? props.bcontent : null);
-//             setBimage(props.bimage ? props.bimage : null); 
-//         });
-//     }
-//         setAdvertising(props.advertising ? props.advertising : false);
-//         setMood(props.mood ? props.mood : '');
-//         setRating(props.rating ? props.rating : '');
-        
-//     }, []);
+    //     useEffect(() => {
+    //         //토큰 가져오기
+    //         if(props.match.params.id!=null){
+    // 		fetch("http://localhost:8000/board/"+props.match.params.id, {
+    // 			method: "GET",
+    // 			headers:{
+    // 				"Authorization": localStorage.getItem("Authorization")
+    // 			}
+    // 		}).then(res=>res.json()).then(res=>{
+    // 			setBtitle(props.btitle ? props.btitle : null);
+    //             setBcontent(props.bcontnet ? props.bcontent : null);
+    //             setBimage(props.bimage ? props.bimage : null); 
+    //         });
+    //     }
+    //         setAdvertising(props.advertising ? props.advertising : false);
+    //         setMood(props.mood ? props.mood : '');
+    //         setRating(props.rating ? props.rating : '');
+
+    //     }, []);
 
     const changeValue = (e) => {
-        setBoard(prevState=>{
-            return{
-            ...prevState,
-            [e.target.name]: e.target.value
+        setBoard(prevState => {
+            return {
+                ...prevState,
+                [e.target.name]: e.target.value
             }
         });
-        
+
     }
 
     const onHandleUpload = (e) => {
         board.bimage = image;
         console.log(board);
         e.preventDefault();
+        const formData = new FormData();
+        var json = JSON.stringify(board);
+        formData.append("board", json);
+        formData.append("title", board.btitle);
+        formData.append("content", board.bcontent);
+        formData.append("image", board.bimage);
         if (
             board.bimage === null || //이미지업로드 X
             board.btitle === null || //제목이(x)
@@ -129,11 +140,10 @@ export default function UploadPage(props) {
             fetch("http://localhost:8000/board/save", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json; charset=utf-8",
                     "Authorization": localStorage.getItem("Authorization")
                 },
-                body: JSON.stringify(board)
-            }).then(res=>res.text()).then(res => {
+                body: formData,
+            }).then(res => res.text()).then(res => {
                 if (res === "ok") {
                     //props.history.push("/");
                     alert('업로드 완료');
@@ -163,35 +173,35 @@ export default function UploadPage(props) {
             <form>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                    <div
-                    style={{
-                        height: '100%',
-                    }}
-                    >   
-                    <DropzoneArea
-                        onDrop={onDrop}
-                        dropzoneClass={classes.DropZoneArea}
-                        dropzoneParagraphClass={classes.DropzoneParagrap}
-                        Icon=""
-                        dropzoneText={
-                            <div style={{ textAlign: 'center' }}>
-                                <img src={board.bimage} alt="NewPick" />
-                            </div>                    
-                        }
-                        acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
-                        showPreviews={true}
-                        showPreviewsInDropzone={true}
-                        useChipsForPreview //사진이 아니라 이름으로 보여주기 위함
-                        previewText="Selected files"
-                        filesLimit={1} //파일 갯수
-                        // previewGridProps={{
-                        //     //업로드시 아래 select 파일 이라고 뜨는것
-                        //     container: { spacing: 1, direction: 'row' },
-                        // }}
-                        //  previewChipProps={{ classes: { root: classes.previewChip } }}
-                        
-                        />
-                    </div>
+                        <div
+                            style={{
+                                height: '100%',
+                            }}
+                        >
+                            <DropzoneArea
+                                onDrop={onDrop}
+                                dropzoneClass={classes.DropZoneArea}
+                                dropzoneParagraphClass={classes.DropzoneParagrap}
+                                Icon=""
+                                dropzoneText={
+                                    <div style={{ textAlign: 'center' }}>
+                                        <img src={board.bimage} alt="NewPick" />
+                                    </div>
+                                }
+                                acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
+                                showPreviews={true}
+                                showPreviewsInDropzone={true}
+                                useChipsForPreview //사진이 아니라 이름으로 보여주기 위함
+                                previewText="Selected files"
+                                filesLimit={1} //파일 갯수
+                            // previewGridProps={{
+                            //     //업로드시 아래 select 파일 이라고 뜨는것
+                            //     container: { spacing: 1, direction: 'row' },
+                            // }}
+                            //  previewChipProps={{ classes: { root: classes.previewChip } }}
+
+                            />
+                        </div>
                         {/* <Dropzone
                             bimage={bimage}
                             setHadImageurl={setBimage}
@@ -200,34 +210,34 @@ export default function UploadPage(props) {
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
-                        <form style={{ width: '100%', height: '100%' }}>
-                            <Input
-                                placeholder="제목"
-                                name="btitle"
-                                onChange={changeValue}
-                                style={{ width: '100%', height: '11%', color: '#ffffff' }}
-                                
-                                
-                                
-                            />
-                            <TextField
-                                style={{
-                                    color: '#ffffff',
-                                    width: '100%',
-                                    marginTop: '21px',
-                                    borderRadius: '10px',
-                                    boxSizing: 'border-box',
-                                    border: '2px solid #979797',
-                                }}
-                                id="outlined-multiline-static"
-                                name="bcontent"
-                                multiline
-                                rows={17}
-                                placeholder="리뷰 적기..."
-                                variant="outlined"
-                                onChange={changeValue} 
-                            />
-                        </form>
+                            <form style={{ width: '100%', height: '100%' }}>
+                                <Input
+                                    placeholder="제목"
+                                    name="btitle"
+                                    onChange={changeValue}
+                                    style={{ width: '100%', height: '11%', color: '#ffffff' }}
+
+
+
+                                />
+                                <TextField
+                                    style={{
+                                        color: '#ffffff',
+                                        width: '100%',
+                                        marginTop: '21px',
+                                        borderRadius: '10px',
+                                        boxSizing: 'border-box',
+                                        border: '2px solid #979797',
+                                    }}
+                                    id="outlined-multiline-static"
+                                    name="bcontent"
+                                    multiline
+                                    rows={17}
+                                    placeholder="리뷰 적기..."
+                                    variant="outlined"
+                                    onChange={changeValue}
+                                />
+                            </form>
                         </TitleInputBar>
                         <AdvertisementComponent>
                             <Advertisement />
@@ -236,7 +246,7 @@ export default function UploadPage(props) {
                             <Atmosphere />
                         </AtmosphereComponent>
                         <LocationComponent>
-                            <Address/>
+                            <Address />
                         </LocationComponent>
                         <div
                             style={{
@@ -247,9 +257,9 @@ export default function UploadPage(props) {
                                 maxHeight: '140px',
                             }}
                         >
-                           
+
                         </div>
-                        
+
                     </RightContainer>
                     <ClearTwoToneIcon
                         fontSize="large"
