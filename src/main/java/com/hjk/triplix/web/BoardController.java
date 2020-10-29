@@ -68,7 +68,7 @@ public class BoardController {
 	@PostMapping("/save")
 	public ResponseEntity<?> boardSave(@RequestParam("image")MultipartFile[] files, @RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("board") String board) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
-		String uploadFolder = "d:\\upload";
+		String uploadFolder = "C:\\workspace\\project\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
 		Member memberEntity = (Member) session.getAttribute("principal");
 		String filename = "";
@@ -79,13 +79,13 @@ public class BoardController {
 		for (MultipartFile file : files) {
 	         UUID uuid = UUID.randomUUID();
 	         String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
-	         File saveFile = new File(uploadPath, uploadFileName);
+	         File saveFile = new File(uploadFolder, uploadFileName);
 	         System.out.println(uploadPath);
 	         System.out.println(uploadFileName);
-	         filename = uploadPath+"\\"+uploadFileName;
+	         filename = uploadFolder+"\\"+uploadFileName;
 	         file.transferTo(saveFile);
-	          // TODO
-	    }
+	         filename = ".\\postImages\\"+uploadFileName;
+	    } 
 		boardService.boardSave(title, content, filename, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);

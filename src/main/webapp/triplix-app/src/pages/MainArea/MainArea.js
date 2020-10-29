@@ -76,7 +76,7 @@ export default () => {
         .then((res)=>res.json())
         .then((res)=>{
             setPosts(res);
-            console.log(res);
+            console.log("zzz",res);
         });
     },[]);
 
@@ -179,7 +179,7 @@ export default () => {
         <MarginContainer>
             <HeaderContainer>
                 <Title>전국팔도유랑</Title>
-                
+                <br/><br/><br/><br/>
                  <MoodList>
                     {moods.map((moodText) => (
                         <Mood
