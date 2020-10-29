@@ -33,6 +33,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 import ShowMoreText from 'react-show-more-text';
+import Message from './Message';
+import ChatInput from './ChatInput';
 //import Subscribe from './DetailFunction/Subscribe';
 //import Avartar from './DetailFunction/Avartar';
 //import LikeInterest from './DetailFunction/Like_Interest';
@@ -100,23 +102,18 @@ export default function DetailPage(props) {
     };
 
     /*
-    useEffect(() => {
-        fetch("http://localhost:8000/board/")
-
-        if (props.id) {
-            db.collection('posts')
-                .doc(props.id)
-                .onSnapshot((snapShot) => setRoomDetails(snapShot.data()));
-        }
-        db.collection('posts')
-            .doc(props.id)
-            .collection('comment')
-            .orderBy('timestamp', 'desc')
-            .onSnapshot((snapShot) =>
-                setRoomMessages(snapShot.docs.map((doc) => doc.data()))
-            );
-    }, [props.id]);
-    */
+    const [posts, setPosts] = useState([]);
+        useEffect(() => {
+            fetch("http://localhost:8000/board/detail/1")
+            .then((res)=>res.json())
+            .then((res)=>{
+                setPosts(res);
+                // console.log(res);
+                // console.log(res[0].comment[0].comment);
+            });
+        },[]);
+*/
+    
     const executeOnClick = (isExpanded) => {
         // console.log(isExpanded);
     };
@@ -236,8 +233,7 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                                        
-                            
+
                         </LeftContainer>
                         <RightContainer>
                             <div
@@ -288,42 +284,7 @@ export default function DetailPage(props) {
                                                 <RatingFont>별로야</RatingFont>
                                             }
                                             labelPlacement="bottom"
-                                        />
-                                        <FormControlLabel
-                                            value="2"
-                                            control={<Radio color="primary" />}
-                                            label={
-                                                <RatingFont>
-                                                    그저그래
-                                                </RatingFont>
-                                            }
-                                            labelPlacement="bottom"
-                                        />
-                                        <FormControlLabel
-                                            value="3"
-                                            control={<Radio color="primary" />}
-                                            label={
-                                                <RatingFont>괜찮아</RatingFont>
-                                            }
-                                            labelPlacement="bottom"
-                                        />
-                                        <FormControlLabel
-                                            value="4"
-                                            control={<Radio color="primary" />}
-                                            label={
-                                                <RatingFont>좋아</RatingFont>
-                                            }
-                                            labelPlacement="bottom"
-                                        />                   
-                                        <FormControlLabel
-                                            value="5"
-                                            control={<Radio color="primary" />}
-                                            label={
-                                                <RatingFont>최고야</RatingFont>
-                                            }
-                                            labelPlacement="bottom"
-                                        />
-                                        
+                                        />    
                                         <Button className={classes.RatingBtn}>
                                             완료
                                         </Button>
@@ -331,7 +292,7 @@ export default function DetailPage(props) {
                                 </FormControl>
                             </div> */}
 
-                            {/* <CommentBox
+                            <CommentBox
                                 style={{
                                     height: 'auto',
                                     minHeight: '35%',
@@ -341,30 +302,36 @@ export default function DetailPage(props) {
                                     overflow: 'auto',
                                 }}
                             >
-                                {roomMessages.map(
+                                {/* {posts.map(
                                     (
                                         {
-                                            message,
-                                            timestamp,
-                                            user,
-                                            userimage,
-                                            uid,
+                                            mname,
+                                            comment,
+                                            member,
+                                            good,
+                                            pick,
                                         },
                                         index
                                     ) => (
                                         <Message
-                                            key={index}
-                                            message={message}
-                                            timestamp={timestamp}
-                                            user={user}
-                                            userImage={userimage}
-                                            uid={uid}
+                                            // key={index}
+                                            mname={member.mname}
+                                            comment={comment.id}
+                                            good={good}
+                                            pick={pick}
+
+                                            //key={index}
+                                            //message={message}
+                                            //timestamp={timestamp}
+                                            //user={user}
+                                            //userImage={userimage}
+                                            //uid={uid}
                                         />
                                     )
-                                )}
-                            </CommentBox> */}
+                                )} */}
+                            </CommentBox>
                             {/*안풋바 */}
-                            {/* <ChatInput id={props.id} /> */}
+                            <ChatInput id={props.id} />
                         </RightContainer>
                     </MainContentContainer>
                 </TotalContainer>

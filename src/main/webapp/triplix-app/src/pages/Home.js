@@ -10,8 +10,6 @@ import MainArea from './MainArea/MainArea';
 export default () => {
     return (
         <>
-            <NavBar />
-
             <Banner />
 
             <PickBar />

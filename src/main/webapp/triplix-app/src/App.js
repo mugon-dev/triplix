@@ -19,7 +19,9 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <div>
+      <NavBar/>
       <GlobalStyle />
+        
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
