@@ -36,6 +36,12 @@
 - 성공 : member 객체 
 - id,mid,mpw,mname,memail,mprofile
 
+### member/image
+- jwt 필요
+- post 호출
+- image form 데이터 필요
+- return ok
+
 ## board 관련 기능
 
 ### board/

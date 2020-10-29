@@ -40,18 +40,18 @@ const useStyles = makeStyles((theme) => ({
 
 const UserImageDialog = (props) => {
   const classes = useStyles();
-  const { onClose, open } = props;
+  const { onClose, changeImage, open } = props;
 
   const handleClose = (e) => {
     setImage("");
     onClose();
   };
 
-  const handleCloseUpdate = (e) => {
-    console.log(image);
+  const handleCloseUpdate = (changeImage) => {
+    console.log(changeImage);
     const formData = new FormData();
-    formData.append("image", image);
-    fetch("http://localhost:8000/board/save", {
+    formData.append("image", changeImage);
+    fetch("http://localhost:8000/member/image", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -61,13 +61,12 @@ const UserImageDialog = (props) => {
       .then((res) => res.text())
       .then((res) => {
         if (res === "ok") {
-          //props.history.push("/");
           alert("업로드 완료");
         } else {
-          alert("글등록 실패");
+          alert("업로드 실패");
         }
       });
-    onClose();
+    onClose(changeImage);
   };
 
   const [image, setImage] = useState();
@@ -124,7 +123,7 @@ const UserImageDialog = (props) => {
           Cancle
         </Button>
         <Button
-          onClick={handleCloseUpdate}
+          onClick={() => handleCloseUpdate(image)}
           color="primary"
           name="update"
           value="update"

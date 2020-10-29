@@ -77,7 +77,18 @@ function UserPage(props) {
 
   const handleClose = (value) => {
     setOpen(false);
-    setChangeImage(value);
+    setChangeImage(changeImage);
+
+    console.log(userinfo);
+    console.log(changeImage);
+    setUserInfo((prevState) => {
+      return {
+        ...prevState,
+        mimage: "URL.createObjectURL(changeImage)",
+      };
+    });
+    console.log(userinfo);
+    console.log(URL.createObjectURL(changeImage));
   };
 
   return (
