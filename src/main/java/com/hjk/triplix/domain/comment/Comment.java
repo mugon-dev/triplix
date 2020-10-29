@@ -40,6 +40,7 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp createdate;
 	
+	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "boardId")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Board board;
