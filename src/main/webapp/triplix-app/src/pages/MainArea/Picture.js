@@ -1,6 +1,7 @@
 import { PostAddSharp } from '@material-ui/icons';
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
+import DetailPage from './DetailPage';
 //import DetailPage from '../Detail/DetailPage';
 //import Avartar from '../Detail/DetailFunction/Avartar';
 //import LikeInterest from '../Detail/DetailFunction/Like_Interest';
@@ -93,27 +94,29 @@ function Picture ({
 
         return (
             <>
-                {/* <DetailPage
+                 <DetailPage
                     open={isModalOpen}
                     close={onClose}
                     id={id}
-                    advertising={advertising}
-                    area={area}
-                    avatar={avatar}
-                    heart={heart}
-                    imageUrl={imageUrl}
-                    latitude={latitude}
-                    longitude={longitude}
-                    mood={mood}
-                    novelty={novelty}
-                    rating={rating}
-                    review={review}
-                    timestamp={timestamp}
                     title={title}
-                    username={username}
-                    address={address}
-                    uid={uid}
-                /> */}
+                    content={content}
+                    image={image}
+                    //advertising={advertising}
+                    //area={area}
+                    //avatar={avatar}
+                    //heart={heart}
+                    //imageUrl={imageUrl}
+                    //latitude={latitude}
+                    //longitude={longitude}
+                    //mood={mood}
+                    //novelty={novelty}
+                    //rating={rating}
+                    //review={review}
+                    //timestamp={timestamp}
+                    //username={username}
+                    //address={address}
+                    //uid={uid}
+                />
                 
                 <Box>
                     <ImageContainer>

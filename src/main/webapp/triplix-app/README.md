@@ -11,6 +11,7 @@
 - JavaScript Library(npm i proj4)
 - React-Infinite-Scroll-Component(npm i react-infinite-scroll-component)
 - React-Flip-Move(react-flip-move)
+- React-show-more-text (npm i react-show-more-text)
 
 ### 업데이트 내용
 
