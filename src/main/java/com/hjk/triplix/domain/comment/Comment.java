@@ -1,6 +1,7 @@
 package com.hjk.triplix.domain.comment;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.member.Member;
 
@@ -41,8 +44,9 @@ public class Comment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Board board;
 	
+	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "memberId")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	private Member member;
 	
 	

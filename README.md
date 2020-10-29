@@ -61,3 +61,63 @@
 - put
 - jwt 필요
 - btitle,bcontent,bimage
+
+## comment 기능
+
+### comment/save/{id}
+- post
+- jwt
+- board id 필요
+- return ok
+
+### comment/
+- get
+- 전체 리스트
+
+### comment/{id}
+- get
+- 하나 리턴
+
+### comment/{id}
+- put
+- jwt
+- comment 업데이트
+- return ok
+
+### comment{id}
+- delete
+- jwt
+- return ok
+
+## Good 좋아요 기능
+
+### good/{id}
+- get
+- good 하나 리턴
+
+### good/{id}
+- post
+- jwt 필요
+- boardId 받아서 저장
+- return ok
+
+### good/{id}
+- delete
+- jwt 필요
+- return ok
+
+## pick 기능
+
+### pick/{id}
+- get
+- pick 하나 리턴
+
+### pick/{id}
+- post
+- jwt
+- return ok
+
+### pick/{id}
+- delete
+- jwt
+- return ok

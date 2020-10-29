@@ -36,8 +36,9 @@ public class BoardController {
 		return boardService.boardList();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/detail/{id}")
 	public Board boardDetail(@PathVariable int id) {
+		System.out.println("boardDetail");
 		Board board = boardService.boardDetail(id);
 		return board;
 	}
