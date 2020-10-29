@@ -49,20 +49,20 @@ public class Member {
 	@Column(length = 10000)
 	private String mprofile;
 	
-	@JsonIgnoreProperties({"member","boards"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"member"})
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private List<Board> boards;
 	
-	@JsonIgnoreProperties({"member","comment"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	private List<Comment> comment;
-	
-	@JsonIgnoreProperties({"member"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	private List<Good> good;
-	
-	@JsonIgnoreProperties({"member"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	private List<Pick> pick;
+//	@JsonIgnoreProperties({"member","comment"})
+//	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//	private List<Comment> comment;
+//	
+//	@JsonIgnoreProperties({"member"})
+//	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//	private List<Good> good;
+//	
+//	@JsonIgnoreProperties({"member"})
+//	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+//	private List<Pick> pick;
 
 }
