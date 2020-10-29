@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Form, Button } from 'react-bootstrap';
 import { SignUpLabel } from '../components/CommonStyle/SignUpLabel';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
 import { useHistory, Link } from 'react-router-dom';
-import { useStateValue } from '../StateProvider';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { useDispatch } from 'react-redux';
 import { login } from '../store';
-
+import { SocialCollection } from '../components/CommonStyle/SocialCollection';
+//import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
+//import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
+//import { InputBar } from '../components/CommonStyle/InputBar';
+import { MainTheme } from '../components/CommonStyle/MainTheme';
+//import { SignUpLabel } from '../components/CommonStyle/SignUpLabel';
+import { SocialBox } from '../components/CommonStyle/SocialBox';
+import { SocialFont } from '../components/CommonStyle/SocialFont';
+import { SocialImage } from '../components/CommonStyle/SocialImage';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 const LoginLabel = styled.div`
     margin-top: 5%;
@@ -33,7 +40,8 @@ const IDCheckLabel = styled.div`
 const Login = (props) => {
 
 	const dispatch = useDispatch();
-
+	const history = useHistory();
+	
 	const [member, setMember] = useState({
 		mid: "",
 		mpw: ""
@@ -77,6 +85,7 @@ const Login = (props) => {
 
 
 	return (
+		<MainTheme bg={'/images/loginbg.jpg'}>
 		<div
 			style={{
 				overflow: 'hidden',
@@ -85,17 +94,81 @@ const Login = (props) => {
 				backgroundColor: 'rgba(0, 0, 0, 0.5)',
 			}}
 		>
+
+<KeyboardBackspaceIcon
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                    fontSize="large"
+                    style={{
+                        position: 'absolute',
+                        paddingTop: '75px',
+                        marginLeft: '75px',
+                        display: 'flex',
+                        cursor: 'pointer',
+                        width: '50px',
+                        height: '50px',
+                        textAlign: 'left',
+                        color: 'white',
+                    }}
+                />
+
 			<LoginLabel>방문해주셔서 감사합니다</LoginLabel>
-			<SignUpLabel style={{ marginTop: '2%' }}>
-				{/* <img
+			<SignUpLabel style={{ marginTop: '1%' }}>
+				<img
 					style={{ marginRight: '30px' }}
-					src="/images/Logo.png"
+					src="/images/NavbarLogo.png"
 					alt="Logo"
-				/> */}
+				/>
                     &nbsp;로그인
                 </SignUpLabel>
 
-			<BackgroundBox style={{ height: '500px', marginTop: '3%' }}>
+			<BackgroundBox style={{ height: '500px', marginTop: '-3%' }}>
+				{/*소셜 로그인 박스*/}
+				<SocialCollection>
+                        <SocialBox>
+                            <SocialImage bg={'/images/kakao.png'} />
+                            <SocialFont>
+                                카카오 아이디로
+                                <br /> 로그인
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox>
+                            <SocialImage bg={'/images/naver.png'} />
+                            <SocialFont>
+                                네이버 아이디로
+                                <br /> 로그인
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox>
+                            <SocialImage
+                                style={{
+                                    background: ' #3B5998',
+                                    borderRadius: '35px',
+                                }}
+                            >
+                                <img
+                                    src="/images/facebook.png"
+                                    alt="Facebook"
+                                />
+                            </SocialImage>
+                            <SocialFont>
+                                페이스북 아이디로
+                                <br /> 로그인
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox>
+                            <SocialImage
+                                bg={'/images/google.png'}
+                                alt="Google"
+                            />
+                            <SocialFont>
+                                구글 아이디로
+                                <br /> 로그인
+                            </SocialFont>
+                        </SocialBox>
+                    </SocialCollection>
+                    {/*inputBox Div*/}
 
 				<form
 					onSubmit={onLoginHandler}
@@ -107,33 +180,33 @@ const Login = (props) => {
 					}}
 				>
 					<InputBar
-						style={{ height: '17%', marginTop: '10%' }}
-						placeholder="아아디"
+						style={{ height: '17%'}}
+						placeholder="아이디"
 						type="text"
 						name="mid"
 						onChange={changeValue}
 					/>
 					<InputBar
-						style={{ height: '17%', marginTop: '-1%' }}
+						style={{ height: '17%', marginTop: '-3%' }}
 						placeholder="비밀번호"
 						type="password"
 						name="mpw"
 						onChange={changeValue}
 					/>
-					{/* <p
+					 <p
 						style={{
 							width: '86%',
-							marginTop: '-5%',
+							marginTop: '-4%',
 							textAlign: 'right',
 						}}
 					>
 						비밀번호찾기
-                        </p> */}
+                        </p>
 					<SubmittBtn
-						style={{ height: '17%', marginTop: '2%' }}
+						style={{ height: '17%', marginTop: '-4%' }}
 						onClick={onLoginHandler}
 					>
-						Traview 로그인
+						TRIPLIX 로그인
                         </SubmittBtn>
 
 					<IDCheckLabel>
@@ -145,6 +218,7 @@ const Login = (props) => {
 				</form>
 			</BackgroundBox>
 		</div>
+		</MainTheme>
 	);
 };
 

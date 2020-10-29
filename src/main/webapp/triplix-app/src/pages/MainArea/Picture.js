@@ -124,7 +124,7 @@ function Picture ({
                         />
                         <LeftBottomContainer>
                             {/* <Avartar uid={uid} Type="MainArea" /> */}
-                            <TextBox>유저이름 : {id}</TextBox>
+                            <TextBox>{id}</TextBox>
                         </LeftBottomContainer>
                         {/* <LikeInterest postId={id} /> */}
                         <RightBottomContainer>

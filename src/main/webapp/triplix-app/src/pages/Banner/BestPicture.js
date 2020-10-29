@@ -72,7 +72,7 @@ function BestPicture({
     member,
     btitle,
     bcontent,
-    bimage
+    image
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -104,13 +104,13 @@ function BestPicture({
                 uid={uid}
             /> */}
             <ImageContainer onClick={() => setIsModalOpen(true)}>
-                 <Image src="./images/homer.jpg" alt="" /> {/*<Image src={imageUrl} alt="" /> */}
+                 <Image src={image} alt="" /> {/*<Image src={imageUrl} alt="" /> */}
                 <LeftBottomContainer>
                     {/* <Avartar uid={uid} Type="Best" /> */}
-                    <TextBox>유저이름 : {id}</TextBox>
+                    <TextBox>{id}</TextBox>
                 </LeftBottomContainer>
                 <RightTopContainer>
-                     좋아요 수 : 
+                     좋냐
                     <image src="./images/pinger.png" alt="?" /> 
                     {/* <LikeInterest postId={id} Type="small" /> */}
                 </RightTopContainer>
@@ -120,7 +120,7 @@ function BestPicture({
                         src="./images/location.png"
                         alt=""
                     />
-                    <TextBox>지역 : 부산</TextBox> {/* <TextBox>{area}</TextBox> */}
+                    <TextBox>부산</TextBox> {/* <TextBox>{area}</TextBox> */}
                 </RightBottomContainer>
             </ImageContainer>
         </>
