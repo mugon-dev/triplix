@@ -66,6 +66,7 @@ const UploadPage = (props) => {
     });
     const [image, setImage] = useState();
     const onDrop = async (file) => {
+        
         setBoard((prevState) => {
             return {
                 ...prevState,
@@ -187,7 +188,7 @@ const UploadPage = (props) => {
                                 Icon=""
                                 dropzoneText={
                                     <div style={{ textAlign: 'center' }}>
-                                        <img src={board.bimage} alt="NewPick" />
+                                        <img src={image ? URL.createObjectURL(image) : null} alt={image ? image.name : null}  />
                                     </div>
                                 }
                                 acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
