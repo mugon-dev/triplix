@@ -52,4 +52,11 @@ public class MemberService {
 		Member member = memberRepository.findById(id).get();
 		return member;
 	}
+
+	@Transactional
+	public void updateImage(int id, String filename) {
+		Member member = memberRepository.findById(id).get();
+		member.setMimage(filename);
+		
+	}
 }

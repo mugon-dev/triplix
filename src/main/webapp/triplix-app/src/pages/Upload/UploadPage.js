@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import {RouteComponentProps} from 'react-router';
+import { Route , withRouter} from 'react-router-dom';
 import {
     TotalContainer,
     UploadDropZone,
@@ -48,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '50px',
     },
 }));
-export default function UploadPage(props) {
+const UploadPage = (props) => {
     //유저 정보
     const [userId, setUserId] = useState();
     //유저 상태
@@ -64,6 +66,7 @@ export default function UploadPage(props) {
     });
     const [image, setImage] = useState();
     const onDrop = async (file) => {
+        
         setBoard((prevState) => {
             return {
                 ...prevState,
@@ -145,8 +148,8 @@ export default function UploadPage(props) {
                 body: formData,
             }).then(res => res.text()).then(res => {
                 if (res === "ok") {
-                    //props.history.push("/");
                     alert('업로드 완료');
+                    window.location.reload();
                 } else {
                     alert('글등록 실패');
                 }
@@ -185,7 +188,7 @@ export default function UploadPage(props) {
                                 Icon=""
                                 dropzoneText={
                                     <div style={{ textAlign: 'center' }}>
-                                        <img src={board.bimage} alt="NewPick" />
+                                        <img src={image ? URL.createObjectURL(image) : null} alt={image ? image.name : null}  />
                                     </div>
                                 }
                                 acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
@@ -194,19 +197,9 @@ export default function UploadPage(props) {
                                 useChipsForPreview //사진이 아니라 이름으로 보여주기 위함
                                 previewText="Selected files"
                                 filesLimit={1} //파일 갯수
-                            // previewGridProps={{
-                            //     //업로드시 아래 select 파일 이라고 뜨는것
-                            //     container: { spacing: 1, direction: 'row' },
-                            // }}
-                            //  previewChipProps={{ classes: { root: classes.previewChip } }}
-
                             />
                         </div>
-                        {/* <Dropzone
-                            bimage={bimage}
-                            setHadImageurl={setBimage}
-                                                 
-                        />  */}
+        
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
@@ -216,9 +209,6 @@ export default function UploadPage(props) {
                                     name="btitle"
                                     onChange={changeValue}
                                     style={{ width: '100%', height: '11%', color: '#ffffff' }}
-
-
-
                                 />
                                 <TextField
                                     style={{
@@ -306,4 +296,4 @@ export default function UploadPage(props) {
     );
 }
 
-
+export default UploadPage;

@@ -101,21 +101,6 @@ function Picture ({
                     title={title}
                     content={content}
                     image={image}
-                    //advertising={advertising}
-                    //area={area}
-                    //avatar={avatar}
-                    //heart={heart}
-                    //imageUrl={imageUrl}
-                    //latitude={latitude}
-                    //longitude={longitude}
-                    //mood={mood}
-                    //novelty={novelty}
-                    //rating={rating}
-                    //review={review}
-                    //timestamp={timestamp}
-                    //username={username}
-                    //address={address}
-                    //uid={uid}
                 />
                 
                 <Box>
@@ -133,7 +118,7 @@ function Picture ({
                         <RightBottomContainer>
                             <img
                                 style={{ marginRight: '4px' }}
-                                src="/images/location.png"
+                                src="/images/{location.png}"
                                 alt=""
                             />
                              <TextBox>부산</TextBox>{/*{area} */}
