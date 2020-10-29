@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.comment.Comment;
 import com.hjk.triplix.domain.comment.CommentSaveRequestDto;
 import com.hjk.triplix.domain.member.Member;
+import com.hjk.triplix.service.BoardService;
 import com.hjk.triplix.service.CommentService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/comment")
 @RequiredArgsConstructor
 public class CommentController {
-	private CommentService commentService;
+	private final CommentService commentService;
+	private final BoardService boardService;
 	
 	@GetMapping("/")
 	public List<Comment> CommentList() {
@@ -38,11 +41,13 @@ public class CommentController {
 		return commentService.commentOne(id);
 	}
 	
-	@PostMapping("/save")
-	public ResponseEntity<?> CommentSave(HttpServletRequest request, @RequestBody Comment comment) {
+	@PostMapping("/save/{id}")
+	public ResponseEntity<?> CommentSave(HttpServletRequest request, @RequestBody Comment comment, @PathVariable int id) {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
+			Board board = boardService.boardDetail(id);
+			comment.setBoard(board);
 			comment.setMember(member);
 			commentService.commentSave(comment);
 			return new ResponseEntity<String>("ok",HttpStatus.OK);

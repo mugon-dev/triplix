@@ -61,3 +61,28 @@
 - put
 - jwt 필요
 - btitle,bcontent,bimage
+
+## comment 기능
+
+### comment/save/{id}
+- post
+- jwt
+- board id 필요
+- return ok
+
+## Good 좋아요 기능
+
+### good/{id}
+- get
+- good 하나 리턴
+
+### good/save
+- post
+- jwt 필요
+- boardId 받아서 저장
+- return ok
+
+### good/{id}
+- delete
+- jwt 필요
+- return ok

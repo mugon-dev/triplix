@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
+import com.hjk.triplix.domain.comment.Comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,6 +48,6 @@ public class Member {
 	
 	@JsonIgnoreProperties({"member","bcontent"})
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
-	private List<Board> boards;;
+	private List<Board> boards;
 
 }
