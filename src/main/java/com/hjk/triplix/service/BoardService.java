@@ -19,7 +19,11 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 	
 	@Transactional
-	public void boardSave(Board board, Member member) {
+	public void boardSave(String title, String content, String filename, Member member) {
+		Board board = new Board();
+		board.setBTitle(title);
+		board.setBContent(content);
+		board.setBImage(filename);
 		board.setMember(member);
 		boardRepository.save(board);
 	}

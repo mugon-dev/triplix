@@ -1,6 +1,11 @@
 package com.hjk.triplix.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.board.BoardSaveRequestDto;
@@ -59,16 +66,29 @@ public class BoardController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<?> boardSave(HttpServletRequest request, @RequestBody Board board) {
+	public ResponseEntity<?> boardSave(@RequestParam("image")MultipartFile[] files, @RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("board") String board) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
-		HttpSession session = request.getSession();
-		if(session.getAttribute("principal") != null) {
-			Member member = (Member) session.getAttribute("principal");
-			System.out.println("member: "+member);
-			boardService.boardSave(board,member);
-			return new ResponseEntity<String>("ok",HttpStatus.OK);
+		String uploadFolder = "d:\\upload";
+		String uploadFolderPath = getFolder();
+		Member memberEntity = (Member) session.getAttribute("principal");
+		String filename = "";
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
 		}
-		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
+		for (MultipartFile file : files) {
+	         UUID uuid = UUID.randomUUID();
+	         String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
+	         File saveFile = new File(uploadPath, uploadFileName);
+	         System.out.println(uploadPath);
+	         System.out.println(uploadFileName);
+	         filename = uploadPath+"\\"+uploadFileName;
+	         file.transferTo(saveFile);
+	          // TODO
+	    }
+		boardService.boardSave(title, content, filename, memberEntity);
+		System.out.println("글 입력 성공");
+		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update/{id}")
@@ -87,5 +107,11 @@ public class BoardController {
 		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
 	}
 	
+	private String getFolder() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		return str.replace("-", File.separator);
+	}
 	
 }
