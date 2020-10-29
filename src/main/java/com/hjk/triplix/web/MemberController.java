@@ -74,7 +74,7 @@ public class MemberController {
 		}
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
 	}
-	@PostMapping("/detail")
+	@GetMapping("/detail")
 	public ResponseEntity<?> member(HttpServletRequest request){
 		System.out.println("member/detail");
 		HttpSession session = request.getSession();
