@@ -29,48 +29,43 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class Member {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(unique = true, length = 50)
 	private String mid;
-	
+
 	@Column(length = 50)
 	private String mpw;
-	
+
 	@Column(length = 50)
 	private String mname;
-	
+
 	@Column(length = 50)
 	private String memail;
-	
+
 	@Column(length = 10000)
 	private String mimage;
-	
+
 	@Column(length = 10000)
 	private String mprofile;
-	
-	@JsonIgnoreProperties({"member","comment","good","pick"})
-	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+
+	@JsonIgnoreProperties({ "member" })
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 	private List<Board> boards;
-	
-	/*
-	 * @JsonIgnoreProperties({"member","comment","board"})
-	 * 
-	 * @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) private List<Comment>
-	 * comment;
-	 * 
-	 * @JsonIgnoreProperties({"member","board"})
-	 * 
-	 * @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) private List<Good>
-	 * good;
-	 * 
-	 * @JsonIgnoreProperties({"member","board"})
-	 * 
-	 * @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) private List<Pick>
-	 * pick;
-	 */
+
+	@JsonIgnoreProperties({ "member" })
+	@OneToMany(mappedBy = "member")
+	private List<Comment> comment;
+
+//	@JsonIgnoreProperties({ "member" })
+//	@OneToMany(mappedBy = "member")
+//	private List<Good> good;
+
+//	@JsonIgnoreProperties({ "member" })
+//	@OneToMany(mappedBy = "member")
+//	private List<Pick> pick;
 
 }

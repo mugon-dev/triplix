@@ -40,14 +40,12 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp createdate;
 	
-	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "boardId")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private Board board;
 	
-	@JsonIgnoreProperties({"boards"})
 	@JoinColumn(name = "memberId")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private Member member;
 	
 	

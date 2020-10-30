@@ -47,9 +47,7 @@ public class JwtAuthorizationFilter implements Filter {
 				System.out.println("jwt id: "+id);
 				HttpSession session = req.getSession();
 				Member memberEntity = memberRepository.findById(id).get();
-				System.out.println(memberEntity);
 				session.setAttribute("principal", memberEntity);
-				System.out.println("zzzz");
 				chain.doFilter(request, response);
 			}catch (Exception e) {
 				// TODO: handle exception
