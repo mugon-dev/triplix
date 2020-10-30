@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
+    "jwt-decode": "^3.0.0",
     "material-ui-dropzone": "^3.5.0",
     "popper.js": "^1.16.1",
     "proj4": "^2.6.2",

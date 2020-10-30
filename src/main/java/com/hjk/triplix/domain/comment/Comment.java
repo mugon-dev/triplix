@@ -43,7 +43,7 @@ public class Comment {
 	@JoinColumn(name = "boardId")
 	@ManyToOne
 	private Board board;
-	
+	 
 	@JoinColumn(name = "memberId")
 	@ManyToOne
 	private Member member;

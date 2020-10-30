@@ -12,6 +12,7 @@
 - React-Infinite-Scroll-Component(npm i react-infinite-scroll-component)
 - React-Flip-Move(react-flip-move)
 - React-show-more-text (npm i react-show-more-text)
+- jwt-decode (npm i jwt-decode)
 
 ### 업데이트 내용
 

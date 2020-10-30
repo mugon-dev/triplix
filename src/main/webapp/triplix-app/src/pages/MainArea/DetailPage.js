@@ -65,6 +65,7 @@ const DetailContent = styled.div`
     }
 `;
 
+
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
@@ -92,7 +93,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-    // console.log(1,props);
+
+    console.log(props,"sss");
+    
+
     const classes = useStyles();
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
@@ -101,6 +105,11 @@ export default function DetailPage(props) {
             `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
         );
     };
+
+    function likebutton() {
+        document.querySelector("#like").className = "fas fa-thumbs-up fa-5x";
+        fetch().then().then();
+    }
 
     /*
     const [posts, setPosts] = useState([]);
@@ -231,10 +240,11 @@ export default function DetailPage(props) {
                                     onClick={executeOnClick}
                                     expanded={false}
                                 >
+                                    
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-
+                            <i id="like" class="far fa-thumbs-up fa-5x" onClick={likebutton}></i>
                         </LeftContainer>
                         <RightContainer>
                             <div
@@ -244,7 +254,6 @@ export default function DetailPage(props) {
                                     justifyContent: 'space-between',
                                 }}
                             >
-                                <p>평점그래프</p>
                                 <div>
                                     <ClearTwoToneIcon
                                         fontSize="large"
