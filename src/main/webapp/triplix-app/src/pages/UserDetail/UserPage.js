@@ -14,6 +14,7 @@ import AddIcon from "@material-ui/icons/Add";
 import UserImageDialog from "./UserImageDialog";
 import styled from "styled-components";
 import UserProfileDialog from "./UserProfileDialog";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: relative;
@@ -59,6 +60,8 @@ const IntroductionFont = styled.p`
 
 const UserPage = () => {
   const [userinfo, setUserInfo] = useState("");
+  const isLogin = useSelector((store) => store.isLogin);
+  console.log(isLogin);
 
   useEffect(() => {
     fetch("http://localhost:8000/member/detail", {
@@ -221,7 +224,7 @@ const UserPage = () => {
               }}
             >
               여긴 나에 대한 정보가 들어있어요
-              {/* {userinfo.mprofile} */}
+              {userinfo.mprofile}
               <Button
                 variant="outlined"
                 color="primary"
@@ -267,8 +270,6 @@ const UserPage = () => {
           </div>
         </div>
       </div>
-
-      {/* <Mypost uid={userinfo.uid} /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, Button, Form } from "react-bootstrap";
-import { logout } from "../../store";
+import { login, logout } from "../../store";
 import UploadPage from "../Upload/UploadPage";
 
 const MarginContainer = styled.div`
@@ -99,6 +99,7 @@ const ColorStyle = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
+  console.log("navbar");
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [board, setBoard] = useState({
     bTitle: "",
@@ -145,7 +146,6 @@ export default (props) => {
     dispatch(logout());
   };
   const [area, setArea] = useState("");
-
   return (
     <MarginContainer>
       <Container>
