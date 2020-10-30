@@ -59,4 +59,11 @@ public class MemberService {
 		member.setMimage(filename);
 		
 	}
+	
+	@Transactional
+	public void updateProfile(int id, String profile) {
+		Member member = memberRepository.findById(id).get();
+		member.setMprofile(profile);
+		
+	}
 }

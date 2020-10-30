@@ -1,17 +1,13 @@
 import {
-  Avatar,
   Button,
   Dialog,
   DialogActions,
   DialogTitle,
-  Fab,
   makeStyles,
 } from "@material-ui/core";
 import { DropzoneArea } from "material-ui-dropzone";
 import React, { useState } from "react";
-import { UploadDropZone } from "../pages/Upload/UploadStyled";
-import AddIcon from "@material-ui/icons/Add";
-
+import { UploadDropZone } from "../Upload/UploadStyled";
 const useStyles = makeStyles((theme) => ({
   DropZoneArea: {
     height: "80%",
@@ -62,6 +58,7 @@ const UserImageDialog = (props) => {
       .then((res) => {
         if (res === "ok") {
           alert("업로드 완료");
+          setImage("");
         } else {
           alert("업로드 실패");
         }
@@ -74,6 +71,7 @@ const UserImageDialog = (props) => {
     setImage(file[0]);
     console.log(image);
   };
+
   return (
     <Dialog
       onClose={handleClose}
