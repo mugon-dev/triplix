@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import NavBar from "./pages/NavBar/NavBar";
 import UserPage from "./pages/UserDetail/UserPage";
 import DetailPage from "./pages/MainArea/DetailPage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { login } from "./store";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -18,6 +21,16 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const logged = localStorage.getItem("Authorization");
+    if (logged === null) {
+      return;
+    } else {
+      dispatch(login());
+    }
+  }, []);
+
   return (
     <div>
       <NavBar />

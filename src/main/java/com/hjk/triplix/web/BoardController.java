@@ -27,6 +27,7 @@ import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.board.BoardSaveRequestDto;
 import com.hjk.triplix.domain.member.Member;
 import com.hjk.triplix.service.BoardService;
+import com.hjk.triplix.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,39 +35,52 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
-	
+
 	private final HttpSession session;
 	private final BoardService boardService;
-	
+	private final MemberService memberService;
+
 	@GetMapping("/")
-	public List<Board> boardList(){
+	public List<Board> boardList() {
 		return boardService.boardList();
 	}
-	
+
+	@GetMapping("/my")
+	public List<Board> boardMyList(HttpServletRequest request) {
+		System.out.println("boardmylist");
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("principal");
+		int memberId = member.getId();
+		Member memberEntity = memberService.member(memberId);
+		return boardService.boardMyList(memberEntity);
+	}
+
 	@GetMapping("/detail/{id}")
 	public Board boardDetail(@PathVariable int id) {
 		System.out.println("boardDetail");
 		Board board = boardService.boardDetail(id);
 		return board;
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> boardDelete(HttpServletRequest request, @PathVariable int id) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("principal") != null) {
+		if (session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
 			Board board = boardService.boardDetail(id);
-			if(board.getMember().getId() == member.getId()) {
+			if (board.getMember().getId() == member.getId()) {
 				boardService.boardDelete(id);
-				return new ResponseEntity<String>("ok",HttpStatus.OK);
+				return new ResponseEntity<String>("ok", HttpStatus.OK);
 			}
-			return new ResponseEntity<String>("not same writer",HttpStatus.FORBIDDEN);
+			return new ResponseEntity<String>("not same writer", HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
+		return new ResponseEntity<String>("You don't have authorization", HttpStatus.FORBIDDEN);
 	}
-	
+
 	@PostMapping("/save")
-	public ResponseEntity<?> boardSave(@RequestParam("image")MultipartFile[] files, @RequestParam("title") String title,@RequestParam("content") String content,@RequestParam("board") String board) throws IllegalStateException, IOException {
+	public ResponseEntity<?> boardSave(@RequestParam("image") MultipartFile[] files,
+			@RequestParam("title") String title, @RequestParam("content") String content,
+			@RequestParam("board") String board) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
 		String uploadFolder = "C:\\workspace\\project\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
@@ -77,41 +91,42 @@ public class BoardController {
 			uploadPath.mkdirs();
 		}
 		for (MultipartFile file : files) {
-	         UUID uuid = UUID.randomUUID();
-	         String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
-	         File saveFile = new File(uploadFolder, uploadFileName);
-	         System.out.println(uploadPath);
-	         System.out.println(uploadFileName);
-	         filename = uploadFolder+"\\"+uploadFileName;
-	         file.transferTo(saveFile);
-	         filename = ".\\postImages\\"+uploadFileName;
-	    } 
+			UUID uuid = UUID.randomUUID();
+			String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
+			File saveFile = new File(uploadFolder, uploadFileName);
+			System.out.println(uploadPath);
+			System.out.println(uploadFileName);
+			filename = uploadFolder + "\\" + uploadFileName;
+			file.transferTo(saveFile);
+			filename = ".\\postImages\\" + uploadFileName;
+		}
 		boardService.boardSave(title, content, filename, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public ResponseEntity<?> boardUpdate(HttpServletRequest request, @PathVariable int id, @RequestBody BoardSaveRequestDto dto) {
+	public ResponseEntity<?> boardUpdate(HttpServletRequest request, @PathVariable int id,
+			@RequestBody BoardSaveRequestDto dto) {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("principal") != null) {
+		if (session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
 			Board board = boardService.boardDetail(id);
-			if(board.getMember().getId() == member.getId()) {
+			if (board.getMember().getId() == member.getId()) {
 				System.out.println(dto);
 				boardService.boardUpdate(id, dto);
-				return new ResponseEntity<String>("ok",HttpStatus.OK);
+				return new ResponseEntity<String>("ok", HttpStatus.OK);
 			}
-			return new ResponseEntity<String>("not same writer",HttpStatus.FORBIDDEN);
+			return new ResponseEntity<String>("not same writer", HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
+		return new ResponseEntity<String>("You don't have authorization", HttpStatus.FORBIDDEN);
 	}
-	
+
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
 		return str.replace("-", File.separator);
 	}
-	
+
 }
