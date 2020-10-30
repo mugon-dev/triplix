@@ -52,4 +52,10 @@ public class BoardService {
 	public List<Board> boardList(){
 		return boardRepository.findAll();
 	}
+
+	public List<Board> boardMyList(Member member) {
+		int memberId = member.getId();
+		Board board = boardRepository.findByMemberId(memberId);
+		return null;
+	}
 }

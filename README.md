@@ -58,6 +58,11 @@
 - get 호출
 - board 하나
 
+### board/my
+- get 호출
+- jwt
+- 로그인한 회원 게시글 전체
+
 ### board/delete/{id}
 - delete
 - jwt 필요

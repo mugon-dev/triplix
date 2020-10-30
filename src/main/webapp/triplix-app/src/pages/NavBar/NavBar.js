@@ -99,7 +99,6 @@ const ColorStyle = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => {
-  console.log("navbar");
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [board, setBoard] = useState({
     bTitle: "",

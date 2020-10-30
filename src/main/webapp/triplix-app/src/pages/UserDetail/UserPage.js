@@ -15,6 +15,11 @@ import UserImageDialog from "./UserImageDialog";
 import styled from "styled-components";
 import UserProfileDialog from "./UserProfileDialog";
 import { useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import FlipMove from "react-flip-move";
+import Picture from "../MainArea/Picture";
+import Loader from "../MainArea/Loader";
+import UserBoardList from "./UserBoardList";
 
 const Container = styled.div`
   position: relative;
@@ -270,6 +275,7 @@ const UserPage = () => {
           </div>
         </div>
       </div>
+      <UserBoardList />
     </div>
   );
 };
