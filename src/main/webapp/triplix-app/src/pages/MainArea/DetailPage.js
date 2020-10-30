@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 //import Message from './DetailFunction/Message';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import CommentList from './CommentList';
 import jwt_decode from "jwt-decode";
 //import db from '../../firebase';
 import {
@@ -95,6 +96,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DetailPage(props) {
     console.log(props.bId,"비아이디");
+    let comments = props.comment;
+    console.log("cccc",comments);
     let jwtTokenTemp = localStorage.getItem("Authorization");
     let jwtToken = jwtTokenTemp.replace('Bearer ','');
     console.log("토큰 : ", jwtToken);
@@ -327,7 +330,7 @@ export default function DetailPage(props) {
                                     </RadioGroup>
                                 </FormControl>
                             </div> */}
-
+                            {<CommentList comment={comments}/>}
                             <CommentBox
                                 style={{
                                     height: 'auto',

@@ -88,7 +88,9 @@ function Picture ({
             content,
             image,
             good,
+            comment,
         }) {
+        console.log("ㅇㅇㅇㅇㅇㅇ");
         const [isModalOpen, setIsModalOpen] = useState(false);
         const onClose = () => {
             setIsModalOpen(false);
@@ -105,6 +107,7 @@ function Picture ({
                     image={image}
                     bId={bId}
                     good={good}
+                    comment={comment}
                 />
                 
                 <Box>
