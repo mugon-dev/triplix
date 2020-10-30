@@ -41,6 +41,7 @@ public class FilterConfig {
 		System.out.println("JwtAuthorizationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = new FilterRegistrationBean<>(new JwtAuthorizationFilter(memberRepository));
 		bean.addUrlPatterns("/member/update/*");
+		bean.addUrlPatterns("/member/image/*");
 		bean.addUrlPatterns("/member/delete/*");
 		bean.addUrlPatterns("/member/detail/*");
 		bean.addUrlPatterns("/board/delete/*");
