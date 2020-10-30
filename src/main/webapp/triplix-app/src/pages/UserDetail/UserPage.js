@@ -1,13 +1,20 @@
+import {
+  Avatar,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fab,
+  TextField,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-//import Mypost from '../components/Mypage/Mypost';
-import { Avatar, Fab } from "@material-ui/core";
-//import db from '../firebase';
-import { useParams } from "react-router";
 import AddIcon from "@material-ui/icons/Add";
-import UserImageDialog from "../components/UserImageDialog";
+import UserImageDialog from "./UserImageDialog";
+import styled from "styled-components";
+import UserProfileDialog from "./UserProfileDialog";
 
-//import Subscribe from '../components/Detail/DetailFunction/Subscribe';
 const Container = styled.div`
   position: relative;
   z-index: 1;
@@ -49,21 +56,23 @@ const IntroductionFont = styled.p`
   letter-spacing: -0.48px;
   color: #ffffff;
 `;
-function UserPage(props) {
+
+const UserPage = () => {
   const [userinfo, setUserInfo] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/member", {
+    fetch("http://localhost:8000/member/detail", {
       method: "GET",
       headers: {
-        //Authorization: localStorage.getItem("Authorization"),
+        Authorization: localStorage.getItem("Authorization"),
       },
     })
       .then((res) => res.json())
       .then((res) => {
-        setUserInfo(res[0]);
+        setUserInfo(res);
         console.log(userinfo);
         console.log(userinfo.mname);
+        console.log(userinfo.mimage);
       });
   }, []);
 
@@ -77,18 +86,70 @@ function UserPage(props) {
 
   const handleClose = (value) => {
     setOpen(false);
-    setChangeImage(changeImage);
+    // console.log("받아온이미지", changeImage);
+    // setChangeImage(changeImage);
+    // console.log(userinfo);
+    // console.log("바뀐 이미지", changeImage);
+    // setUserInfo((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     mimage: URL.createObjectURL(changeImage),
+    //   };
+    // });
+    // console.log(userinfo);
+    // console.log(URL.createObjectURL(changeImage));
+    fetch("http://localhost:8000/member/detail", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setUserInfo(res);
+      });
+  };
+  const [profileOpen, setProfileOpen] = React.useState(false);
+  const [profile, setProfile] = useState({
+    profile: "",
+  });
 
-    console.log(userinfo);
-    console.log(changeImage);
-    setUserInfo((prevState) => {
-      return {
-        ...prevState,
-        mimage: "URL.createObjectURL(changeImage)",
-      };
+  const handleClickProfileOpen = () => {
+    setProfileOpen(true);
+  };
+  const handleProfileClose = () => {
+    setProfileOpen(false);
+  };
+  const handleProfileCloseUpdate = () => {
+    console.log(profile);
+    fetch("http://localhost:8000/member/profile", {
+      method: "PUT",
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+      body: JSON.stringify(profile),
+    })
+      .then((res) => res.text())
+      .then((res) => {
+        if (res === "ok") {
+          alert("업로드 완료");
+          setProfile("");
+          setUserInfo({
+            ...userinfo,
+            mprofile: profile,
+          });
+        } else {
+          alert("업로드 실패");
+        }
+      });
+    setProfileOpen(false);
+  };
+  const profileUpdate = (e) => {
+    setProfile({
+      ...profile,
+      [e.target.name]: e.target.value,
     });
-    console.log(userinfo);
-    console.log(URL.createObjectURL(changeImage));
+    console.log(profile);
   };
 
   return (
@@ -115,7 +176,7 @@ function UserPage(props) {
           }}
         >
           <Avatar
-            src={userinfo.photoURL}
+            src={userinfo.mimage} //{userinfo.photoURL}
             alt={""}
             style={{
               width: "200px",
@@ -139,7 +200,7 @@ function UserPage(props) {
             open={open}
             onClose={handleClose}
           />
-          <Username>userinfo.mname</Username> {/*{userinfo.displayName} */}
+          <Username>{userinfo.mname}</Username> {/*{userinfo.displayName} */}
           {/* <Subscribe userTo={friendid} Type="FollowPage" /> */}
         </div>
         <div
@@ -161,16 +222,48 @@ function UserPage(props) {
             >
               여긴 나에 대한 정보가 들어있어요
               {/* {userinfo.mprofile} */}
-              <Fab
+              <Button
+                variant="outlined"
                 color="primary"
-                aria-label="add"
+                onClick={handleClickProfileOpen}
                 style={{
                   float: "right",
                 }}
               >
-                <AddIcon />
-              </Fab>
+                내 소개 수정
+              </Button>
             </IntroductionFont>
+            <Dialog
+              open={profileOpen}
+              onClose={handleProfileClose}
+              fullWidth="true"
+              maxWidth="md"
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                인트로듀스 마이쉘
+              </DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="profile"
+                  name="profile"
+                  label="자기소개"
+                  type="email"
+                  fullWidth
+                  onChange={profileUpdate}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleProfileClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={handleProfileCloseUpdate} color="primary">
+                  Update
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -178,5 +271,6 @@ function UserPage(props) {
       {/* <Mypost uid={userinfo.uid} /> */}
     </div>
   );
-}
+};
+
 export default UserPage;

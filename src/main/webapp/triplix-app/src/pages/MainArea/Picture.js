@@ -81,6 +81,7 @@ const TextBox = styled.label`
 //const Picture = forwardRef(
 function Picture ({
             id,
+            bId,
             member,
             title,
             content,
@@ -101,6 +102,7 @@ function Picture ({
                     title={title}
                     content={content}
                     image={image}
+                    bId={bId}
                 />
                 
                 <Box>

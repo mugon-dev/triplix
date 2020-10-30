@@ -1,12 +1,12 @@
-import { Route } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
-import Login from './pages/Login';
-import Register from './pages/Register/Register';
-import UploadPage from './pages/Upload/UploadPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './pages/Home';
-import NavBar from './pages/NavBar/NavBar';
-import UserPage from './pages/UserPage';
+import { Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import Login from "./pages/Login";
+import Register from "./pages/Register/Register";
+import UploadPage from "./pages/Upload/UploadPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "./pages/Home";
+import NavBar from "./pages/NavBar/NavBar";
+import UserPage from "./pages/UserDetail/UserPage";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,18 +19,17 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <GlobalStyle />
-        
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
 
-        <Route exact path="/upload" component={UploadPage} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
 
-        {/* 테스트중 */}
-        <Route exact path="/userpage" component={UserPage} />
+      <Route exact path="/upload" component={UploadPage} />
 
+      {/* 테스트중 */}
+      <Route exact path="/userpage" component={UserPage} />
     </div>
   );
 }
