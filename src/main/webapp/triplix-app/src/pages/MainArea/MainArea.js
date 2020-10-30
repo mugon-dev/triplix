@@ -200,7 +200,7 @@ export default () => {
             > 
                 <Container>
                      <FlipMove>
-                        {posts.map(({ post, id, btitle, bcontent, member, bimage,bId }) => (
+                        {posts.map(({ post, id, btitle, bcontent, member, bimage,bId,good }) => (
                             <Picture
                             id={member.mname}
                             bId={id}
@@ -208,6 +208,7 @@ export default () => {
                             content={bcontent}
                             member={member}
                             image={bimage}
+                            good={good}
                             />
                         ))}
                         

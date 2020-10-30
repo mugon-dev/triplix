@@ -28,6 +28,11 @@ public class GoodService {
 	}
 	
 	@Transactional
+	public void myGood(int mid, int bid) {
+		goodRepository.mFindMyId(mid, bid);
+	}
+	
+	@Transactional
 	public Good goodOne(int id) {
 		return goodRepository.findById(id).get();
 	}

@@ -66,6 +66,7 @@ const Login = (props) => {
       })
       .then((res) => {
         if (res === "ok") {
+          console.log(member);
           // 로그인 상태 값 리덕스 저장
           dispatch(login());
           props.history.push("/");
