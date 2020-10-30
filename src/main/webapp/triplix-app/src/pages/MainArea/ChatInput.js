@@ -11,7 +11,7 @@ function ChatInput(props) {
     console.log(props.id.bId);
    
     const [comment, setComment] = useState({
-        comment: '',
+        comment: "",
     });
 
     const changeValue = (e) => {
@@ -29,7 +29,7 @@ function ChatInput(props) {
     const sendMessage = (e) => {
         e.preventDefault();
         if (!isLogin) {
-            alert('로그인 후의 이용바랍니다');
+            alert('로그인 후 이용바랍니다');
         }
         // else if (setComment === '' || setComment === null) {
         //     alert('댓글을 작성해주세요');
@@ -38,7 +38,7 @@ function ChatInput(props) {
         // } 
         else if (isLogin) {
             commentPost();
-            alert('완료?');
+            
             console.log(comment);
         }
         setComment('');
@@ -48,15 +48,16 @@ function ChatInput(props) {
         fetch("http://localhost:8000/comment/save/" +props.id.bId, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                Authorization: localStorage.getItem("Authorization"),
+               "Content-Type": "application/json; charset=utf-8",
             },
             body: JSON.stringify(comment),
         })
             .then(res=>res.text())
             .then(res=>{
                 if(res==="ok"){
-                    setComment(res);
-                    
+                    props.history.push("/");
+                    alert('완료?');
                 }
             });
     }
@@ -73,9 +74,9 @@ function ChatInput(props) {
                 border: '1px solid #FFFFFF',
             }}
         >
-            <Input
+            <Input  
                 placeholder="댓글 쓰기"
-                inputProps={{ 'aria-label': 'description' }}
+                // inputprops={{ 'aria-label': 'description' }}
                 style={{
                     color: 'white',
                     paddingLeft: '15px',

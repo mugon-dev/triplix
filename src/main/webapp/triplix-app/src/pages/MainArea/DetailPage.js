@@ -92,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
+    // console.log(1,props);
     const classes = useStyles();
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
@@ -302,30 +303,21 @@ export default function DetailPage(props) {
                                     overflow: 'auto',
                                 }}
                             >
-                                {/* {posts.map(
+                                {/* {Comment.map(
                                     (
                                         {
                                             mname,
                                             comment,
-                                            member,
-                                            good,
-                                            pick,
                                         },
-                                        index
                                     ) => (
                                         <Message
-                                            // key={index}
+                                       
                                             mname={member.mname}
                                             comment={comment.id}
                                             good={good}
                                             pick={pick}
 
-                                            //key={index}
-                                            //message={message}
-                                            //timestamp={timestamp}
-                                            //user={user}
-                                            //userImage={userimage}
-                                            //uid={uid}
+                                            
                                         />
                                     )
                                 )} */}
