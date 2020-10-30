@@ -331,7 +331,7 @@ export default function DetailPage(props) {
                                 )} */}
                             </CommentBox>
                             {/*안풋바 */}
-                            <ChatInput id={props.id} />
+                            <ChatInput id={props} />
                         </RightContainer>
                     </MainContentContainer>
                 </TotalContainer>
