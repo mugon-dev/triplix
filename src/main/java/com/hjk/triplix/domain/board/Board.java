@@ -54,15 +54,20 @@ public class Board {
 	@CreationTimestamp
 	private Timestamp bCreatedate;
 	
+	@JsonIgnoreProperties({"board"})
 	@JoinColumn(name = "memberId")
 	@ManyToOne
 	private Member member;
 
-	@JsonIgnoreProperties({"board"})
+	@JsonIgnoreProperties({"board","member"}) 
 	@OneToMany(mappedBy = "board", fetch=FetchType.EAGER)
 	private List<Comment> comment;
-
-//	@JsonIgnoreProperties({"board"})
-//	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-//	private List<Pick> pick;
+	
+	@JsonIgnoreProperties({"board","member"})
+	@OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
+	private List<Good> good;
+	
+	@JsonIgnoreProperties({"board","member"})
+	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+	private List<Pick> pick;
 }

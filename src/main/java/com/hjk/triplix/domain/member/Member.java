@@ -52,20 +52,16 @@ public class Member {
 	@Column(length = 10000)
 	private String mprofile;
 
-	@JsonIgnoreProperties({ "member" })
+	@JsonIgnoreProperties({"member"})
+	@OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
+	private List<Board> board;
+
+	@JsonIgnoreProperties({"member","board"})
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	private List<Board> boards;
-
-	@JsonIgnoreProperties({ "member" })
+	private List<Good> good;
+	
+	@JsonIgnoreProperties({ "member","board"})
 	@OneToMany(mappedBy = "member")
-	private List<Comment> comment;
-
-//	@JsonIgnoreProperties({ "member" })
-//	@OneToMany(mappedBy = "member")
-//	private List<Good> good;
-
-//	@JsonIgnoreProperties({ "member" })
-//	@OneToMany(mappedBy = "member")
-//	private List<Pick> pick;
+	private List<Pick> pick;
 
 }

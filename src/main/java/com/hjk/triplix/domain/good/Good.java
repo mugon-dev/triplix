@@ -1,5 +1,7 @@
 package com.hjk.triplix.domain.good;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.member.Member;
 
@@ -36,7 +37,5 @@ public class Good {
 	@JoinColumn(name = "memberId")
 	@ManyToOne
 	private Member member;
-	
-	
 
 }
