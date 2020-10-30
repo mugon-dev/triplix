@@ -33,6 +33,14 @@ public class GoodController {
 		return goodService.goodOne(id);
 	}
 	
+	@GetMapping("/{mid}/{bid}")
+	public String myGood(@PathVariable int mid, @PathVariable int bid) {
+		System.out.print("옵니까요");
+		//System.out.println("있씁니까 엠아이디 : " + mid);
+		//goodService.myGood(mid, bid);
+		return "ok";
+	}
+	
 	@PostMapping("/{id}")
 	public ResponseEntity<?> goodSave(HttpServletRequest request, @PathVariable int id) {
 		HttpSession session = request.getSession();

@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 //import Message from './DetailFunction/Message';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import jwt_decode from "jwt-decode";
 //import db from '../../firebase';
 import {
     ImageContainer,
@@ -93,8 +94,32 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-    console.log(props,"sss");
-    
+    console.log(props.bId,"비아이디");
+    let jwtTokenTemp = localStorage.getItem("Authorization");
+    let jwtToken = jwtTokenTemp.replace('Bearer ','');
+    console.log("토큰 : ", jwtToken);
+    let mid = jwt_decode(jwtToken).id; 
+    let bid =props.bId;
+    let hak = null;
+    useEffect(() => {
+        if(mid != null){
+        console.log(mid,"있습니까? ");
+        console.log(bid,"bid 잇습니까");
+        
+        fetch("http://localhost:8000/good/"+mid+"/"+bid)
+        .then((res)=>res.text())
+        .then((res)=>{
+            if(res == "ok"){
+                console.log("잇습니다요");
+                hak = 1;
+            }else{
+                console.log("없습니다.");
+                hak = 2;
+            }
+        });
+    }
+    },[]);
+
     const classes = useStyles();
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
@@ -106,7 +131,6 @@ export default function DetailPage(props) {
 
     function likebutton() {
         document.querySelector("#like").className = "fas fa-thumbs-up fa-5x";
-        fetch().then().then();
     }
 
     /*
@@ -242,6 +266,7 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
+                            {hak}
                             <i id="like" class="far fa-thumbs-up fa-5x" onClick={likebutton}></i>
                         </LeftContainer>
                         <RightContainer>

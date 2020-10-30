@@ -2,6 +2,7 @@ import { PostAddSharp } from '@material-ui/icons';
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import DetailPage from './DetailPage';
+import { Link } from 'react-router-dom';
 //import DetailPage from '../Detail/DetailPage';
 //import Avartar from '../Detail/DetailFunction/Avartar';
 //import LikeInterest from '../Detail/DetailFunction/Like_Interest';
@@ -86,9 +87,9 @@ function Picture ({
             title,
             content,
             image,
+            good,
         }) {
         const [isModalOpen, setIsModalOpen] = useState(false);
-
         const onClose = () => {
             setIsModalOpen(false);
         };
@@ -103,6 +104,7 @@ function Picture ({
                     content={content}
                     image={image}
                     bId={bId}
+                    good={good}
                 />
                 
                 <Box>

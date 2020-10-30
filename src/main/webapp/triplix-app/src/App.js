@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import NavBar from "./pages/NavBar/NavBar";
 import UserPage from "./pages/UserDetail/UserPage";
+import DetailPage from "./pages/MainArea/DetailPage";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,7 +26,6 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-
       <Route exact path="/upload" component={UploadPage} />
 
       {/* 테스트중 */}
