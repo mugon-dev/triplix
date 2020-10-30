@@ -22,7 +22,13 @@
 ### member/update
 - jwt 필요
 - put 호출
-- memail, mprofile, mpw 변경 가능
+- mimage 변경 가능
+- 성공 : ok
+
+### member/profile
+- jwt 필요
+- put 호출
+- mprofile 변경 가능
 - 성공 : ok
 
 ### member/delete
