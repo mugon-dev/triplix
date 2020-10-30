@@ -9,17 +9,15 @@ import jwt_decode from "jwt-decode";
 const UserBoardList = () => {
   const [posts, setPosts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [userId, setUserId] = useState();
 
   useEffect(() => {
     let jwtTokenTemp = localStorage.getItem("Authorization");
     let jwtToken = jwtTokenTemp.replace("Bearer ", "");
+    let id = jwt_decode(jwtToken).id;
+    console.log(jwtToken);
+    console.log(id);
 
-    setUserId(jwt_decode(jwtToken).id);
-
-    console.log("userId" + userId);
-
-    fetch("http://localhost:8000/member/my", {
+    fetch("http://localhost:8000/board/my/" + id, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -40,7 +38,7 @@ const UserBoardList = () => {
     >
       <Container>
         <FlipMove>
-          {/* {posts.map(({ post, id, btitle, bcontent, member, bimage, bId }) => (
+          {posts.map(({ post, id, btitle, bcontent, member, bimage, bId }) => (
             <Picture
               id={member.mname}
               bId={id}
@@ -49,7 +47,7 @@ const UserBoardList = () => {
               member={member}
               image={bimage}
             />
-          ))} */}
+          ))}
         </FlipMove>
       </Container>
     </InfiniteScroll>

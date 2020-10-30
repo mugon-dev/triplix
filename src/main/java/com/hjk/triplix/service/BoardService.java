@@ -53,9 +53,7 @@ public class BoardService {
 		return boardRepository.findAll();
 	}
 
-	public List<Board> boardMyList(Member member) {
-		int memberId = member.getId();
-		Board board = boardRepository.findByMemberId(memberId);
-		return null;
+	public List<Board> boardMyList(int memberId) {
+		return boardRepository.findAllMemberId(memberId);
 	}
 }

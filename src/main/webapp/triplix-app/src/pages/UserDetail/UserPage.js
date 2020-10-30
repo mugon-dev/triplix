@@ -275,6 +275,10 @@ const UserPage = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
       <UserBoardList />
     </div>
   );

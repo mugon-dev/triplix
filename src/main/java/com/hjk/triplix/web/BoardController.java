@@ -45,14 +45,14 @@ public class BoardController {
 		return boardService.boardList();
 	}
 
-	@GetMapping("/my")
-	public List<Board> boardMyList(HttpServletRequest request) {
+	@GetMapping("/my/{id}")
+	public List<Board> boardMyList(HttpServletRequest request, @PathVariable int id) {
 		System.out.println("boardmylist");
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("principal");
-		int memberId = member.getId();
-		Member memberEntity = memberService.member(memberId);
-		return boardService.boardMyList(memberEntity);
+		if (session.getAttribute("principal") != null) {
+			return boardService.boardMyList(id);
+		}
+		return null;
 	}
 
 	@GetMapping("/detail/{id}")
