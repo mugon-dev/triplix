@@ -10,9 +10,7 @@ import { useSelector } from 'react-redux';
 function ChatInput(props) {
     console.log(props.id.bId);
    
-    const [comment, setComment] = useState({
-        comment: "",
-    });
+    const [comment, setComment] = useState();
 
     const changeValue = (e) => {
     setComment({
@@ -45,7 +43,7 @@ function ChatInput(props) {
     };
 
     const commentPost = () => {
-        fetch("http://localhost:8000/comment/save/" +props.id.bId, {
+        fetch("http://localhost:8000/comment/save/"+props.id.bId, {
             method: "POST",
             headers: {
                 Authorization: localStorage.getItem("Authorization"),
@@ -56,8 +54,8 @@ function ChatInput(props) {
             .then(res=>res.text())
             .then(res=>{
                 if(res==="ok"){
-                    props.history.push("/");
-                    alert('완료?');
+                    alert('댓글작성완료');
+                    
                 }
             });
     }

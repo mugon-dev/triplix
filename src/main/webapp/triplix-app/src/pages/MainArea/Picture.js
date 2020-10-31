@@ -82,6 +82,7 @@ const TextBox = styled.label`
 //const Picture = forwardRef(
 function Picture ({
             id,
+            name,
             bId,
             member,
             title,
@@ -102,6 +103,7 @@ function Picture ({
                     open={isModalOpen}
                     close={onClose}
                     id={id}
+                    name={name}
                     title={title}
                     content={content}
                     image={image}

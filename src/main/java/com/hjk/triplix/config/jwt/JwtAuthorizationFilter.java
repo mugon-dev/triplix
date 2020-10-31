@@ -37,6 +37,7 @@ public class JwtAuthorizationFilter implements Filter {
 		String jwtToken = req.getHeader(JwtProps.header);
 		
 		if(jwtToken == null) {
+			System.out.println("없습니다.");
 			PrintWriter out = resp.getWriter();
 			out.print("jwtToken not found");
 			out.flush();

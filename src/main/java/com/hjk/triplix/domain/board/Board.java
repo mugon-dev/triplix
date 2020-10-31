@@ -59,11 +59,11 @@ public class Board {
 	@ManyToOne
 	private Member member;
 
-	@JsonIgnoreProperties({"board","member"}) 
+	@JsonIgnoreProperties({"board"}) 
 	@OneToMany(mappedBy = "board", fetch=FetchType.EAGER)
 	private List<Comment> comment;
 	
-	@JsonIgnoreProperties({"board","member"})
+	@JsonIgnoreProperties({"board"})
 	@OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
 	private List<Good> good;
 	
