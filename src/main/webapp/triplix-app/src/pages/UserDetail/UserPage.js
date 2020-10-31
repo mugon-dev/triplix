@@ -20,6 +20,13 @@ import FlipMove from "react-flip-move";
 import Picture from "../MainArea/Picture";
 import Loader from "../MainArea/Loader";
 import UserBoardList from "./UserBoardList";
+import UserPick from "./UserPick";
+
+const MarginContainer = styled.div`
+  max-width: 1440px;
+  margin: auto;
+  margin-top: 90px;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -63,10 +70,51 @@ const IntroductionFont = styled.p`
   color: #ffffff;
 `;
 
+const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const MoodList = styled.ul`
+  display: flex;
+`;
+
+const Mood = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 80px;
+  height: 46px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  color: ${(props) => (props.active ? "#ff534b" : "")};
+  cursor: pointer;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 35px;
+  letter-spacing: -0.48px;
+
+  &:hover {
+    color: #ff534b;
+    transition: color 300ms ease-out;
+  }
+`;
+const Title = styled.h4`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 43px;
+  letter-spacing: -0.6px;
+`;
+
 const UserPage = () => {
   const [userinfo, setUserInfo] = useState("");
   const isLogin = useSelector((store) => store.isLogin);
-  console.log(isLogin);
+  const [mood, setMood] = useState("");
+  const moods = ["서울", "대전", "대구", "부산", "찍고", "아하", "~!"];
 
   useEffect(() => {
     fetch("http://localhost:8000/member/detail", {
@@ -277,9 +325,30 @@ const UserPage = () => {
       </div>
       <br />
       <br />
+      <UserPick />
       <br />
       <br />
-      <UserBoardList />
+      <MarginContainer>
+        <HeaderContainer>
+          <Title>전국팔도유랑</Title>
+          <br />
+          <br />
+          <br />
+          <br />
+          <MoodList>
+            {moods.map((moodText) => (
+              <Mood key={moodText} active={moodText === mood ? true : false}>
+                {moodText}
+              </Mood>
+            ))}
+          </MoodList>
+        </HeaderContainer>
+        <br />
+        <br />
+        <br />
+        <br />
+        <UserBoardList />
+      </MarginContainer>
     </div>
   );
 };
