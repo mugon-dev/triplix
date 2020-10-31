@@ -1,6 +1,7 @@
 package com.hjk.triplix.domain.pick;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,11 +30,11 @@ public class Pick {
 	private int id;
 	
 	@JoinColumn(name = "boardId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Board board;
 	
 	@JoinColumn(name = "memberId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Member member;
 
 }

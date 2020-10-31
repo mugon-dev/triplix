@@ -52,6 +52,8 @@ public class FilterConfig {
 		bean.addUrlPatterns("/comment/save/*");
 		bean.addUrlPatterns("/good/save");
 		bean.addUrlPatterns("/good/delete");
+		bean.addUrlPatterns("/pick/save");
+		bean.addUrlPatterns("/pick/delete");
 		bean.setOrder(2);
 		return bean;
 	}

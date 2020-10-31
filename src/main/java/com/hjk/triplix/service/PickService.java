@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hjk.triplix.domain.board.Board;
 import com.hjk.triplix.domain.board.BoardRepository;
+import com.hjk.triplix.domain.good.Good;
 import com.hjk.triplix.domain.member.Member;
 import com.hjk.triplix.domain.pick.Pick;
 import com.hjk.triplix.domain.pick.PickRepository;
@@ -25,6 +26,11 @@ public class PickService {
 		pick.setMember(member);
 		pick.setBoard(board);
 		pickRepository.save(pick);
+	}
+	
+	@Transactional
+	public Pick myPick(int mid, int bid) {
+		return pickRepository.mFindMyId(mid, bid);
 	}
 	
 	@Transactional

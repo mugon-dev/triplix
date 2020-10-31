@@ -70,7 +70,6 @@ export default () => {
     const [hasMore, setHasMore] = useState(true);
     const moods = ['서울', '대전', '대구', '부산', '찍고', '아하', '~!'];
 
-    console.log("posts는 : ? ", posts);
     useEffect(() => {
         fetch("http://localhost:8000/board/")
         .then((res)=>res.json())
@@ -200,7 +199,7 @@ export default () => {
             > 
                 <Container>
                      <FlipMove>
-                        {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage,bId,good }) => (
+                        {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage, bId, good, pick }) => (
                             <Picture
                             id={member.mname}
                             bId={id}
@@ -209,6 +208,7 @@ export default () => {
                             member={member}
                             image={bimage}
                             good={good}
+                            pick={pick}
                             comment={comment}
                             />
                         ))}

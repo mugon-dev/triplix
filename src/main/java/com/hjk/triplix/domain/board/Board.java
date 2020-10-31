@@ -67,7 +67,7 @@ public class Board {
 	@OneToMany(mappedBy = "board", fetch=FetchType.LAZY)
 	private List<Good> good;
 	
-	@JsonIgnoreProperties({"board","member"})
+	@JsonIgnoreProperties({"board"})
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 	private List<Pick> pick;
 }

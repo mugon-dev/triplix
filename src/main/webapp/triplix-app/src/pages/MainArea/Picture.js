@@ -89,6 +89,7 @@ function Picture ({
             image,
             good,
             comment,
+            pick,
         }) {
         console.log("ㅇㅇㅇㅇㅇㅇ");
         const [isModalOpen, setIsModalOpen] = useState(false);
@@ -108,6 +109,7 @@ function Picture ({
                     bId={bId}
                     good={good}
                     comment={comment}
+                    pick={pick}
                 />
                 
                 <Box>

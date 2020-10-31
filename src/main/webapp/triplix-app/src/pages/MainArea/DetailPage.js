@@ -68,6 +68,9 @@ const DetailContent = styled.div`
     }
 `;
 
+const RigthStyle = {
+    textAlign : "right"
+}
 
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
@@ -98,6 +101,8 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailPage(props) {
     console.log(props,"detailres값");
     let comments = props.comment;
+    let picks = props.pick;
+    console.log("qwerasd",picks);
     console.log("cccc",comments);
     let bid =props.bId;
     let mid =0;
@@ -137,10 +142,6 @@ export default function DetailPage(props) {
             `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
         );
     };
-
-    function likebutton() {
-        document.querySelector("#like").className = "fas fa-thumbs-up fa-5x";
-    }
 
     /*
     const [posts, setPosts] = useState([]);
@@ -275,7 +276,8 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                            <Good bid={bid} mid={mid} good={props.good}/>
+                            <Good bid={bid} mid={mid} good={props.good} pick={props.pick}/>
+              
                         </LeftContainer>
                         <RightContainer>
                             <div
