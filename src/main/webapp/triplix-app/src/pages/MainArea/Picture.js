@@ -82,6 +82,7 @@ const TextBox = styled.label`
 //const Picture = forwardRef(
 function Picture ({
             id,
+            name,
             bId,
             member,
             title,
@@ -90,6 +91,7 @@ function Picture ({
             good,
             comment,
             pick,
+            location
         }) {
         console.log("ㅇㅇㅇㅇㅇㅇ");
         const [isModalOpen, setIsModalOpen] = useState(false);
@@ -103,6 +105,7 @@ function Picture ({
                     open={isModalOpen}
                     close={onClose}
                     id={id}
+                    name={name}
                     title={title}
                     content={content}
                     image={image}
@@ -130,7 +133,7 @@ function Picture ({
                                 src="/images/{location.png}"
                                 alt=""
                             />
-                             <TextBox>부산</TextBox>{/*{area} */}
+                             <TextBox>{location}</TextBox>{/*{area} */}
                         </RightBottomContainer>
                     </ImageContainer>
                     <ImageTitle>{title}</ImageTitle>
