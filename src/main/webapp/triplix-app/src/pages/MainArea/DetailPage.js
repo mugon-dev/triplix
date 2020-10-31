@@ -164,19 +164,6 @@ if(localStorage.getItem("Authorization") != null){
         document.querySelector("#like").className = "fas fa-thumbs-up fa-5x";
     }
 
-    /*
-    const [posts, setPosts] = useState([]);
-        useEffect(() => {
-            fetch("http://localhost:8000/board/detail/1")
-            .then((res)=>res.json())
-            .then((res)=>{
-                setPosts(res);
-                // console.log(res);
-                // console.log(res[0].comment[0].comment);
-            });
-        },[]);
-*/
-
     const executeOnClick = (isExpanded) => {
         // console.log(isExpanded);
     };
@@ -186,6 +173,24 @@ if(localStorage.getItem("Authorization") != null){
     const onClose = () => {
         setIsModalOpen(false);
     };
+
+    const deleteBoard=() => {
+		fetch("http://localhost:8000/board/delete/"+props.bId, {
+			method: "DELETE",
+			headers:{
+				"Authorization": localStorage.getItem("Authorization")
+			}
+        })
+        .then(res=>res.text())
+        .then(res=>{
+			if(res === "ok"){
+                alert('삭제완료');
+                window.location.reload();
+			}else{
+				alert('삭제실패');
+			}
+		});
+	}
 
 
     return (
@@ -408,6 +413,7 @@ if(localStorage.getItem("Authorization") != null){
                                         <>
                                             <Button className="btn btn-warning" onClick={() => setIsModalOpen(true)}>수정</Button>
                                             <UploadUpdate {...props} open={IsModalOpen} close={onClose} />
+                                            <Button  className="btn btn-danger" onClick={deleteBoard}>삭제</Button>
                                         </>
                                         : ''
                                     }
