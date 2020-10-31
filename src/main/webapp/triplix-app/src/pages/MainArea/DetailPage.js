@@ -319,6 +319,7 @@ if(localStorage.getItem("Authorization") != null){
                                     justifyContent: 'space-between',
                                 }}
                             >
+                                <p>댓글 목록</p>
                                 <div>
                                     <ClearTwoToneIcon
                                         fontSize="large"
