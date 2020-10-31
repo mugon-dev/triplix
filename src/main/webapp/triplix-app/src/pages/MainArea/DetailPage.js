@@ -98,13 +98,15 @@ export default function DetailPage(props) {
     console.log(props.bId,"비아이디");
     let comments = props.comment;
     console.log("cccc",comments);
-    let jwtTokenTemp = localStorage.getItem("Authorization");
-    let jwtToken = jwtTokenTemp.replace('Bearer ','');
-    console.log("토큰 : ", jwtToken);
-    let mid = jwt_decode(jwtToken).id; 
-    let bid =props.bId;
-    let hak = null;
-    useEffect(() => {
+    if(localStorage.getItem("Authorization") != null){
+        let jwtTokenTemp = localStorage.getItem("Authorization");
+        let jwtToken = jwtTokenTemp.replace('Bearer ','');
+        console.log("토큰 : ", jwtToken);
+        let mid = jwt_decode(jwtToken).id; 
+        let bid =props.bId;
+        let hak = null;
+    }
+   /*  useEffect(() => {
         if(mid != null){
         console.log(mid,"있습니까? ");
         console.log(bid,"bid 잇습니까");
@@ -121,7 +123,7 @@ export default function DetailPage(props) {
             }
         });
     }
-    },[]);
+    },[]); */
 
 
     console.log(props,"sss");
@@ -272,7 +274,6 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                            {hak}
                             <i id="like" class="far fa-thumbs-up fa-5x" onClick={likebutton}></i>
                         </LeftContainer>
                         <RightContainer>
