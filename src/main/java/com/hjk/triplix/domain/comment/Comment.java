@@ -45,7 +45,7 @@ public class Comment {
 	private Board board;
 	 
 	@JoinColumn(name = "memberId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Member member;
 	
 	
