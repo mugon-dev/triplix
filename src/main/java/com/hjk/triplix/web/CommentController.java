@@ -42,16 +42,19 @@ public class CommentController {
 	}
 	
 	@PostMapping("/save/{id}")
-	public ResponseEntity<?> CommentSave(HttpServletRequest request, @RequestBody Comment comment, @PathVariable int id) {
+	public ResponseEntity<?> CommentSave(@RequestBody Comment comment, @PathVariable int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		System.out.println("commentSaveController");
 		if(session.getAttribute("principal") != null) {
-			Member member = (Member) session.getAttribute("principal");
-			Board board = boardService.boardDetail(id);
+			System.out.println("commentSaveController2"); 
+			Member member = (Member)session.getAttribute("principal"); 
+			Board board = boardService.boardDetail(id); 
 			comment.setBoard(board);
-			comment.setMember(member);
-			commentService.commentSave(comment);
-			return new ResponseEntity<String>("ok",HttpStatus.OK);
+			comment.setMember(member); 
+			commentService.commentSave(comment); 
+			return new ResponseEntity<String>("ok",HttpStatus.OK); 
 		}
+	
 		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
 	}
 	

@@ -163,7 +163,7 @@ export default (props) => {
         <RegisterContainer>
           {isLogin ? (
             <>
-              <Link style={ColorStyle} onClick={logoutProc}>
+              <Link style={ColorStyle} onClick={logoutProc} to="/">
                 로그아웃
               </Link>
               <div>|</div>

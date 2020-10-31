@@ -28,8 +28,8 @@ public class GoodService {
 	}
 	
 	@Transactional
-	public void myGood(int mid, int bid) {
-		goodRepository.mFindMyId(mid, bid);
+	public Good myGood(int mid, int bid) {
+		return goodRepository.mFindMyId(mid, bid);
 	}
 	
 	@Transactional
@@ -43,8 +43,8 @@ public class GoodService {
 	}
 	
 	@Transactional
-	public void goodDelete(int id) {
-		goodRepository.deleteById(id);
+	public void goodDelete(int gid) {
+		goodRepository.deleteById(gid);
 	}
 	
 	

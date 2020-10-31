@@ -36,9 +36,13 @@ import styled from 'styled-components';
 import ShowMoreText from 'react-show-more-text';
 import Message from './Message';
 import ChatInput from './ChatInput';
+
 import { Link } from 'react-router-dom';
 import UploadPage from '../Upload/UploadPage';
 import UploadUpdate from '../Upload/UploadUpdate';
+
+import Good from './Good';
+
 //import Subscribe from './DetailFunction/Subscribe';
 //import Avartar from './DetailFunction/Avartar';
 //import LikeInterest from './DetailFunction/Like_Interest';
@@ -97,17 +101,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-    console.log("=========",props);
-    let comments = props.comment;
-    // console.log("cccc", comments);
-    if (localStorage.getItem("Authorization") != null) {
-        let jwtTokenTemp = localStorage.getItem("Authorization");
-        let jwtToken = jwtTokenTemp.replace('Bearer ', '');
-        // console.log("토큰 : ", jwtToken);
-        let mid = jwt_decode(jwtToken).id;
-        let bid = props.bId;
-        let hak = null;
-    }
+console.log(props,"detailres값");
+let comments = props.comment;
+console.log("cccc",comments);
+let bid =props.bId;
+let mid =0;
+if(localStorage.getItem("Authorization") != null){
+    let jwtTokenTemp = localStorage.getItem("Authorization");
+    let jwtToken = jwtTokenTemp.replace('Bearer ','');
+    console.log("토큰 : ", jwtToken);
+    mid = jwt_decode(jwtToken).id; 
+}
     
     /*  useEffect(() => {
          if(mid != null){
@@ -139,7 +143,6 @@ export default function DetailPage(props) {
 
             setMid(jwt_decode(jwtToken).id);
             setBoard(props.id);
-
         }
     }, []);
     
@@ -301,7 +304,7 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                            <i id="like" class="far fa-thumbs-up fa-5x" onClick={likebutton}></i>
+                            <Good bid={bid} mid={mid} good={props.good}/>
                         </LeftContainer>
                         <RightContainer>
                             <div

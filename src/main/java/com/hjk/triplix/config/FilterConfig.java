@@ -49,6 +49,9 @@ public class FilterConfig {
 		bean.addUrlPatterns("/board/my/*");
 		bean.addUrlPatterns("/board/update/*");
 		bean.addUrlPatterns("/board/save");
+		bean.addUrlPatterns("/comment/save/*");
+		bean.addUrlPatterns("/good/save");
+		bean.addUrlPatterns("/good/delete");
 		bean.setOrder(2);
 		return bean;
 	}
