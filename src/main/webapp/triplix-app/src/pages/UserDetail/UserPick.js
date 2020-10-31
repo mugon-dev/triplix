@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const MarginContainer = styled.div`
@@ -77,7 +77,7 @@ const InterestingBox = styled.div`
   bottom: 59.32%;
 `;
 
-const UserPick = () => {
+const UserPick = (props) => {
   return (
     <MarginContainer>
       <Main>
@@ -86,6 +86,7 @@ const UserPick = () => {
             background:
               "linear-gradient(332deg, #E659A8 -14.31%, #EE5A4A 77.81%, #ED7E21 113.18%)",
           }}
+          onClick={() => props.Myclick()}
         >
           <MainLabel>내가 갔던 여행</MainLabel>
           <Label>
@@ -103,6 +104,7 @@ const UserPick = () => {
             background:
               "linear-gradient(150.6deg, #851095 -11.03%, #821297 -11.03%, #A75DEA 42.9%, #6159DE 86.99%)",
           }}
+          onClick={() => props.Pickclick()}
           /* onClick={() => {
                         user && user.uid && history.push('/Follow');
                     }}*/
@@ -123,6 +125,7 @@ const UserPick = () => {
             background:
               "linear-gradient(151.01deg, #61BFDA -17.86%, #4366E9 105.09%)",
           }}
+          onClick={() => props.Mapclick()}
         >
           <InterestingBox>
             <img src="/images/Interesting.png" alt="Interesting" />
