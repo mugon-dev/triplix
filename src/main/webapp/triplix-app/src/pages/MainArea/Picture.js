@@ -90,6 +90,7 @@ function Picture ({
             image,
             good,
             comment,
+            location
         }) {
         console.log("ㅇㅇㅇㅇㅇㅇ");
         const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,7 +131,7 @@ function Picture ({
                                 src="/images/{location.png}"
                                 alt=""
                             />
-                             <TextBox>부산</TextBox>{/*{area} */}
+                             <TextBox>{location}</TextBox>{/*{area} */}
                         </RightBottomContainer>
                     </ImageContainer>
                     <ImageTitle>{title}</ImageTitle>
