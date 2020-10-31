@@ -7,7 +7,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import CommentList from './CommentList';
 import jwt_decode from "jwt-decode";
-//import db from '../../firebase';
 import {
     ImageContainer,
     LeftContainer,
@@ -37,6 +36,9 @@ import styled from 'styled-components';
 import ShowMoreText from 'react-show-more-text';
 import Message from './Message';
 import ChatInput from './ChatInput';
+import { Link } from 'react-router-dom';
+import UploadPage from '../Upload/UploadPage';
+import UploadUpdate from '../Upload/UploadUpdate';
 //import Subscribe from './DetailFunction/Subscribe';
 //import Avartar from './DetailFunction/Avartar';
 //import LikeInterest from './DetailFunction/Like_Interest';
@@ -95,38 +97,56 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-    console.log(props.bId,"비아이디");
+    console.log("=========",props);
     let comments = props.comment;
-    console.log("cccc",comments);
-    if(localStorage.getItem("Authorization") != null){
+    // console.log("cccc", comments);
+    if (localStorage.getItem("Authorization") != null) {
         let jwtTokenTemp = localStorage.getItem("Authorization");
-        let jwtToken = jwtTokenTemp.replace('Bearer ','');
-        console.log("토큰 : ", jwtToken);
-        let mid = jwt_decode(jwtToken).id; 
-        let bid =props.bId;
+        let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+        // console.log("토큰 : ", jwtToken);
+        let mid = jwt_decode(jwtToken).id;
+        let bid = props.bId;
         let hak = null;
     }
-   /*  useEffect(() => {
-        if(mid != null){
-        console.log(mid,"있습니까? ");
-        console.log(bid,"bid 잇습니까");
-        
-        fetch("http://localhost:8000/good/"+mid+"/"+bid)
-        .then((res)=>res.text())
-        .then((res)=>{
-            if(res == "ok"){
-                console.log("잇습니다요");
-                hak = 1;
-            }else{
-                console.log("없습니다.");
-                hak = 2;
-            }
-        });
-    }
-    },[]); */
+    
+    /*  useEffect(() => {
+         if(mid != null){
+         console.log(mid,"있습니까? ");
+         console.log(bid,"bid 잇습니까");
+         
+         fetch("http://localhost:8000/good/"+mid+"/"+bid)
+         .then((res)=>res.text())
+         .then((res)=>{
+             if(res == "ok"){
+                 console.log("잇습니다요");
+                 hak = 1;
+             }else{
+                 console.log("없습니다.");
+                 hak = 2;
+             }
+         });
+     }
+     },[]); */
 
+    const [board, setBoard] = useState();
 
-    console.log(props,"sss");
+    const [mId, setMid] = useState();
+
+    useEffect(() => {
+        if (localStorage.getItem("Authorization") != null) {
+            let jwtTokenTemp = localStorage.getItem("Authorization");
+            let jwtToken = jwtTokenTemp.replace('Bearer ', '');
+
+            setMid(jwt_decode(jwtToken).id);
+            setBoard(props.id);
+
+        }
+    }, []);
+    
+    console.log(mId,"------------mid");
+    console.log(board,"-----------bid");
+
+    console.log(props, "sss");
 
     const classes = useStyles();
     const [roomDetails, setRoomDetails] = useState(null);
@@ -153,10 +173,17 @@ export default function DetailPage(props) {
             });
         },[]);
 */
-    
+
     const executeOnClick = (isExpanded) => {
         // console.log(isExpanded);
     };
+
+    const [IsModalOpen, setIsModalOpen] = useState(false);
+
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+
 
     return (
         <Dialog
@@ -200,7 +227,7 @@ export default function DetailPage(props) {
                                             textAlign: 'left',
                                         }}
                                     >
-                                        <TextBox>{props.id}</TextBox>
+                                        <TextBox>{props.name}</TextBox>
                                         {/* <Subscribe userTo={props.uid} /> */}
                                     </div>
                                 </LeftBottomContainer>
@@ -258,11 +285,11 @@ export default function DetailPage(props) {
                                 </RightBottomContainer>
                             </ImageContainer>
                             <PostName>{props.title}</PostName>
-                            
+
                             <DetailContent>
                                 <ShowMoreText
                                     width={650}
-                                      //Default options 
+                                    //Default options 
                                     lines={6}
                                     more={<ExpandMoreIcon fontSize="large" />}
                                     less={<ExpandLessIcon />}
@@ -270,7 +297,7 @@ export default function DetailPage(props) {
                                     onClick={executeOnClick}
                                     expanded={false}
                                 >
-                                    
+
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
@@ -296,7 +323,7 @@ export default function DetailPage(props) {
                                     />
                                 </div>
                             </div>
-                            
+
                             {/* <div style={{ marginTop: '20px' }}>
                                 <SubtitleFont style={{ marginBottom: '31px' }}>
                                     평점 주기
@@ -331,7 +358,7 @@ export default function DetailPage(props) {
                                     </RadioGroup>
                                 </FormControl>
                             </div> */}
-                            {<CommentList comment={comments}/>}
+                            {<CommentList comment={comments} />}
                             <CommentBox
                                 style={{
                                     height: 'auto',
@@ -362,7 +389,28 @@ export default function DetailPage(props) {
                                 )} */}
                             </CommentBox>
                             {/*안풋바 */}
+
                             <ChatInput id={props} />
+
+                            <form
+                                style={{
+                                    marginTop: '30px',
+                                    width: '100%',
+                                    height: '46px',
+                                    textAlign: "right"
+                                }}>
+
+                                <div>
+                                    {board === mId ?
+                                        <>
+                                            <Button className="btn btn-warning" onClick={() => setIsModalOpen(true)}>수정</Button>
+                                            <UploadUpdate {...props} open={IsModalOpen} close={onClose} />
+                                        </>
+                                        : ''
+                                    }
+                                </div>
+                            </form>
+
                         </RightContainer>
                     </MainContentContainer>
                 </TotalContainer>

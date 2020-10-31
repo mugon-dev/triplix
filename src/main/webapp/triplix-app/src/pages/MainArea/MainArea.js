@@ -201,7 +201,8 @@ export default () => {
                      <FlipMove>
                         {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage,bId,good }) => (
                             <Picture
-                            id={member.mname}
+                            id={member.id}
+                            name={member.mname}
                             bId={id}
                             title={btitle}
                             content={bcontent}
