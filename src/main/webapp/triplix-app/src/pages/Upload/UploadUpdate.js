@@ -189,7 +189,7 @@ const UploadUpdate = (props) => {
                                 Icon=""
                                 dropzoneText={
                                     <div style={{ textAlign: 'center' }}>
-                                        <img src={image ?  props.image: URL.createObjectURL(image)} alt={image ? image.name : null}  />
+                                        {/* <img src={image ?  props.image: URL.createObjectURL(image)} alt={image ? image.name : null}  /> */}
                                     </div>
                                 }
                                 acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}

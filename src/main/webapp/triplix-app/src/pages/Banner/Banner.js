@@ -133,13 +133,14 @@ const BestPicContainer = styled.div`
                     }}
                 />
                 <div className="row__posters">
-                    {posts.map(({ btitle, bcontent, member, bimage }) => (
+                    {posts.map(({ btitle, bcontent, member, bimage, blocation }) => (
                         <BestPicture
                             id={member.mname}
                             title={btitle}
                             content={bcontent}
                             member={member}
                             image={bimage}
+                            location={blocation}
                         />
                     ))}
                 </div>

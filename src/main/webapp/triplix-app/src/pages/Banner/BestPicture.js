@@ -72,7 +72,8 @@ function BestPicture({
     member,
     btitle,
     bcontent,
-    image
+    image,
+    location
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -120,7 +121,7 @@ function BestPicture({
                         src="./images/location.png"
                         alt=""
                     />
-                    <TextBox>부산</TextBox> {/* <TextBox>{area}</TextBox> */}
+                    <TextBox>{location}</TextBox> {/* <TextBox>{area}</TextBox> */}
                 </RightBottomContainer>
             </ImageContainer>
         </>
