@@ -37,6 +37,7 @@ import styled from 'styled-components';
 import ShowMoreText from 'react-show-more-text';
 import Message from './Message';
 import ChatInput from './ChatInput';
+import Good from './Good';
 //import Subscribe from './DetailFunction/Subscribe';
 //import Avartar from './DetailFunction/Avartar';
 //import LikeInterest from './DetailFunction/Like_Interest';
@@ -95,16 +96,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-    console.log(props.bId,"비아이디");
+    console.log(props,"detailres값");
     let comments = props.comment;
     console.log("cccc",comments);
+    let bid =props.bId;
+    let mid =0;
     if(localStorage.getItem("Authorization") != null){
         let jwtTokenTemp = localStorage.getItem("Authorization");
         let jwtToken = jwtTokenTemp.replace('Bearer ','');
         console.log("토큰 : ", jwtToken);
-        let mid = jwt_decode(jwtToken).id; 
-        let bid =props.bId;
-        let hak = null;
+        mid = jwt_decode(jwtToken).id; 
     }
    /*  useEffect(() => {
         if(mid != null){
@@ -115,7 +116,7 @@ export default function DetailPage(props) {
         .then((res)=>res.text())
         .then((res)=>{
             if(res == "ok"){
-                console.log("잇습니다요");
+                console.log("잇습니다요");  
                 hak = 1;
             }else{
                 console.log("없습니다.");
@@ -274,7 +275,7 @@ export default function DetailPage(props) {
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                            <i id="like" class="far fa-thumbs-up fa-5x" onClick={likebutton}></i>
+                            <Good bid={bid} mid={mid} good={props.good}/>
                         </LeftContainer>
                         <RightContainer>
                             <div

@@ -31,11 +31,11 @@ public class Good {
 	private int id;
 	
 	@JoinColumn(name = "boardId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Board board;
 	
 	@JoinColumn(name = "memberId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Member member;
 
 }
