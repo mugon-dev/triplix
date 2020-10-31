@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import UserBoardList from "./UserBoardList";
+import UserMap from "./UserMap";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -77,9 +78,13 @@ const UserSwitch = (props) => {
               </div>
             );
           case 2:
-            return <div>You are a Manager.</div>;
+            return <div>미구현</div>;
           default:
-            return <div>You are a User.</div>;
+            return (
+              <div>
+                <UserMap />
+              </div>
+            );
         }
       })()}
     </div>
