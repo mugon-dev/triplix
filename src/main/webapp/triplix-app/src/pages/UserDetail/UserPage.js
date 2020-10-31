@@ -20,6 +20,14 @@ import FlipMove from "react-flip-move";
 import Picture from "../MainArea/Picture";
 import Loader from "../MainArea/Loader";
 import UserBoardList from "./UserBoardList";
+import UserPick from "./UserPick";
+import UserSwitch from "./UserSwitch";
+
+const MarginContainer = styled.div`
+  max-width: 1440px;
+  margin: auto;
+  margin-top: 90px;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -66,7 +74,17 @@ const IntroductionFont = styled.p`
 const UserPage = () => {
   const [userinfo, setUserInfo] = useState("");
   const isLogin = useSelector((store) => store.isLogin);
-  console.log(isLogin);
+
+  const [select, setSelect] = useState(1);
+  const Myclick = () => {
+    setSelect(1);
+  };
+  const Pickclick = () => {
+    setSelect(2);
+  };
+  const Mapclick = () => {
+    setSelect(3);
+  };
 
   useEffect(() => {
     fetch("http://localhost:8000/member/detail", {
@@ -277,9 +295,12 @@ const UserPage = () => {
       </div>
       <br />
       <br />
+      <UserPick Myclick={Myclick} Pickclick={Pickclick} Mapclick={Mapclick} />
       <br />
       <br />
-      <UserBoardList />
+      <MarginContainer>
+        <UserSwitch select={select} />
+      </MarginContainer>
     </div>
   );
 };

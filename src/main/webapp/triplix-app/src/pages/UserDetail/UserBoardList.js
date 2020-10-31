@@ -1,10 +1,17 @@
-import { Container } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "../MainArea/Loader";
 import Picture from "../MainArea/Picture";
 import FlipMove from "react-flip-move";
 import jwt_decode from "jwt-decode";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 1440px;
+  margin: 36px 0;
+  columns: 3;
+  column-gap: 40px;
+`;
 
 const UserBoardList = () => {
   const [posts, setPosts] = useState([]);
@@ -38,16 +45,30 @@ const UserBoardList = () => {
     >
       <Container>
         <FlipMove>
-          {posts.map(({ post, id, btitle, bcontent, member, bimage, bId }) => (
-            <Picture
-              id={member.mname}
-              bId={id}
-              title={btitle}
-              content={bcontent}
-              member={member}
-              image={bimage}
-            />
-          ))}
+          {posts.map(
+            ({
+              post,
+              id,
+              btitle,
+              bcontent,
+              member,
+              comment,
+              bimage,
+              bId,
+              good,
+            }) => (
+              <Picture
+                id={member.mname}
+                bId={id}
+                title={btitle}
+                content={bcontent}
+                member={member}
+                image={bimage}
+                good={good}
+                comment={comment}
+              />
+            )
+          )}
         </FlipMove>
       </Container>
     </InfiniteScroll>
