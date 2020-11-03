@@ -7,24 +7,20 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import React, { useEffect } from "react";
+import UploadMap from "./UploadMap";
 
 const MapDialog = (props) => {
-  useEffect(() => {
-    const container = document.getElementById("myMap");
-    const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
-    };
-    const map = new kakao.maps.Map(container, options);
-  }, []);
-
-  const { onClose, selectedValue, open } = props;
-
-  const handleClose = () => {
-    onClose(selectedValue);
+  const { onClose, searchValue, open } = props;
+  console.log("modal: " + searchValue);
+  const handleClose = (value) => {
+    console.log("modal 종료: 1");
+    console.log(value);
+    onClose(value);
   };
 
   const handleListItemClick = (value) => {
+    console.log("modal 종료: 2");
+    console.log(value);
     onClose(value);
   };
 
@@ -32,26 +28,10 @@ const MapDialog = (props) => {
     <div>
       <Dialog
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby="simple-dialog-title"
         open={open}
       >
-        <DialogTitle id="customized-dialog-title">
-          등록할 장소를 클릭하세요
-        </DialogTitle>
-        <DialogContent dividers>
-          <div
-            id="myMap"
-            style={{
-              width: "500px",
-              height: "500px",
-            }}
-          ></div>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
-          </Button>
-        </DialogActions>
+        <UploadMap search={searchValue} open={open} onClose={handleClose} />
       </Dialog>
     </div>
   );

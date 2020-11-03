@@ -80,7 +80,7 @@ public class BoardController {
 	@PostMapping("/save")
 	public ResponseEntity<?> boardSave(@RequestParam("image") MultipartFile[] files,
 			@RequestParam("title") String title, @RequestParam("content") String content,
-			@RequestParam("board") String board) throws IllegalStateException, IOException {
+			@RequestParam("board") String board,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
 		String uploadFolder = "E:\\workspace\\springTeam\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
@@ -100,7 +100,7 @@ public class BoardController {
 			file.transferTo(saveFile);
 			filename = ".\\postImages\\" + uploadFileName;
 		}
-		boardService.boardSave(title, content, filename, memberEntity);
+		boardService.boardSave(title, content, filename,longitude,longitude, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}

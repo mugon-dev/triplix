@@ -25,6 +25,7 @@ import { makeStyles } from "@material-ui/core";
 import { DropzoneArea } from "material-ui-dropzone";
 import Input from "@material-ui/core/Input";
 import TextField from "@material-ui/core/TextField";
+import StickMap from "./UploadFunction/StickMap";
 
 const useStyles = makeStyles((theme) => ({
   DropZoneArea: {
@@ -50,13 +51,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "50px",
   },
 }));
+
 const UploadPage = (props) => {
   //유저 정보
   const [userId, setUserId] = useState();
   //유저 상태
   const isLogin = useSelector((store) => store.isLogin);
   //주소
-  const [address, setAddress] = useState({
+  const [address, setAddress] = useState();
+  const [location, setLocation] = useState({
     latitude: "",
     longitude: "",
   });
@@ -128,6 +131,8 @@ const UploadPage = (props) => {
   const onHandleUpload = (e) => {
     board.bimage = image;
     console.log(board);
+    console.log("위도", location.latitude);
+    console.log("경도", location.longitude);
     e.preventDefault();
     const formData = new FormData();
     var json = JSON.stringify(board);
@@ -135,6 +140,8 @@ const UploadPage = (props) => {
     formData.append("title", board.btitle);
     formData.append("content", board.bcontent);
     formData.append("image", board.bimage);
+    formData.append("latitude", location.latitude);
+    formData.append("longitude", location.longitude);
     if (
       board.bimage === null || //이미지업로드 X
       board.btitle === null || //제목이(x)
@@ -162,6 +169,7 @@ const UploadPage = (props) => {
       props.close();
     }
   };
+
   return (
     <Dialog
       scroll={"body"}
@@ -243,7 +251,12 @@ const UploadPage = (props) => {
               <Atmosphere />
             </AtmosphereComponent>
             <LocationComponent>
-              <Address address={address} setAddress={setAddress} />
+              <Address
+                location={location}
+                setLocation={setLocation}
+                address={address}
+                setAddress={setAddress}
+              />
             </LocationComponent>
             <div
               style={{

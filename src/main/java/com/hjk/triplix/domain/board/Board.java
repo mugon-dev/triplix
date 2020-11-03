@@ -50,6 +50,12 @@ public class Board {
 	
 	@Column(length = 100000)
 	private String bImage;
+
+	@Column(length = 100000)
+	private String latitude;
+
+	@Column(length = 100000)
+	private String longitude;
 	
 	@CreationTimestamp
 	private Timestamp bCreatedate;

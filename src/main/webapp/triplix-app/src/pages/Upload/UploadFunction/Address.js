@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import SearchIcon from "@material-ui/icons/Search";
 import ClearTwoToneIcon from "@material-ui/icons/ClearTwoTone";
 import MapDialog from "./MapDialog";
+import StickMap from "./StickMap";
 export const AddressTtile = styled.p`
   font-family: Noto Sans KR;
   font-style: normal;
@@ -45,18 +46,36 @@ const useStyles = makeStyles((theme) => ({
 
 function Address(props) {
   const classes = useStyles(props);
-  const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
   const [address, setAddress] = useState(props.address);
+  const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState();
+  const [location, setLocation] = useState({
+    latitude: "",
+    longitude: "",
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  const [stickopen, setStickopen] = useState(false);
   const handleClose = (value) => {
+    console.log(value);
+    setLocation(value);
+    props.setAddress(value);
+    props.setLocation(value);
     setOpen(false);
-    setSelectedValue(value);
+    setStickopen(true);
   };
+
+  const searchKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setSearchValue(e.target.value);
+      setOpen(true);
+    }
+  };
+
   return (
     <div
       style={{
@@ -78,12 +97,7 @@ function Address(props) {
           className={classes.input}
           placeholder="위치 검색"
           //value={props.address}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              props.setAddress("");
-            }
-          }}
+          onKeyPress={searchKeyPress}
           onChange={(e) => props.setAddress(e.target.value)}
           // inputProps={{ 'aria-label': 'search google maps' }}
         />
@@ -96,13 +110,19 @@ function Address(props) {
         >
           <ClearTwoToneIcon />
         </IconButton>
-        <MapDialog
-          selectedValue={selectedValue}
-          open={open}
-          onClose={handleClose}
-          address={address}
-        />
+        {stickopen ? (
+          <StickMap
+            latitude={location.latitude}
+            longitude={location.longitude}
+          />
+        ) : null}
       </Paper>
+      <MapDialog
+        searchValue={searchValue}
+        open={open}
+        onClose={handleClose}
+        location={setLocation}
+      />
     </div>
   );
 }
