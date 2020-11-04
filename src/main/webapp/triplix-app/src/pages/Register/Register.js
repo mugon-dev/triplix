@@ -37,7 +37,6 @@ const Register = (props) => {
 			}else{
 				alert('회원가입 실패');
 			}
-
 		});
 	}
 	

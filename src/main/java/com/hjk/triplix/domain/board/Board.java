@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -53,6 +54,9 @@ public class Board {
 	
 	@CreationTimestamp
 	private Timestamp bCreatedate;
+	
+	@ColumnDefault("0")
+	private int bGoodNum;
 	
 	@JsonIgnoreProperties({"board"})
 	@JoinColumn(name = "memberId")

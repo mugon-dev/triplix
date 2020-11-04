@@ -44,6 +44,20 @@ public class BoardService {
 		boardEntity.setBImage(dto.getBImage());
 	}
 	
+	@Transactional
+	public int boardGoodNumPlus(int bid) {
+		Board boardEntity = boardRepository.findById(bid).get();
+		boardEntity.setBGoodNum(boardEntity.getBGoodNum()+1);
+		System.out.println(boardEntity.getBGoodNum()+ " dddd");
+		return boardEntity.getBGoodNum();
+	}
+	
+	@Transactional
+	public void boardGoodNumMinus(int bid) {
+		Board boardEntity = boardRepository.findById(bid).get();
+		boardEntity.setBGoodNum(boardEntity.getBGoodNum()-1);
+	}
+	
 	public Board boardDetail(int id) {
 		Board board = boardRepository.findById(id).get();
 		return board;

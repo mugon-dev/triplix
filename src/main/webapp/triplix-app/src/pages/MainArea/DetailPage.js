@@ -80,7 +80,6 @@ const RigthStyle = {
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
-
         border: '2px solid #FF534B',
         height: '24px',
         width: '55px',
@@ -104,7 +103,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function DetailPage(props) {
-
     console.log(props,"detailres값");
     let comments = props.comment;
     let picks = props.pick;
@@ -136,36 +134,6 @@ export default function DetailPage(props) {
         });
     }
     },[]); */
-console.log(props,"detailres값");
-let comments = props.comment;
-console.log("cccc",comments);
-let bid =props.bId;
-let mid =0;
-if(localStorage.getItem("Authorization") != null){
-    let jwtTokenTemp = localStorage.getItem("Authorization");
-    let jwtToken = jwtTokenTemp.replace('Bearer ','');
-    console.log("토큰 : ", jwtToken);
-    mid = jwt_decode(jwtToken).id; 
-}
-    
-    /*  useEffect(() => {
-         if(mid != null){
-         console.log(mid,"있습니까? ");
-         console.log(bid,"bid 잇습니까");
-         
-         fetch("http://localhost:8000/good/"+mid+"/"+bid)
-         .then((res)=>res.text())
-         .then((res)=>{
-             if(res == "ok"){
-                 console.log("잇습니다요");
-                 hak = 1;
-             }else{
-                 console.log("없습니다.");
-                 hak = 2;
-             }
-         });
-     }
-     },[]); */
 
     const [board, setBoard] = useState();
 
@@ -335,7 +303,7 @@ if(localStorage.getItem("Authorization") != null){
                                     {props.content}
                                 </ShowMoreText>
                             </DetailContent>
-                            <Good bid={bid} mid={mid} good={props.good} pick={props.pick}/>
+                            <Good bid={bid} mid={mid} good={props.good} pick={props.pick} goodnum={props.goodnum}/>
               
                         </LeftContainer>
                         <RightContainer>

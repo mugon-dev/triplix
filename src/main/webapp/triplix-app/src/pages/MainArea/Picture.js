@@ -91,9 +91,10 @@ function Picture ({
             good,
             comment,
             pick,
-            location
+            location,
+            goodnum
         }) {
-        console.log("ㅇㅇㅇㅇㅇㅇ");
+            
         const [isModalOpen, setIsModalOpen] = useState(false);
         const onClose = () => {
             setIsModalOpen(false);
@@ -113,6 +114,7 @@ function Picture ({
                     good={good}
                     comment={comment}
                     pick={pick}
+                    goodnum={goodnum}
                 />
                 
                 <Box>

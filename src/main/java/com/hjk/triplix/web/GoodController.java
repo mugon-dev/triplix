@@ -43,6 +43,7 @@ public class GoodController {
 		if(session.getAttribute("principal") != null) { 
 			Member member = (Member)
 		    session.getAttribute("principal"); 
+			boardService.boardGoodNumPlus(b_id);
 			Board board = boardService.boardDetail(b_id); 
 			goodService.goodSave(member,board); 
 			return new ResponseEntity<String>("ok",HttpStatus.OK); 
@@ -60,8 +61,10 @@ public class GoodController {
 			Member member = (Member) session.getAttribute("principal");
 			System.out.println("보드 아이디 는 : " + b_id);
 			System.out.println("멤버 아이디 는 : " + member.getId());
+			boardService.boardGoodNumMinus(b_id);
 			if(member.getId() != 0) {
 				System.out.println("여기로옵니다.");
+				
 				Good good = goodService.myGood(member.getId(), b_id);
 				System.out.println("굿 아이디는 ?  : " + good.getId());
 				goodService.goodDelete(good.getId());

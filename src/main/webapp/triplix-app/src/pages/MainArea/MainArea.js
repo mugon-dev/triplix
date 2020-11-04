@@ -200,9 +200,7 @@ export default () => {
                 <Container>
                      <FlipMove>
 
-                        {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage, bId, good, pick }) => (
-
-                        {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage,bId,good, blocation }) => (
+                        {posts.map(({ post, id, btitle, bcontent, member, comment ,bimage,bId,good, blocation, pick, bgoodNum }) => (
                             <Picture
                             id={member.id}
                             name={member.mname}
@@ -215,6 +213,7 @@ export default () => {
                             pick={pick}
                             comment={comment}
                             location={blocation}
+                            goodnum={bgoodNum}
                             />
                         ))}
                         
