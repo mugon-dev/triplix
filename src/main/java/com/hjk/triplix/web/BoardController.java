@@ -80,9 +80,9 @@ public class BoardController {
 	@PostMapping("/save")
 	public ResponseEntity<?> boardSave(@RequestParam("image") MultipartFile[] files,
 			@RequestParam("title") String title, @RequestParam("content") String content,
-			@RequestParam("board") String board) throws IllegalStateException, IOException {
+			@RequestParam("board") String board,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
-		String uploadFolder = "C:\\workspace\\project\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
+		String uploadFolder = "E:\\workspace\\springTeam\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
 		Member memberEntity = (Member) session.getAttribute("principal");
 		String filename = "";
@@ -100,21 +100,37 @@ public class BoardController {
 			file.transferTo(saveFile);
 			filename = ".\\postImages\\" + uploadFileName;
 		}
-		boardService.boardSave(title, content, filename, memberEntity);
+		boardService.boardSave(title, content, filename,longitude,longitude, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<?> boardUpdate(HttpServletRequest request, @PathVariable int id,
-			@RequestBody BoardSaveRequestDto dto) {
+	public ResponseEntity<?> boardUpdate(HttpServletRequest request, @PathVariable int id,@RequestParam("image") MultipartFile file,
+			@RequestParam("title") String title, @RequestParam("content") String content) throws IllegalStateException, IOException {
+		System.out.println("왔니..?");
 		HttpSession session = request.getSession();
+		String uploadFolder = "E:\\workspace\\springTeam\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
+		String uploadFolderPath = getFolder();
+		String filename = "";
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+	         UUID uuid = UUID.randomUUID();
+	         String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
+	         File saveFile = new File(uploadFolder, uploadFileName);
+	         System.out.println(uploadPath);
+	         System.out.println(uploadFileName);
+	         filename = uploadFolder+"\\"+uploadFileName;
+	         file.transferTo(saveFile);
+	         filename = ".\\postImages\\"+uploadFileName;
+		
 		if (session.getAttribute("principal") != null) {
 			Member member = (Member) session.getAttribute("principal");
 			Board board = boardService.boardDetail(id);
 			if (board.getMember().getId() == member.getId()) {
-				System.out.println(dto);
-				boardService.boardUpdate(id, dto);
+				boardService.boardUpdate(id,title,content,filename);
 				return new ResponseEntity<String>("ok", HttpStatus.OK);
 			}
 			return new ResponseEntity<String>("not same writer", HttpStatus.FORBIDDEN);

@@ -144,7 +144,8 @@ const UploadUpdate = (props) => {
             fetch("http://localhost:8000/board/update/"+props.bId, {
                 method: "PUT",
                 headers: {
-                    "Authorization": localStorage.getItem("Authorization")
+                    "Authorization": localStorage.getItem("Authorization"),
+            
                 },
                 body: formData,
             }).then(res => res.text()).then(res => {
@@ -189,7 +190,16 @@ const UploadUpdate = (props) => {
                                 Icon=""
                                 dropzoneText={
                                     <div style={{ textAlign: 'center' }}>
+
+                                        
+                                        <img src={props.image}  />
+                                                                           
+                                         {/* <img src={image ? URL.createObjectURL(image) : null} alt={image ? image.name : null}  /> */}
+                                         
+                                        
+
                                         {/* <img src={image ?  props.image: URL.createObjectURL(image)} alt={image ? image.name : null}  /> */}
+
                                     </div>
                                 }
                                 acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}

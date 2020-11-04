@@ -19,11 +19,13 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 	
 	@Transactional
-	public void boardSave(String title, String content, String filename, Member member) {
+	public void boardSave(String title, String content, String filename, Member member, String latitude, String longitude) {
 		Board board = new Board();
 		board.setBTitle(title);
 		board.setBContent(content);
 		board.setBImage(filename);
+		board.setLatitude(latitude);
+		board.setLongitude(longitude);
 		board.setMember(member);
 		boardRepository.save(board);
 	}
@@ -34,14 +36,15 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public void boardUpdate(int id, BoardSaveRequestDto dto) {
+	public void boardUpdate(int id, String title, String content,String filename) {
 		Board boardEntity = boardRepository.findById(id).get();
-		if(dto.getBTitle()!=null)
-		boardEntity.setBTitle(dto.getBTitle());
-		if(dto.getBContent()!=null)
-		boardEntity.setBContent(dto.getBContent());
-		if(dto.getBImage()!=null)
-		boardEntity.setBImage(dto.getBImage());
+//		if(dto.getBTitle()!=null)
+		boardEntity.setBTitle(title);
+//		if(dto.getBContent()!=null)
+		boardEntity.setBContent(content);
+//		if(dto.getBImage()!=null)
+		boardEntity.setBImage(filename);
+		boardRepository.save(boardEntity);
 	}
 	
 	@Transactional

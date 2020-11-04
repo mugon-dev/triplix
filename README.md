@@ -1,140 +1,55 @@
 # triplix
 
-## member 관련 기능
+## 개발 도구
 
-### member/login
-- 로그인 기능
-- post, mid, mpw
-- 실패 : fail
-- return 회원번호, 아이디
-- jwt 생성
+- sts4 (eclipse)
+- visual studio code
 
-### member/register
-- 회원가입
-- post 호출
-- mid, memail, mname, mprofile, mpw 요구
-- 성공 : ok
+## 개발 기술
 
-### member/logout
-- get 호출
-- session 삭제
+- SpringBoot (version 2.3.4)
+- JPA
+- React
+- MySQL
 
-### member/update
-- jwt 필요
-- put 호출
-- mimage 변경 가능
-- 성공 : ok
+## wiki (https://github.com/dngkgkgk/triplix/wiki)
 
-### member/profile
-- jwt 필요
-- put 호출
-- mprofile 변경 가능
-- 성공 : ok
+- 데이터 CRUD 규칙
 
-### member/delete
-- jwt 필요
-- delete 호출
-- 성공 : ok 
+## springBoot dependency
 
-### member/detail
-- jwt 필요
-- get 호출
-- 성공 : member 객체 
-- id,mid,mpw,mname,memail,mprofile
+- Spring Boot DevTools
+- Lombok
+- Spring Data JPA
+- MySQL Driver
+- Spring Web
+- Tomcat Embed Jasper
+- java-jwt
 
-### member/image
-- jwt 필요
-- post 호출
-- image form 데이터 필요
-- return ok
+## react library
 
-## board 관련 기능
+### 기능
 
-### board/
-- get 호출
-- board 전체 리스트 
+- jquery(npm install --save jquery)
+- JavaScript Library(npm i proj4)
+- jwt-decode (npm i jwt-decode)
+- react-router-dom (npm i react-router-dom)
+- yarn (npm i yarn)
+- react-redux (yarn add redux react-redux)
 
-### board/{id}
-- get 호출
-- board 하나
+### 디자인
 
-### board/my
-- get 호출
-- jwt
-- 로그인한 회원 게시글 전체
+- Bootstrap4 종속성(npm install popper.js --save)
+- Material-UI Core(npm install @material-ui/core)
+- Material-UI Icon(npm install @material-ui/icons)
+- Material-Lab(npm install @material-ui/lab)
+- Material-Dropzone(npm i material-ui-dropzone)
+- React-Infinite-Scroll-Component(npm i react-infinite-scroll-component)
+- React-Flip-Move(react-flip-move)
+- React-show-more-text (npm i react-show-more-text)
+- styled-components (npm install --save styled-components)
 
-### board/delete/{id}
-- delete
-- jwt 필요
-- 같은 작성자일 때 삭제 가능
-- board 하나 삭제
+## 보안
 
-### board/save
-- post
-- jwt 필요
-- btitle,bcontent,bimage
-
-### board/update/{id}
-- put
-- jwt 필요
-- btitle,bcontent,bimage
-
-## comment 기능
-
-### comment/save/{id}
-- post
-- jwt
-- board id 필요
-- return ok
-
-### comment/
-- get
-- 전체 리스트
-
-### comment/{id}
-- get
-- 하나 리턴
-
-### comment/{id}
-- put
-- jwt
-- comment 업데이트
-- return ok
-
-### comment{id}
-- delete
-- jwt
-- return ok
-
-## Good 좋아요 기능
-
-### good/{id}
-- get
-- good 하나 리턴
-
-### good/{id}
-- post
-- jwt 필요
-- boardId 받아서 저장
-- return ok
-
-### good/{id}
-- delete
-- jwt 필요
-- return ok
-
-## pick 기능
-
-### pick/{id}
-- get
-- pick 하나 리턴
-
-### pick/{id}
-- post
-- jwt
-- return ok
-
-### pick/{id}
-- delete
-- jwt
-- return ok
+- JWT 토큰 인증
+- filter
