@@ -128,11 +128,9 @@ const UploadUpdate = (props) => {
         console.log(board);
         e.preventDefault();
         const formData = new FormData();
-        var json = JSON.stringify(board);
-        formData.append("board", json);
         formData.append("title", board.btitle);
         formData.append("content", board.bcontent);
-        formData.append("image", board.bimage);
+        
         if (
             board.bimage === null || //이미지업로드 X
             board.btitle === null || //제목이(x)
@@ -145,15 +143,14 @@ const UploadUpdate = (props) => {
                 method: "PUT",
                 headers: {
                     "Authorization": localStorage.getItem("Authorization"),
-            
                 },
                 body: formData,
             }).then(res => res.text()).then(res => {
                 if (res === "ok") {
-                    alert('업로드 완료');
+                    alert('글수정 완료');
                     window.location.reload();
                 } else {
-                    alert('글등록 실패');
+                    alert('글수정 실패');
                 }
             });
             props.close();

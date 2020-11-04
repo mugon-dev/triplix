@@ -53,9 +53,8 @@ function ChatInput(props) {
         })
             .then(res=>res.text())
             .then(res=>{
-                if(res==="ok"){
+                if(res==="ok"){ 
                     alert('댓글작성완료');
-                    
                 }
             });
     }

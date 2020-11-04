@@ -98,6 +98,7 @@ function Picture ({
         const [isModalOpen, setIsModalOpen] = useState(false);
         const onClose = () => {
             setIsModalOpen(false);
+            window.location.reload();
         };
 
         return (
