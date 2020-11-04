@@ -323,7 +323,7 @@ const useStyles = makeStyles((theme) => ({
                   {props.content}
                 </ShowMoreText>
               </DetailContent>
-              <Good bid={bid} mid={mid} good={props.good} />
+              <Good bid={bid} mid={mid} good={props.good} pick={props.pick} goodnum={props.goodnum}/>
             </LeftContainer>
             <RightContainer>
               <div
