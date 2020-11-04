@@ -112,18 +112,6 @@ const UserPage = () => {
 
   const handleClose = (value) => {
     setOpen(false);
-    // console.log("받아온이미지", changeImage);
-    // setChangeImage(changeImage);
-    // console.log(userinfo);
-    // console.log("바뀐 이미지", changeImage);
-    // setUserInfo((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     mimage: URL.createObjectURL(changeImage),
-    //   };
-    // });
-    // console.log(userinfo);
-    // console.log(URL.createObjectURL(changeImage));
     fetch("http://localhost:8000/member/detail", {
       method: "GET",
       headers: {

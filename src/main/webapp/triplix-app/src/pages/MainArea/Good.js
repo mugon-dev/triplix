@@ -3,17 +3,20 @@ import { useSelector } from 'react-redux';
 
 const Good = (props) => {
    const [gnum, setGnum] = useState();
-   const [aaa, setAaa] = useState();
+   const [like, setLike] = useState();
+   const [mark , setMark] = useState();
     useEffect(() => {
-		 abcd(); 
+		 check(); 
         setGnum(props.goodnum);
     }, []);
 
-	 function abcd(){
-				setAaa(false);
+	 function check(){
+				setLike(false);
+				setMark(false);
 		for (let index = 0; index < props.good.length; index++) {
 			if(props.good[index].member.id === mid){
-				setAaa(true);
+				setLike(true);
+				setMark(true);
 				break;
 			}
 
@@ -40,7 +43,7 @@ const Good = (props) => {
 		}).then(res => res.text())
 			.then(res => {
 				if (res === "ok") {
-					setAaa(true);
+					setLike(true);
 					setGnum(gnum+1);
 					alert("좋아요");
 				}
@@ -58,14 +61,14 @@ const Good = (props) => {
 		}).then(res => res.text())
 			.then(res => {
 				if (res === "ok") {
-					setAaa(false);
+					setLike(false);
 					setGnum(gnum-1);
 					alert("좋아요 취소");
 				}
 			});
 	}
 
-	function p_register() {
+	function pmark() {
 		fetch("http://localhost:8000/pick/save", {
 			method: "POST",
 			headers: {
@@ -76,12 +79,13 @@ const Good = (props) => {
 		}).then(res => res.text())
 			.then(res => {
 				if (res === "ok") {
+					setMark(true);
 					alert("찜하기~~!");
 				}
 			});
 	}
 
-	function p_unpick() {
+	function unmakr() {
 		fetch("http://localhost:8000/pick/delete", {
 			method: "DELETE",
 			headers: {
@@ -92,6 +96,7 @@ const Good = (props) => {
 		}).then(res => res.text())
 			.then(res => {
 				if (res === "ok") {
+					setMark(false);
 					alert("찜하기 취소");
 				}
 			});
@@ -101,7 +106,7 @@ const Good = (props) => {
 		<div>
 			{isLogin ? (
 				<>
-					{aaa ? (
+					{like ? (
 						<>
 							<span><i class="fas fa-thumbs-up fa-5x" onClick={unlike}></i>({gnum})</span>
 						</>
@@ -112,10 +117,16 @@ const Good = (props) => {
 							</>
 						)
 					}
-					{picks.map((pick) => pick.member.id === mid ? p_like = true : p_like = false)}
-					{
-						p_like ? <span><i class="fas fa-bookmark fa-5x" onClick={p_unpick}></i></span> :
-							<span><i class="far fa-bookmark fa-5x" onClick={p_register}></i></span>
+					{mark ? (
+							<>
+								<span><i class="fas fa-bookmark fa-5x" onClick={unmakr}></i></span>
+							</>
+					):
+						(
+							<>
+								<span><i class="far fa-bookmark fa-5x" onClick={pmark}></i></span>
+							</>
+						)
 					}
 				</>
 			) : (
