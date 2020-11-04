@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import UserBoardList from "./UserBoardList";
 import UserMap from "./UserMap";
+import jwt_decode from "jwt-decode";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -45,7 +46,27 @@ const Title = styled.h4`
 
 const UserSwitch = (props) => {
   const [mood, setMood] = useState("");
+  const [posts, setPosts] = useState([]);
   const moods = ["서울", "대전", "대구", "부산", "찍고", "아하", "~!"];
+  useEffect(() => {
+    //위도,경도, 이미지 가져오기
+    let jwtTokenTemp = localStorage.getItem("Authorization");
+    let jwtToken = jwtTokenTemp.replace("Bearer ", "");
+    let id = jwt_decode(jwtToken).id;
+    console.log(jwtToken);
+    console.log(id);
+
+    fetch("http://localhost:8000/board/my/" + id, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setPosts(res);
+      });
+  }, []);
   return (
     <div>
       {(() => {
@@ -82,7 +103,7 @@ const UserSwitch = (props) => {
           default:
             return (
               <div>
-                <UserMap />
+                <UserMap posts={posts} />
               </div>
             );
         }
