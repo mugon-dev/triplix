@@ -100,7 +100,7 @@ public class BoardController {
 			file.transferTo(saveFile);
 			filename = ".\\postImages\\" + uploadFileName;
 		}
-		boardService.boardSave(title, content, filename,longitude,longitude, memberEntity);
+		boardService.boardSave(title, content, filename,latitude,longitude, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 	}
