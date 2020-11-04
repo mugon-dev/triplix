@@ -1,6 +1,14 @@
 /*global kakao*/
 import React, { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 900px;
+  height: 900px;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 const UserMap = () => {
   const [posts, setPosts] = useState([]);
@@ -23,53 +31,62 @@ const UserMap = () => {
         setPosts(res);
       });
 
-    const container = document.getElementById("myMap");
+    const container = document.getElementById("userMap");
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3,
+      center: new kakao.maps.LatLng(38.030524123908684, 127.39839986319302),
+      level: 14,
     };
     const map = new kakao.maps.Map(container, options);
 
-    // {posts.map(
-    //   ({
-    //     bimage,
-    //     latitude,
-    //     longitude
-    //   }) => (
-
-    //   )
-    // )}
+    {
+      console.log(posts);
+      posts.map(
+        ({ bimage, latitude, longitude }) =>
+          new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(latitude, longitude),
+            image: new kakao.maps.MarkerImage(
+              bimage,
+              new kakao.maps.Size(64, 69),
+              { offset: new kakao.maps.Point(27, 69) }
+            ), // 마커이미지 설정
+          })
+      );
+    }
     const imageSrc =
         "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
       imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
       imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    const markerImage = new kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imageOption
-      ),
-      markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
+    // const markerImage = new kakao.maps.MarkerImage(
+    //     imageSrc,
+    //     imageSize,
+    //     imageOption
+    //   ),
+    //   markerPosition = new kakao.maps.LatLng(
+    //     38.030524123908684,
+    //     127.39839986319302
+    //   ); // 마커가 표시될 위치입니다
 
-    // 마커를 생성합니다
-    const marker = new kakao.maps.Marker({
-      position: markerPosition,
-      image: markerImage, // 마커이미지 설정
-    });
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
+    // // 마커를 생성합니다
+    // const marker = new kakao.maps.Marker({
+    //   position: markerPosition,
+    //   image: markerImage, // 마커이미지 설정
+    // });
+    // // 마커가 지도 위에 표시되도록 설정합니다
+    //marker.setMap(map);
   }, []);
   return (
-    <div>
+    <Container>
       <div
-        id="myMap"
+        id="userMap"
         style={{
-          width: "500px",
-          height: "500px",
+          width: "800px",
+          height: "700px",
         }}
       ></div>
-    </div>
+    </Container>
   );
 };
 
