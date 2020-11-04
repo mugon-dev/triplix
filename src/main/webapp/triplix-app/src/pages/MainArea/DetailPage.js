@@ -117,24 +117,7 @@ export default function DetailPage(props) {
         console.log("토큰 : ", jwtToken);
         mid = jwt_decode(jwtToken).id; 
     }
-   /*  useEffect(() => {
-        if(mid != null){
-        console.log(mid,"있습니까? ");
-        console.log(bid,"bid 잇습니까");
-        
-        fetch("http://localhost:8000/good/"+mid+"/"+bid)
-        .then((res)=>res.text())
-        .then((res)=>{
-            if(res == "ok"){
-                console.log("잇습니다요");  
-                hak = 1;
-            }else{
-                console.log("없습니다.");
-                hak = 2;
-            }
-        });
-    }
-    },[]); */
+
 
 const useStyles = makeStyles((theme) => ({
   FollowBtn: {
@@ -162,37 +145,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto 0",
   },
 }));
-export default function DetailPage(props) {
-  console.log(props, "detailres값");
-  let comments = props.comment;
-  console.log("cccc", comments);
-  let bid = props.bId;
-  let mid = 0;
-  if (localStorage.getItem("Authorization") != null) {
-    let jwtTokenTemp = localStorage.getItem("Authorization");
-    let jwtToken = jwtTokenTemp.replace("Bearer ", "");
-    console.log("토큰 : ", jwtToken);
-    mid = jwt_decode(jwtToken).id;
-  }
-
-  /*  useEffect(() => {
-         if(mid != null){
-         console.log(mid,"있습니까? ");
-         console.log(bid,"bid 잇습니까");
-         
-         fetch("http://localhost:8000/good/"+mid+"/"+bid)
-         .then((res)=>res.text())
-         .then((res)=>{
-             if(res == "ok"){
-                 console.log("잇습니다요");
-                 hak = 1;
-             }else{
-                 console.log("없습니다.");
-                 hak = 2;
-             }
-         });
-     }
-     },[]); */
 
   const [board, setBoard] = useState();
 
@@ -395,40 +347,6 @@ export default function DetailPage(props) {
                 </div>
               </div>
 
-              {/* <div style={{ marginTop: '20px' }}>
-                                <SubtitleFont style={{ marginBottom: '31px' }}>
-                                    평점 주기
-                                </SubtitleFont>
-                                <FormControl
-                                    component="fieldset"
-                                    style={{ width: '100%' }}
-                                >
-                                    <RadioGroup
-                                        style={{
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                        }}
-                                        row
-                                        aria-label="position"
-                                        name="position"
-                                        defaultValue="top"
-                                        //  value={value}
-                                        // onChange={handleChange}
-                                    >
-                                        <FormControlLabel
-                                            value="1"
-                                            control={<Radio color="primary" />}
-                                            label={
-                                                <RatingFont>별로야</RatingFont>
-                                            }
-                                            labelPlacement="bottom"
-                                        />    
-                                        <Button className={classes.RatingBtn}>
-                                            완료
-                                        </Button>
-                                    </RadioGroup>
-                                </FormControl>
-                            </div> */}
               {<CommentList comment={comments} />}
               <CommentBox
                 style={{
@@ -440,24 +358,7 @@ export default function DetailPage(props) {
                   overflow: "auto",
                 }}
               >
-                {/* {Comment.map(
-                                    (
-                                        {
-                                            mname,
-                                            comment,
-                                        },
-                                    ) => (
-                                        <Message
-                                       
-                                            mname={member.mname}
-                                            comment={comment.id}
-                                            good={good}
-                                            pick={pick}
-
-                                            
-                                        />
-                                    )
-                                )} */}
+               
               </CommentBox>
               {/*안풋바 */}
 
@@ -495,17 +396,12 @@ export default function DetailPage(props) {
                 </div>
               </form>
             </RightContainer>
-            {/* <StickMap
-            latitude={location.latitude}
-            longitude={location.longitude}
-          /> */}
+           
           </MainContentContainer>
         </TotalContainer>
       </DialogContent>
       <DialogActions>
-        {/*원래버튼있던자리 지만 저희 기능에선 사용할거없음*/}
       </DialogActions>
     </Dialog>
   );
-}
 }

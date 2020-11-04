@@ -82,7 +82,7 @@ public class BoardController {
 			@RequestParam("title") String title, @RequestParam("content") String content,
 			@RequestParam("board") String board,@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
-		String uploadFolder = "E:\\workspace\\springTeam\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
+		String uploadFolder = "C:\\workspace\\project\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
 		Member memberEntity = (Member) session.getAttribute("principal");
 		String filename = "";
