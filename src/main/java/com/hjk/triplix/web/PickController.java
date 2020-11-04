@@ -40,7 +40,8 @@ public class PickController {
 	public Pick pickOne(@PathVariable int id) {
 		return pickService.pickOne(id);
 	}
-		
+	
+	
 	@PostMapping("/save")
 	public ResponseEntity<?> pickSave(HttpServletRequest request, @RequestBody String bid) {
 		System.out.println("pickSaveController");

@@ -135,8 +135,6 @@ const UploadPage = (props) => {
     console.log("경도", location.longitude);
     e.preventDefault();
     const formData = new FormData();
-    var json = JSON.stringify(board);
-    formData.append("board", json);
     formData.append("title", board.btitle);
     formData.append("content", board.bcontent);
     formData.append("image", board.bimage);
