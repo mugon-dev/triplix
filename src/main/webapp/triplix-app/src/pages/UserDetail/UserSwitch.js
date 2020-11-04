@@ -3,6 +3,7 @@ import styled from "styled-components";
 import UserBoardList from "./UserBoardList";
 import UserMap from "./UserMap";
 import jwt_decode from "jwt-decode";
+import UserPickList from "./UserPickList";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -99,7 +100,11 @@ const UserSwitch = (props) => {
               </div>
             );
           case 2:
-            return <div>미구현</div>;
+            return (
+              <div>
+                <UserPickList />
+              </div>
+            );
           default:
             return (
               <div>
