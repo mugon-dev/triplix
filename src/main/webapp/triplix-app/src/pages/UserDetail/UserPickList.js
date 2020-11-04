@@ -24,7 +24,7 @@ const UserPickList = () => {
     console.log(jwtToken);
     console.log(id);
 
-    fetch("http://localhost:8000/board/my/" + id, {
+    fetch("http://localhost:8000/pick/my/" + id, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("Authorization"),
