@@ -47,5 +47,10 @@ public class PickService {
 	public List<Pick> pickList() {
 		return pickRepository.findAll();
 	}
+	
+	@Transactional
+	public List<Pick> pickMemberList(int memberId) {
+		return pickRepository.mFindMemberId(memberId);
+	}
 
 }

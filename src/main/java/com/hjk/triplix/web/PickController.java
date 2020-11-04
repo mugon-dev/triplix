@@ -40,6 +40,11 @@ public class PickController {
 	public Pick pickOne(@PathVariable int id) {
 		return pickService.pickOne(id);
 	}
+	
+	@GetMapping("/my/{id}")
+	public List<Pick> pickMyList(@PathVariable int id) {
+		return pickService.pickMemberList(id);
+	}
 		
 	@PostMapping("/save")
 	public ResponseEntity<?> pickSave(HttpServletRequest request, @RequestBody String bid) {
