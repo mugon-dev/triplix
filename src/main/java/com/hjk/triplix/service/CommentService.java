@@ -20,8 +20,8 @@ public class CommentService {
 	private final BoardRepository boardRepository;
 	private final CommentRepository commentRepository;
 	
-	public List<Comment> commentList(){
-		return commentRepository.findAll();
+	public List<Comment> commentList(int bid){
+		return commentRepository.mFindbyBoardId(bid);
 	}
 	public Comment commentOne(int id) {
 		return commentRepository.findById(id).get();

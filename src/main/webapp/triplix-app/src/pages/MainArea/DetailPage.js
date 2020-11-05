@@ -5,7 +5,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 //import Message from './DetailFunction/Message';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import CommentList from "./CommentList";
 import jwt_decode from "jwt-decode";
 import {
   ImageContainer,
@@ -158,7 +157,7 @@ const useStyles = makeStyles((theme) => ({
       setMid(jwt_decode(jwtToken).id);
       setBoard(props.id);
     }
-  }, []);
+  },[]);
 
   console.log(mId, "------------mid");
   console.log(board, "-----------bid");
@@ -346,20 +345,7 @@ const useStyles = makeStyles((theme) => ({
                   />
                 </div>
               </div>
-
-              {<CommentList comment={comments} />}
-              <CommentBox
-                style={{
-                  height: "auto",
-                  minHeight: "35%",
-                  maxHeight: "65%",
-                  width: "100%",
-                  marginTop: "60px",
-                  overflow: "auto",
-                }}
-              >
-               
-              </CommentBox>
+              
               {/*안풋바 */}
 
               <ChatInput id={props} />

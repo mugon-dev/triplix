@@ -77,7 +77,7 @@ export default () => {
             setPosts(res);
             console.log("aaa",res);
         });
-    },[]);
+    },()=>posts);
 
     /*
         const unsubscribe = db

@@ -94,7 +94,7 @@ function Picture ({
             location,
             goodnum
         }) {
-            
+        console.log("제목은??",title);
         const [isModalOpen, setIsModalOpen] = useState(false);
         const onClose = () => {
             setIsModalOpen(false);

@@ -32,13 +32,9 @@ public class CommentController {
 	private final CommentService commentService;
 	private final BoardService boardService;
 	
-	@GetMapping("/")
-	public List<Comment> CommentList() {
-		return commentService.commentList();
-	}
-	@GetMapping("/{id}")
-	public Comment CommentOne(@PathVariable int id) {
-		return commentService.commentOne(id);
+	@GetMapping("/{bid}")
+	public List<Comment> CommentList(@PathVariable int bid) {
+		return commentService.commentList(bid);
 	}
 	
 	@PostMapping("/save/{id}")

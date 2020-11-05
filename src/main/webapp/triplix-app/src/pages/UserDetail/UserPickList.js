@@ -33,6 +33,7 @@ const UserPickList = () => {
       .then((res) => res.json())
       .then((res) => {
         setPosts(res);
+        console.log("픽리스",res);
       });
   }, []);
   return (
@@ -46,25 +47,17 @@ const UserPickList = () => {
         <FlipMove>
           {posts.map(
             ({
-              post,
-              id,
-              btitle,
-              bcontent,
-              member,
-              comment,
-              bimage,
-              bId,
-              good,
+              board
             }) => (
               <Picture
-                id={member.mname}
-                bId={id}
-                title={btitle}
-                content={bcontent}
-                member={member}
-                image={bimage}
-                good={good}
-                comment={comment}
+                id={board.id}
+                bId={board.id}
+                title={board.title}
+                content={board.bcontent}
+                member={board.member}
+                image={board.bimage}
+                good={board.good}
+                comment={board.comment}
               />
             )
           )}

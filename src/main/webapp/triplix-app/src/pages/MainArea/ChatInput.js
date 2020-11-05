@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '@material-ui/core/Input';
 import { CommentButton } from './DetailStyle';
 //import { CommentButton } from '../DetailStyle';
@@ -6,18 +6,28 @@ import { CommentButton } from './DetailStyle';
 //import firebase from 'firebase/app';
 import { useStateValue } from '../../StateProvider';
 import { useSelector } from 'react-redux';
-
+import {CommentBox,} from "./DetailStyle";
 function ChatInput(props) {
     console.log(props.id.bId);
    
     const [comment, setComment] = useState();
+    const [comments, setComments] = useState([]);
 
+     useEffect(()=>{
+      fetch("http://localhost:8000/comment/"+props.id.bId)
+      .then(res => res.json())
+      .then(res =>{
+          setComments(res);
+      })
+  },[])
+  console.log("실험" , comments[0]);
     const changeValue = (e) => {
     setComment({
       ...comment,
       [e.target.name]: e.target.value,
     });
   };
+
     console.log(comment);
 
     var blank_pattern = /^\s+|\s+$/g;
@@ -37,11 +47,11 @@ function ChatInput(props) {
         else if (isLogin) {
             commentPost();
             
-            console.log(comment);
         }
         setComment('');
     };
 
+    console.log(comment)
     const commentPost = () => {
         fetch("http://localhost:8000/comment/save/"+props.id.bId, {
             method: "POST",
@@ -54,12 +64,45 @@ function ChatInput(props) {
             .then(res=>res.text())
             .then(res=>{
                 if(res==="ok"){ 
+                   document.getElementById("comment").value = "";
                     alert('댓글작성완료');
+                    fetch("http://localhost:8000/comment/"+props.id.bId)
+                        .then(res => res.json())
+                        .then(res =>{
+                            setComments(res);
+                        })
                 }
             });
     }
 
     return (
+        <div>
+           {comments.map((comment) => 
+				<table>
+					<tr>
+						{/* <td><img src={comment.member.mimage}></img>{comment.member.mid} : {comment.comment}</td> */}
+						<td>{comment.member.mid} : {comment.comment}</td>
+					</tr>
+				</table>
+			)
+
+			}
+
+            <CommentBox
+                style={{
+                  height: "auto",
+                  minHeight: "35%",
+                  maxHeight: "65%",
+                  width: "100%",
+                  marginTop: "60px",
+                  overflow: "auto",
+                }}
+              >
+               
+            </CommentBox>
+
+            
+
         <form
             style={{
                 display: 'flex',
@@ -81,6 +124,7 @@ function ChatInput(props) {
                     height: '46px',
                 }}
                 // value={comment}
+                id="comment"
                 name="comment"
                 onChange={changeValue}
                 
@@ -88,6 +132,7 @@ function ChatInput(props) {
                 
             <CommentButton onClick={sendMessage}>게시</CommentButton>
         </form>
+        </div>
     );
 }
 

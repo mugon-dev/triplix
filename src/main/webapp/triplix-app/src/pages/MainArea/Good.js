@@ -7,31 +7,36 @@ const Good = (props) => {
    const [mark , setMark] = useState();
     useEffect(() => {
 		 check(); 
+		 check2();
         setGnum(props.goodnum);
     }, []);
 
 	 function check(){
-				setLike(false);
-				setMark(false);
+		setLike(false);
+		setMark(false);
 		for (let index = 0; index < props.good.length; index++) {
 			if(props.good[index].member.id === mid){
 				setLike(true);
 				setMark(true);
 				break;
 			}
-
 		}
 	} 
+	function check2(){
+		setMark(false);
+		for (let index = 0; index < props.pick.length; index++) {
+			if(props.pick[index].member.id === mid){
+				setMark(true);
+				break;
+			}
+		}
+	}
 	const isLogin = useSelector((store) => store.isLogin);
-	console.log("qwqwqwqw",props);
 	let mid = props.mid;
 	let bid = props.bid;
 	let goods = props.good;
 	let picks = props.pick;
 	let goodnum = props.goodnum;
-	console.log("num!~!! :" , goodnum);
-	let g_like = false;
-	let p_like = false;
 	function glike() {
 		fetch("http://localhost:8000/good/save", {
 			method: "POST",
@@ -49,7 +54,6 @@ const Good = (props) => {
 				}
 			});
 	}
-
 	function unlike() {
 		fetch("http://localhost:8000/good/delete", {
 			method: "DELETE",
