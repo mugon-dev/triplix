@@ -74,6 +74,7 @@ const UploadPage = (props) => {
   });
   const [image, setImage] = useState();
   const onDrop = async (file) => {
+    setImage("");
     setBoard((prevState) => {
       return {
         ...prevState,
@@ -143,7 +144,9 @@ const UploadPage = (props) => {
     if (
       board.bimage === null || //이미지업로드 X
       board.btitle === null || //제목이(x)
-      board.bcontent === null //상세내용x
+      board.bcontent === null || //상세내용x
+      location.latitude === null || //지도 좌표x
+      location.longitude === null
     ) {
       alert("업로드내용을 입력해주세요");
     } else {
@@ -161,7 +164,7 @@ const UploadPage = (props) => {
             alert("업로드 완료");
             window.location.reload();
           } else {
-            alert("글등록 실패");
+            alert("업로드내용을 입력해주세요");
           }
         });
       props.close();
