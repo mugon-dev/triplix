@@ -41,6 +41,7 @@ import UploadPage from "../Upload/UploadPage";
 import UploadUpdate from "../Upload/UploadUpdate";
 
 import Good from "./Good";
+import StickMap from "../Upload/UploadFunction/StickMap";
 
 //import Subscribe from './DetailFunction/Subscribe';
 //import Avartar from './DetailFunction/Avartar';
@@ -72,56 +73,13 @@ const DetailContent = styled.div`
   }
 `;
 
-
 const RigthStyle = {
-    textAlign : "right"
-}
-
-const useStyles = makeStyles((theme) => ({
-    FollowBtn: {
-        color: '#FFFFFF',
-        border: '2px solid #FF534B',
-        height: '24px',
-        width: '55px',
-        fontWeight: 500,
-        fontSize: '13px',
-        lineHeight: '19px',
-        display: 'flex',
-        boxSizing: 'border-box',
-        borderRadius: '16px',
-        marginTop: '10px',
-    },
-    RatingBtn: {
-        width: '26px',
-        height: '21px',
-        fontWeight: '500',
-        fontSize: '14px',
-        lineHeight: '20px',
-        alignItems: 'center',
-        color: '#D84B45',
-        margin: 'auto 0',
-    },
-}));
-export default function DetailPage(props) {
-    console.log(props,"detailres값");
-    let comments = props.comment;
-    let picks = props.pick;
-    console.log("qwerasd",picks);
-    console.log("cccc",comments);
-    let bid =props.bId;
-    let mid =0;
-    if(localStorage.getItem("Authorization") != null){
-        let jwtTokenTemp = localStorage.getItem("Authorization");
-        let jwtToken = jwtTokenTemp.replace('Bearer ','');
-        console.log("토큰 : ", jwtToken);
-        mid = jwt_decode(jwtToken).id; 
-    }
-
+  textAlign: "right",
+};
 
 const useStyles = makeStyles((theme) => ({
   FollowBtn: {
     color: "#FFFFFF",
-
     border: "2px solid #FF534B",
     height: "24px",
     width: "55px",
@@ -144,6 +102,47 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto 0",
   },
 }));
+export default function DetailPage(props) {
+  console.log(props, "detailres값");
+  let comments = props.comment;
+  let picks = props.pick;
+  console.log("qwerasd", picks);
+  console.log("cccc", comments);
+  let bid = props.bId;
+  let mid = 0;
+  if (localStorage.getItem("Authorization") != null) {
+    let jwtTokenTemp = localStorage.getItem("Authorization");
+    let jwtToken = jwtTokenTemp.replace("Bearer ", "");
+    console.log("토큰 : ", jwtToken);
+    mid = jwt_decode(jwtToken).id;
+  }
+
+  const useStyles = makeStyles((theme) => ({
+    FollowBtn: {
+      color: "#FFFFFF",
+
+      border: "2px solid #FF534B",
+      height: "24px",
+      width: "55px",
+      fontWeight: 500,
+      fontSize: "13px",
+      lineHeight: "19px",
+      display: "flex",
+      boxSizing: "border-box",
+      borderRadius: "16px",
+      marginTop: "10px",
+    },
+    RatingBtn: {
+      width: "26px",
+      height: "21px",
+      fontWeight: "500",
+      fontSize: "14px",
+      lineHeight: "20px",
+      alignItems: "center",
+      color: "#D84B45",
+      margin: "auto 0",
+    },
+  }));
 
   const [board, setBoard] = useState();
 
@@ -157,13 +156,12 @@ const useStyles = makeStyles((theme) => ({
       setMid(jwt_decode(jwtToken).id);
       setBoard(props.id);
     }
-  },[]);
+  }, []);
 
   console.log(mId, "------------mid");
   console.log(board, "-----------bid");
 
-
-  console.log(props, "sss");
+  console.log("detail", props.latitude);
 
   const classes = useStyles();
   const [roomDetails, setRoomDetails] = useState(null);
@@ -307,7 +305,6 @@ const useStyles = makeStyles((theme) => ({
               </ImageContainer>
               <PostName>{props.title}</PostName>
 
-
               <DetailContent>
                 <ShowMoreText
                   width={650}
@@ -322,7 +319,13 @@ const useStyles = makeStyles((theme) => ({
                   {props.content}
                 </ShowMoreText>
               </DetailContent>
-              <Good bid={bid} mid={mid} good={props.good} pick={props.pick} goodnum={props.goodnum}/>
+              <Good
+                bid={bid}
+                mid={mid}
+                good={props.good}
+                pick={props.pick}
+                goodnum={props.goodnum}
+              />
             </LeftContainer>
             <RightContainer>
               <div
@@ -345,7 +348,7 @@ const useStyles = makeStyles((theme) => ({
                   />
                 </div>
               </div>
-              
+
               {/*안풋바 */}
 
               <ChatInput id={props} />
@@ -381,13 +384,12 @@ const useStyles = makeStyles((theme) => ({
                   )}
                 </div>
               </form>
+              <StickMap latitude={props.latitude} longitude={props.longitude} />
             </RightContainer>
-           
           </MainContentContainer>
         </TotalContainer>
       </DialogContent>
-      <DialogActions>
-      </DialogActions>
+      <DialogActions></DialogActions>
     </Dialog>
   );
 }
