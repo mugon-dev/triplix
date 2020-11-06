@@ -36,10 +36,11 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public void boardUpdate(int id, String title, String content) {
+	public void boardUpdate(int id, String title, String content,String filename) {
 		Board boardEntity = boardRepository.findById(id).get();
 		boardEntity.setBTitle(title);
 		boardEntity.setBContent(content);
+		boardEntity.setBImage(filename);
 		boardRepository.save(boardEntity);
 	}
 	
