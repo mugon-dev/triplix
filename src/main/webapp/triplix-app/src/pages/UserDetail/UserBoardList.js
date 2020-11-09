@@ -45,30 +45,25 @@ const UserBoardList = () => {
     >
       <Container>
         <FlipMove>
-          {posts.map(
-            ({
-              post,
-              id,
-              btitle,
-              bcontent,
-              member,
-              comment,
-              bimage,
-              bId,
-              good,
-            }) => (
-              <Picture
-                id={member.mname}
-                bId={id}
-                title={btitle}
-                content={bcontent}
-                member={member}
-                image={bimage}
-                good={good}
-                comment={comment}
-              />
-            )
-          )}
+
+          {posts.map(({ post, id, btitle, bcontent, member, comment, bimage, bId, good, latitude, longitude, pick, bgoodNum }) => (
+            <Picture
+              id={member.id}
+              name={member.mname}
+              bId={id}
+              title={btitle}
+              content={bcontent}
+              member={member}
+              image={bimage}
+              good={good}
+              pick={pick}
+              comment={comment}
+              latitude={latitude}
+              longitude={longitude}
+              goodnum={bgoodNum}
+            />
+          ))}
+
         </FlipMove>
       </Container>
     </InfiniteScroll>

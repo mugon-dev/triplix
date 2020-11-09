@@ -48,7 +48,6 @@ const Title = styled.h4`
 const UserSwitch = (props) => {
   const [mood, setMood] = useState("");
   const [posts, setPosts] = useState([]);
-  const moods = ["서울", "대전", "대구", "부산", "찍고", "아하", "~!"];
   useEffect(() => {
     //위도,경도, 이미지 가져오기
     let jwtTokenTemp = localStorage.getItem("Authorization");
@@ -76,24 +75,10 @@ const UserSwitch = (props) => {
             return (
               <div>
                 <HeaderContainer>
-                  <Title>전국팔도유랑</Title>
+                  <Title>TRIPLIX LIST</Title>
                   <br />
                   <br />
-                  <br />
-                  <br />
-                  <MoodList>
-                    {moods.map((moodText) => (
-                      <Mood
-                        key={moodText}
-                        active={moodText === mood ? true : false}
-                      >
-                        {moodText}
-                      </Mood>
-                    ))}
-                  </MoodList>
                 </HeaderContainer>
-                <br />
-                <br />
                 <br />
                 <br />
                 <UserBoardList />

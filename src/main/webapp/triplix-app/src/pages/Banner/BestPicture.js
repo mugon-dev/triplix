@@ -111,7 +111,7 @@ function BestPicture({
                     <TextBox>{id}</TextBox>
                 </LeftBottomContainer>
                 <RightTopContainer>
-                     좋냐
+                     {btitle}
                     <image src="./images/pinger.png" alt="?" /> 
                     {/* <LikeInterest postId={id} Type="small" /> */}
                 </RightTopContainer>

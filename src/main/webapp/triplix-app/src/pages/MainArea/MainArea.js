@@ -68,7 +68,6 @@ export default () => {
     const [last, setLast] = useState(null);
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
-    const moods = ['서울', '대전', '대구', '부산', '찍고', '아하', '~!'];
 
     useEffect(() => {
         fetch("http://localhost:8000/board/")
@@ -79,116 +78,12 @@ export default () => {
         });
     },()=>posts);
 
-    /*
-        const unsubscribe = db
-            .collection('posts')
-            .orderBy('timestamp', 'desc')
-            .limit(10)
-            .onSnapshot((snapshot) => {
-                setPosts(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        post: doc.data(),
-                    }))
-                );
-                setLast(snapshot.docs[snapshot.docs.length - 1]);
-            });
-
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-    */
-
-    /*
-    const next = () => {
-        if (last) {
-            db.collection('posts')
-                .orderBy('timestamp', 'desc')
-                .startAfter(last)
-                .limit(10)
-                .onSnapshot((snapshot) => {
-                    if (snapshot.empty) {
-                        setHasMore(false);
-
-                        return;
-                    }
-                    setPosts([
-                        ...posts,
-                        ...snapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            post: doc.data(),
-                        })),
-                    ]);
-                    setLast(snapshot.docs[snapshot.docs.length - 1]);
-                });
-        }
-    };
-    */
-
-    /*
-    const moodNext = () => {
-        if (last) {
-            db.collection('posts')
-                .orderBy('timestamp', 'desc')
-                .where('mood', '==', mood)
-                .startAfter(last)
-                .limit(10)
-                .onSnapshot((snapshot) => {
-                    if (snapshot.empty) {
-                        setHasMore(false);
-
-                        return;
-                    }
-                    setPosts([
-                        ...posts,
-                        ...snapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            post: doc.data(),
-                        })),
-                    ]);
-                    setLast(snapshot.docs[snapshot.docs.length - 1]);
-                });
-        }
-    };
-    */
-
-    /*
-    const onMoodChange = (e) => {
-        setMood(e.currentTarget.innerText);
-        setPosts([]);
-
-        db.collection('posts')
-            .orderBy('timestamp', 'desc')
-            .where('mood', '==', e.currentTarget.innerText)
-            .limit(10)
-            .onSnapshot((snapshot) => {
-                setPosts(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        post: doc.data(),
-                    }))
-                );
-                setLast(snapshot.docs[snapshot.docs.length - 1]);
-            });
-    };
-    */
-
     return (
         <MarginContainer>
             <HeaderContainer>
-                <Title>전국팔도유랑</Title>
-                <br/><br/><br/><br/>
-                 <MoodList>
-                    {moods.map((moodText) => (
-                        <Mood
-                            key={moodText}
-                            active={moodText === mood ? true : false}
-                        >
-                            {moodText}
-                        </Mood>
-                    ))}
-                </MoodList> 
+                <Title>TRIPLIX LIST</Title>
+                <br/><br/>
+               
             </HeaderContainer>
 
              <InfiniteScroll

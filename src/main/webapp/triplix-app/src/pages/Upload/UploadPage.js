@@ -207,13 +207,14 @@ const UploadPage = (props) => {
                 />
                 <TextField
                   style={{
-                    color: "#ffffff",
+                    color: "#FFFF00",
                     width: "100%",
                     marginTop: "21px",
                     borderRadius: "10px",
                     boxSizing: "border-box",
                     border: "2px solid #979797",
                   }}
+                  color="secondary"
                   id="outlined-multiline-static"
                   name="bcontent"
                   multiline

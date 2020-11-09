@@ -33,9 +33,12 @@ const UserPickList = () => {
       .then((res) => res.json())
       .then((res) => {
         setPosts(res);
-        console.log("픽리스",res);
+        console.log("board리스트" , posts);
       });
   }, []);
+
+  console.log("bbbbbb",posts);
+
   return (
     <InfiniteScroll
       dataLength={posts.length}
@@ -51,6 +54,7 @@ const UserPickList = () => {
             }) => (
               <Picture
                 id={board.id}
+                name={board.member.mname}
                 bId={board.id}
                 title={board.title}
                 content={board.bcontent}
@@ -58,6 +62,10 @@ const UserPickList = () => {
                 image={board.bimage}
                 good={board.good}
                 comment={board.comment}
+                pick={board.pick}
+                goodnum={board.bgoodNum}
+                latitude={board.latitude}
+                longitude={board.longitude}
               />
             )
           )}
