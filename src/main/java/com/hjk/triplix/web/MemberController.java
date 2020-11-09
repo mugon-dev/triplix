@@ -75,6 +75,7 @@ public class MemberController {
 		System.out.println("update profile 호출");
 		HttpSession session = request.getSession();
 		System.out.println(profile);
+		profile = profile.replaceAll("\"", "");
 		if(session.getAttribute("principal") != null) {
 			Member originMember = (Member) session.getAttribute("principal");
 			int id = originMember.getId();

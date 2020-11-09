@@ -72,7 +72,7 @@ const IntroductionFont = styled.p`
 `;
 
 const UserPage = () => {
-  const [userinfo, setUserInfo] = useState("");
+  const [userinfo, setUserInfo] = useState({});
   const isLogin = useSelector((store) => store.isLogin);
 
   const [select, setSelect] = useState(1);
@@ -135,13 +135,13 @@ const UserPage = () => {
     setProfileOpen(false);
   };
   const handleProfileCloseUpdate = () => {
-    console.log(profile);
+    console.log(profile.profile+"프로파일입니다.");
     fetch("http://localhost:8000/member/profile", {
       method: "PUT",
       headers: {
         Authorization: localStorage.getItem("Authorization"),
       },
-      body: JSON.stringify(profile),
+      body: JSON.stringify(profile.profile),
     })
       .then((res) => res.text())
       .then((res) => {
@@ -150,7 +150,7 @@ const UserPage = () => {
           setProfile("");
           setUserInfo({
             ...userinfo,
-            mprofile: profile,
+            mprofile: profile.profile,
           });
         } else {
           alert("업로드 실패");
@@ -234,7 +234,7 @@ const UserPage = () => {
                 fontWeight: "300",
               }}
             >
-              여긴 나에 대한 정보가 들어있어요
+              <br/>
               {userinfo.mprofile}
               <Button
                 variant="outlined"

@@ -20,6 +20,7 @@ public class BoardService {
 	
 	@Transactional
 	public void boardSave(String title, String content, String filename, String latitude, String longitude,Member member) {
+		System.out.println("boardSave 호출");
 		Board board = new Board();
 		board.setBTitle(title);
 		board.setBContent(content);

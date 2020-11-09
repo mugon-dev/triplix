@@ -82,7 +82,7 @@ public class BoardController {
 			@RequestParam("title") String title, @RequestParam("content") String content,
 			@RequestParam("latitude") String latitude,@RequestParam("longitude") String longitude) throws IllegalStateException, IOException {
 		System.out.println("board save 호출");
-		String uploadFolder = "E:\\workspace\\springTeam\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
+		String uploadFolder = "C:\\workspace\\project\\triplix\\src\\main\\webapp\\triplix-app\\public\\postImages";
 		String uploadFolderPath = getFolder();
 		Member memberEntity = (Member) session.getAttribute("principal");
 		String filename = "";
@@ -95,11 +95,12 @@ public class BoardController {
 			String uploadFileName = uuid.toString() + "_" + file.getOriginalFilename();
 			File saveFile = new File(uploadFolder, uploadFileName);
 			System.out.println(uploadPath);
-			System.out.println(uploadFileName);
 			filename = uploadFolder + "\\" + uploadFileName;
 			file.transferTo(saveFile);
 			filename = ".\\postImages\\" + uploadFileName;
+			System.out.println(uploadFileName);
 		}
+		System.out.println("파일업로드 완료");
 		boardService.boardSave(title, content, filename,latitude,longitude, memberEntity);
 		System.out.println("글 입력 성공");
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);

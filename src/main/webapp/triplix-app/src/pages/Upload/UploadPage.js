@@ -99,27 +99,6 @@ const UploadPage = (props) => {
     });
   };
 
-  //이미지
-  //     useEffect(() => {
-  //         //토큰 가져오기
-  //         if(props.match.params.id!=null){
-  // 		fetch("http://localhost:8000/board/"+props.match.params.id, {
-  // 			method: "GET",
-  // 			headers:{
-  // 				"Authorization": localStorage.getItem("Authorization")
-  // 			}
-  // 		}).then(res=>res.json()).then(res=>{
-  // 			setBtitle(props.btitle ? props.btitle : null);
-  //             setBcontent(props.bcontnet ? props.bcontent : null);
-  //             setBimage(props.bimage ? props.bimage : null);
-  //         });
-  //     }
-  //         setAdvertising(props.advertising ? props.advertising : false);
-  //         setMood(props.mood ? props.mood : '');
-  //         setRating(props.rating ? props.rating : '');
-
-  //     }, []);
-
   const changeValue = (e) => {
     setBoard((prevState) => {
       return {
