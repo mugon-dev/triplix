@@ -1,4 +1,18 @@
 # triplix
+![슬라이드1](https://user-images.githubusercontent.com/68521263/103070358-a5c69300-4604-11eb-86c5-557085ff5239.png)
+![슬라이드2](https://user-images.githubusercontent.com/68521263/103070362-a65f2980-4604-11eb-9b46-af12e279d56c.png)
+![슬라이드3](https://user-images.githubusercontent.com/68521263/103070367-a6f7c000-4604-11eb-92e5-47a56fb4be9b.png)
+![슬라이드4](https://user-images.githubusercontent.com/68521263/103070370-a7905680-4604-11eb-99b1-bc852a111ac2.png)
+![슬라이드5](https://user-images.githubusercontent.com/68521263/103070373-a828ed00-4604-11eb-8f7c-d05860a15bef.png)
+![슬라이드6](https://user-images.githubusercontent.com/68521263/103070374-a8c18380-4604-11eb-9ef7-185bccf63ea7.png)
+![슬라이드7](https://user-images.githubusercontent.com/68521263/103070377-a95a1a00-4604-11eb-8d99-46342dfb09c7.png)
+![슬라이드8](https://user-images.githubusercontent.com/68521263/103070378-a9f2b080-4604-11eb-9737-0f2a17108587.png)
+![슬라이드9](https://user-images.githubusercontent.com/68521263/103070380-aa8b4700-4604-11eb-8f5d-404ef095d540.png)
+![슬라이드10](https://user-images.githubusercontent.com/68521263/103070381-ab23dd80-4604-11eb-8cda-a7cdce4888af.png)
+![슬라이드11](https://user-images.githubusercontent.com/68521263/103070383-abbc7400-4604-11eb-85f3-4897707a81a1.png)
+![슬라이드12](https://user-images.githubusercontent.com/68521263/103070385-abbc7400-4604-11eb-8943-98b66a14a5e8.png)
+![슬라이드13](https://user-images.githubusercontent.com/68521263/103070386-ac550a80-4604-11eb-828d-8416bedc727e.png)
+![슬라이드14](https://user-images.githubusercontent.com/68521263/103070389-ac550a80-4604-11eb-8956-e564a6b5ba89.png)
 
 ## 개발 도구
 
